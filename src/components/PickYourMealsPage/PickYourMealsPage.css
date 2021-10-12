@@ -1,0 +1,53 @@
+.item1 { grid-area: a; }
+.item2 { grid-area: b; }
+
+.chosenMeals button {
+position: relative;
+float:right;
+top: 50%;
+}
+
+.chosenMeals{
+margin-bottom: 60px;
+}
+
+.filter-pagination {
+    margin: 5px;
+    border: 1px solid black;
+}
+
+.grid-containerA {
+  display: grid;
+  grid-template-areas:
+    'a b c d e f g';
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding:10px;
+}
+
+.grid-containerA > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid black;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+  height: 300px;
+}
+
+.grid-containerB {
+  display: grid;
+  grid-template-areas:
+    'a b c d';
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding:10px;
+}
+
+.grid-containerB > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid black;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+  height: 300px;
+}
