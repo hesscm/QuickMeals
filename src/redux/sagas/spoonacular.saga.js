@@ -1,7 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-//get images to be displayed on search page
+//get random recipe from Spoonacular API and send to reducer
 function* getRandomRecipe(action) {
     try {
         const response = yield axios.get(`/api/spoonacular`);
@@ -14,7 +14,7 @@ function* getRandomRecipe(action) {
 }//end saga function*/
 
 function* spoonacularSaga() {
-    yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
+    // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
 }
 
 export default spoonacularSaga;
