@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import RecipeGeneratorPage from '../RecipeGeneratorPage/RecipeGeneratorPage';
+import PickYourMealsPage from '../PickYourMealsPage/PickYourMealsPage';
 
 import './App.css';
 
@@ -67,6 +68,14 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/pickmeals"
+          >
+            <PickYourMealsPage />
           </ProtectedRoute>
 
           <ProtectedRoute

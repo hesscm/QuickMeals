@@ -37,6 +37,9 @@ function Nav() {
             <Link className="navLink" to="/recipegenerator">
               Recipe Generator
             </Link>
+            <Link className="navLink" to="/pickmeals">
+              Pick Your Meals
+            </Link>
             <Link className="navLink" to="/info">
               Info Page
             </Link>
