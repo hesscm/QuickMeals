@@ -8,9 +8,9 @@ function FrontOfCard({ flipCard }) {
     return (
         <div className="recipeBox" onClick={flipCard}>
             <h1>Front of card.</h1>
-            <h5>{recipes.randomRecipe.title}</h5>
+            <h1>{recipes.randomRecipe.title}</h1>
             <img src={recipes.randomRecipe.image} alt={recipes.randomRecipe.title} />
-            <h6>Description:</h6>
+            <h3>Description</h3>
             <div dangerouslySetInnerHTML={{ __html: recipes.randomRecipe.summary }} />
         </div>
     )

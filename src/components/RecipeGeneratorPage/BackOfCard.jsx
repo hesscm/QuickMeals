@@ -23,10 +23,10 @@ function BackOfCard({ flipCard }) {
     return (
         <div className="recipeBox" onClick={flipCard}>
             <h1>Back of card.</h1>
-            <h3>{recipes.randomRecipe.title}</h3>
-            <h6>Ingredients</h6>
+            <h1>{recipes.randomRecipe.title}</h1>
+            <h3>Ingredients</h3>
             <div dangerouslySetInnerHTML={{ __html: ingredientsString }} />
-            <h6>Cooking Instructions</h6>
+            <h3>Cooking Instructions</h3>
             <div dangerouslySetInnerHTML={{ __html: recipes.randomRecipe.instructions }} />
         </div>
     )

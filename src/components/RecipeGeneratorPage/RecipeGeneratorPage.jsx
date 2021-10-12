@@ -22,6 +22,7 @@ function RecipeGeneratorPage() {
 
     const handleButtonClick = () => {
         console.log('clicked');
+        dispatch({ type: 'GET_RANDOM_RECIPE' })
     }
 
     const flipCard = () => {
@@ -41,7 +42,9 @@ function RecipeGeneratorPage() {
                     <FrontOfCard flipCard={flipCard} /> :
                     <BackOfCard flipCard={flipCard} />
                 }
+                <br /><br />
                 <button className="btn" onClick={handleButtonClick}>Get A Recipe</button>
+
             </section>
         </div>
     )
