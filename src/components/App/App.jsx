@@ -112,7 +112,7 @@ function App() {
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
-            <h1>404</h1>
+            <h1>404 Error. Looks Like we haven't made this page yet!</h1>
           </Route>
         </Switch>
         <Footer />
