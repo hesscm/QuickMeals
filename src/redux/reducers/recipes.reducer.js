@@ -19,7 +19,27 @@ const randomRecipe = (state = recipe, action) => {
     }
 };//end randomRecipe reducer function*/
 
+const searchRecipe = (state = recipe, action) => {
+    switch (action.type) {
+        case 'SET_API_RECIPE':
+            return action.payload;
+        default:
+            return state;
+    }
+};//end randomRecipe reducer function*/
+
+const searchRecipeIngredients = (state = recipeIngredients, action) => {
+    switch (action.type) {
+        case 'SET_API_RECIPE_INGREDIENTS':
+            return action.payload;
+        default:
+            return state;
+    }
+};//end randomRecipeIngredients reducer function*/
+
 export default combineReducers({
     randomRecipeIngredients,
     randomRecipe
+    searchRecipes,
+    searchRecipeIngredients,
 });

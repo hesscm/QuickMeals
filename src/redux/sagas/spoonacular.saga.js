@@ -13,8 +13,22 @@ function* getRandomRecipe(action) {
     }
 }//end saga function*/
 
+//get random recipe from Spoonacular API and send to reducer
+function* getAPIRecipes(action) {
+    try {
+        const response = yield axios.get(`/api/spoonacular/search`);
+        log('search response', response.data)
+        yield put({ type: 'SET_API_RECIPES', payload: response.data });
+        yield put({ type: 'SET_API_RECIPE_INGREDIENTS', payload: response.data.recipes[0].extendedIngredients });
+
+    } catch (error) {
+        console.log(error);
+    }
+}//end saga function*/
+
 function* spoonacularSaga() {
     // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
+    yield takeEvery('GET_API_RECIPES', getAPIRecipes)
 }
 
 export default spoonacularSaga;
