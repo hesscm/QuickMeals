@@ -2,8 +2,7 @@ import './PickYourMealsPage.css'
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
-import recipesReducer from '../../redux/reducers/recipes.reducer';
-
+import DaysOfWeekGrid from './DaysOfWeekGrid';
 
 function PickYourMealsPage() {
     const dispatch = useDispatch();
@@ -16,18 +15,16 @@ function PickYourMealsPage() {
     const [saturdayMeal, setSaturdayMeal] = useState({ title: '', image: '' });
     const [sundayMeal, setSundayMeal] = useState({ title: '', image: '' });
 
+
     console.log(recipes);
-    console.log(mondayMeal);
+    // console.log(mondayMeal);
 
 
     // useEffect(() => {
     //     dispatch({ type: 'GET_API_RECIPE' })
     // }, []);
 
-    const handleButtonClick = () => {
-        console.log('clicked');
-        dispatch({ type: 'GET_API_RECIPES' })
-    }
+
 
     const handleAddMeal = (input) => {
         console.log('in handleAddMeal');
@@ -70,83 +67,22 @@ function PickYourMealsPage() {
 
     return (
         <>
-            {/* section 1 */}
-            <div className="chosenMeals">
-                <p>chosenMeals.</p>
-                <div className="grid-containerA">
-                    <div className="item1">
-                        <h1>Monday</h1>
-                        {mondayMeal.title == '' ?
-                            <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                            <>
-                                <h3>{mondayMeal.title}</h3>
-                                <img src={mondayMeal.image} alt={mondayMeal.title} />
-                            </>
-                        }
-                    </div>
-                    <div className="item2">
-                        <h1>Tuesday</h1>
-                        {tuesdayMeal.title == '' ?
-                            <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                            <>
-                                <h3>{tuesdayMeal.title}</h3>
-                                <img src={tuesdayMeal.image} alt={tuesdayMeal.title} />
-                            </>
-                        }
-                    </div>
-                    <div className="item3">
-                        <h1>Wednesday</h1>
-                        {wednesdayMeal.title == '' ?
-                            <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                            <>
-                                <h3>{wednesdayMeal.title}</h3>
-                                <img src={wednesdayMeal.image} alt={wednesdayMeal.title} />
-                            </>
-                        }
-                    </div>
-                    <div className="item4">
-                        <h1>Thursday</h1>
-                        {thursdayMeal.title == '' ?
-                            <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                            <>
-                                <h3>{thursdayMeal.title}</h3>
-                                <img src={thursdayMeal.image} alt={thursdayMeal.title} />
-                            </>
-                        }
-                    </div>
-                    <div className="item5">
-                        <h1>Friday</h1>
-                        {fridayMeal.title == '' ?
-                            <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                            <>
-                                <h3>{fridayMeal.title}</h3>
-                                <img src={fridayMeal.image} alt={fridayMeal.title} />
-                            </>
-                        }
-                    </div>
-                    <div className="item6">
-                        <h1>Saturday</h1>
-                        {saturdayMeal.title == '' ?
-                            <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                            <>
-                                <h3>{saturdayMeal.title}</h3>
-                                <img src={saturdayMeal.image} alt={saturdayMeal.title} />
-                            </>
-                        }
-                    </div>
-                    <div className="item7">
-                        <h1>Sunday</h1>
-                        {sundayMeal.title == '' ?
-                            <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                            <>
-                                <h3>{sundayMeal.title}</h3>
-                                <img src={sundayMeal.image} alt={sundayMeal.title} />
-                            </>
-                        }
-                    </div>
-                </div>
-                <button onClick={handleButtonClick} className='btn'>Let's Eat!</button>
-            </div>
+            <DaysOfWeekGrid
+                mondayMeal={mondayMeal}
+                setMondayMeal={setMondayMeal}
+                tuesdayMeal={tuesdayMeal}
+                setTuesdayMeal={setTuesdayMeal}
+                wednesdayMeal={wednesdayMeal}
+                setWednesdayMeal={setWednesdayMeal}
+                thursdayMeal={thursdayMeal}
+                setThursdayMeal={setThursdayMeal}
+                fridayMeal={fridayMeal}
+                setFridayMeal={setFridayMeal}
+                saturdayMeal={saturdayMeal}
+                setSaturdayMeal={setSaturdayMeal}
+                sundayMeal={sundayMeal}
+                setSundayMeal={setSundayMeal}
+            />
             {/* section 2 */}
             <div className="filter-pagination">
                 <p>filter-pagination</p>
