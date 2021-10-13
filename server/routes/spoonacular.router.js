@@ -18,7 +18,7 @@ router.get('/random', (req, res) => {
 
 //get route to for a specified spoonacular search
 router.get('/search', (req, res) => {
-    axios.get(`https://api.spoonacular.com/recipes/complexSearch?type=maincourse&sort=random&number=2&fillIngredients=true&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`)
+    axios.get(`https://api.spoonacular.com/recipes/complexSearch?type=maincourse&sort=random&number=4&fillIngredients=true&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`)
         .then(response => {
             console.log(response.data);
             res.send(response.data);

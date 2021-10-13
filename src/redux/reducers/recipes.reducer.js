@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { recipe, recipeIngredients } from '../../TestVariables';
+import { recipe, recipeIngredients, searchRecipesVar } from '../../TestVariables';
 
 const randomRecipeIngredients = (state = recipeIngredients, action) => {
     switch (action.type) {
@@ -19,9 +19,9 @@ const randomRecipe = (state = recipe, action) => {
     }
 };//end randomRecipe reducer function*/
 
-const searchRecipes = (state = recipe, action) => {
+const searchRecipes = (state = searchRecipesVar, action) => {
     switch (action.type) {
-        case 'SET_API_RECIPE':
+        case 'SET_API_RECIPES':
             return action.payload;
         default:
             return state;
