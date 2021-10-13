@@ -17,9 +17,10 @@ function* getRandomRecipe(action) {
 function* getAPIRecipes(action) {
     try {
         const response = yield axios.get(`/api/spoonacular/search`);
-        log('search response', response.data)
+        console.log('search response', response.data.results)
+        console.log('ingredients test', response.data.results[0].extendedIngredients[0].original);
         yield put({ type: 'SET_API_RECIPES', payload: response.data });
-        yield put({ type: 'SET_API_RECIPE_INGREDIENTS', payload: response.data.recipes[0].extendedIngredients });
+        // yield put({ type: 'SET_API_RECIPE_INGREDIENTS', payload: response.data.recipes.extendedIngredients });
 
     } catch (error) {
         console.log(error);

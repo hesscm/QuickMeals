@@ -1,6 +1,20 @@
 import './PickYourMealsPage.css'
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 
 function PickYourMealsPage() {
+    const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     dispatch({ type: 'GET_API_RECIPE' })
+    // }, []);
+
+    const handleButtonClick = () => {
+        console.log('clicked');
+        dispatch({ type: 'GET_API_RECIPES' })
+    }
+
     return (
         <>
         {/* section 1 */}
@@ -36,7 +50,7 @@ function PickYourMealsPage() {
                         <p>Add a recipe to today.</p>
                     </div>
                 </div>
-                <button className='btn'>Let's Eat!</button>
+                <button onClick={handleButtonClick} className='btn'>Let's Eat!</button>
             </div>
             {/* section 2 */}
             <div className="filter-pagination">
