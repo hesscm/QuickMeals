@@ -22,23 +22,20 @@ router.post('/', async (req, res) => {
     console.log(meal);
     try {
         await pool.query('BEGIN');
-        const queryTest = `WITH json_array AS ( SELECT
-        2,
-        $1,
-        $2,
-        $3,
-        $4,
-        $5,
-        jsonb_array_elements($6::jsonb))
-        INSERT INTO meals(id, name, description, instructions, day, image_path, ingredients) 
-        SELECT * FROM json_array;`;
-        const values = [meal.title, meal.description, 'instructions', meal.day, meal.image, meal.ingredients]; //FIX ME WHEN READY TO CONNECT THE WIRES FROM CLIENT
-        await pool.query(queryTest, values);
-        const junctionQuery = `INSERT INTO user_meals (user_id, meals_id) VALUES(5, 44684);`;
-        await pool.query(junctionQuery);
+        const queryTest = `
+                INSERT INTO meals (api_id, name, description, instructions, image_path, day, ingredients)
+                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING "id";`;
+        const values = [meal.id, meal.title, meal.description, meal.instructions, meal.image, meal.day, JSON.stringify(meal.ingredients)]; //FIX ME WHEN READY TO CONNECT THE WIRES FROM CLIENT
+        const mealsResult = await pool.query(queryTest, values);
+        console.log(mealsResult);
+        const mealsID = mealsResult.rows[0].id;
+        console.log(mealsID);
+        const junctionQuery = `INSERT INTO user_meals (user_id, meals_id) VALUES($1, $2);`;
+        junctionValues = [req.user.id, mealsID];
+        await pool.query(junctionQuery, junctionValues);
         await pool.query('COMMIT');
         res.sendStatus(201);
-    } catch(error) {
+    } catch (error) {
         console.log('ROLLBACK', error);
         await pool.query('ROLLBACK');
         throw error;

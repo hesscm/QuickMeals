@@ -11,25 +11,27 @@
 
 --SQL queries generated from DB Designer
 
-CREATE TABLE "meals" (
-	"id" serial NOT NULL,
-	"name" varchar(255) NOT NULL,
-	"description" varchar(255) NOT NULL,
-	"instructions" TEXT NOT NULL,
-	"ingredients" json NOT NULL,
-	"image_path" varchar(255),
-	"day" varchar(25) NOT NULL,
-	CONSTRAINT "meals_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"username" varchar(80) NOT NULL UNIQUE,
 	"password" varchar(1000) NOT NULL,
 	"number_servings" integer NOT NULL,
 	CONSTRAINT "user_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+CREATE TABLE "meals" (
+	"id" serial NOT NULL,
+	"api_id" integer NOT NULL,
+	"name" varchar(255) NOT NULL,
+	"description" TEXT NOT NULL,
+	"instructions" TEXT NOT NULL,
+	"ingredients" TEXT NOT NULL,
+	"image_path" varchar(255),
+	"day" varchar(25) NOT NULL,
+	CONSTRAINT "meals_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -64,18 +66,27 @@ ALTER TABLE "user_saved_meals" ADD CONSTRAINT "user_saved_meals_fk2" FOREIGN KEY
 --POST QUERY
 --Help from: https://dba.stackexchange.com/questions/152110/insert-array-of-json-into-postgres-table
 WITH json_array AS (
-    SELECT 
-	446384, 
-    'recipe name',
-	'desc',
-	'inst',
-	'img.path',
-	'Monday',
-       jsonb_array_elements('[{
-			"col1": "a",
-			"col2": 1,
-			"col3": 1,
-			"col4": "one"
-                 }]'::jsonb))
-INSERT INTO meals (id, name, description, instructions, day, image_path, ingredients ) 
-SELECT * FROM json_array;
+    SELECT 1 AS api_id, 
+           'name' AS name,
+	'desc' AS description,
+	'instruc' AS instructions,
+	'path' AS image_path,
+	'day' AS day,
+           jsonb_array_elements('
+               [
+    {
+        "name": "skinless boneless chicken breast halves",
+        "amount": 3,
+        "unit": "",
+        "fullString": "3 boneless/skinless chicken breast halves"
+    },
+    {
+        "name": "salt",
+        "amount": 1,
+        "unit": "teaspoon",
+        "fullString": "1 teaspoon salt"
+    }
+]'::jsonb) AS ingredients
+)
+INSERT INTO meals (api_id, name, description, instructions, image_path, day, ingredients) 
+SELECT * FROM json_array

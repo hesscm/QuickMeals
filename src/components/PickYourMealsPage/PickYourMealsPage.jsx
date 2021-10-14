@@ -26,23 +26,26 @@ function PickYourMealsPage() {
         let ingredients = [];
         ingredients = recipes[0].extendedIngredients;
         let ingredientsString = '';
+        let ingredientsArray = [];
 
         if (ingredients.length !== 0) {
             for (let i = 0; i < ingredients.length; i++) {
                 if (i !== ingredients.length - 1) {
                     ingredientsString += ingredients[i].original + '<br />';
+                    ingredientsArray.push({ name: ingredients[i].name, amount: ingredients[i].amount, unit: ingredients[i].unit, fullString: ingredients[i].original});
                 } else {
                     ingredientsString += ingredients[i].original;
                 }
             }
         }
-        return ingredientsString;
+        return [ingredientsString, ingredientsArray];
     }
-    console.log(parseIngredients());
+    console.log(parseIngredients()[1]);
 
-    const parseInstructions = () => {
+    //take the input from the API and convert the recipe instructions into a HTML ready listed string
+    const parseInstructions = (element) => {
         let instructions = [];
-        instructions = recipes[0].analyzedInstructions[0].steps;
+        instructions = recipes[element].analyzedInstructions[0].steps;
         let instructionsString = '';
 
         if (instructions.length !== 0) {
@@ -56,7 +59,6 @@ function PickYourMealsPage() {
         }
         return instructionsString;
     }
-    console.log(parseInstructions());
 
     const handleAddMeal = (input) => {
         console.log('in handleAddMeal');
@@ -69,8 +71,8 @@ function PickYourMealsPage() {
                     title: recipes[input].title, 
                     image: recipes[input].image, 
                     description: recipes[input].summary,
-                    instructions: recipes[input].analyzedInstructions[0].steps,
-                    ingredients: recipes[input].extendedIngredients,
+                    instructions: parseInstructions(input),
+                    ingredients: parseIngredients(input)[1],
                     id: recipes[input].id,
                     day: 'Monday'
                  })
