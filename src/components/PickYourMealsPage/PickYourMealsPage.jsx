@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import DaysOfWeekGrid from './DaysOfWeekGrid';
+import PopulatedMealsGrid from './PopulatedMealsGrid';
 
 function PickYourMealsPage() {
     const dispatch = useDispatch();
@@ -16,14 +17,13 @@ function PickYourMealsPage() {
     const [sundayMeal, setSundayMeal] = useState({ title: '', image: '' });
 
 
-    console.log(recipes);
+    // console.log(recipes);
     // console.log(mondayMeal);
 
 
-    // useEffect(() => {
-    //     dispatch({ type: 'GET_API_RECIPE' })
-    // }, []);
-
+    useEffect(() => {
+        // dispatch({ type: 'GET_API_RECIPES' })
+    }, []);
 
 
     const handleAddMeal = (input) => {
@@ -33,40 +33,96 @@ function PickYourMealsPage() {
         switch (dayOfWeek) {
             case 'Monday':
             case 'monday':
-                setMondayMeal({ title: recipes[input].title, image: recipes[input].image })
+                setMondayMeal({ 
+                    title: recipes[input].title, 
+                    image: recipes[input].image, 
+                    description: recipes[input].summary,
+                    instructions: recipes[input].analyzedInstructions[0].steps,
+                    ingredients: recipes[input].extendedIngredients,
+                    id: recipes[input].id,
+                    day: 'Monday'
+                 })
                 break;
             case 'Tuesday':
             case 'tuesday':
-                setTuesdayMeal({ title: recipes[input].title, image: recipes[input].image })
+                setTuesdayMeal({
+                    title: recipes[input].title,
+                    image: recipes[input].image,
+                    description: recipes[input].summary,
+                    instructions: recipes[input].analyzedInstructions[0].steps,
+                    ingredients: recipes[input].extendedIngredients,
+                    id: recipes[input].id,
+                    day: 'Tuesday'
+                })
                 break;
             case 'Wednesday':
             case 'wednesday':
-                setWednesdayMeal({ title: recipes[input].title, image: recipes[input].image })
+                setWednesdayMeal({
+                    title: recipes[input].title,
+                    image: recipes[input].image,
+                    description: recipes[input].summary,
+                    instructions: recipes[input].analyzedInstructions[0].steps,
+                    ingredients: recipes[input].extendedIngredients,
+                    id: recipes[input].id,
+                    day: 'Wednesday'
+                })
                 break;
             case 'Thursday':
             case 'thursday':
-                setThursdayMeal({ title: recipes[input].title, image: recipes[input].image })
+                setThursdayMeal({
+                    title: recipes[input].title,
+                    image: recipes[input].image,
+                    description: recipes[input].summary,
+                    instructions: recipes[input].analyzedInstructions[0].steps,
+                    ingredients: recipes[input].extendedIngredients,
+                    id: recipes[input].id,
+                    day: 'Thursday'
+                })
                 break;
             case 'Friday':
             case 'friday':
-                setFridayMeal({ title: recipes[input].title, image: recipes[input].image })
-                break;
+                setFridayMeal({
+                    title: recipes[input].title,
+                    image: recipes[input].image,
+                    description: recipes[input].summary,
+                    instructions: recipes[input].analyzedInstructions[0].steps,
+                    ingredients: recipes[input].extendedIngredients,
+                    id: recipes[input].id,
+                    day: 'Friday'
+                })
             case 'Saturday':
             case 'saturday':
-                setSaturdayMeal({ title: recipes[input].title, image: recipes[input].image })
+                setSaturdayMeal({
+                    title: recipes[input].title,
+                    image: recipes[input].image,
+                    description: recipes[input].summary,
+                    instructions: recipes[input].analyzedInstructions[0].steps,
+                    ingredients: recipes[input].extendedIngredients,
+                    id: recipes[input].id,
+                    day: 'Saturday'
+                })
                 break;
             case 'Sunday':
             case 'sunday':
-                setSundayMeal({ title: recipes[input].title, image: recipes[input].image })
+                setSundayMeal({
+                    title: recipes[input].title,
+                    image: recipes[input].image,
+                    description: recipes[input].summary,
+                    instructions: recipes[input].analyzedInstructions[0].steps,
+                    ingredients: recipes[input].extendedIngredients,
+                    id: recipes[input].id,
+                    day: 'Sunday'
+                })
                 break;
             default:
                 break;
         }
-
     }
 
     return (
         <>
+        <h1>Pick Your Meals</h1>
+        {/* top section */}
             <DaysOfWeekGrid
                 mondayMeal={mondayMeal}
                 setMondayMeal={setMondayMeal}
@@ -83,35 +139,15 @@ function PickYourMealsPage() {
                 sundayMeal={sundayMeal}
                 setSundayMeal={setSundayMeal}
             />
-            {/* section 2 */}
+            {/* middle section */}
             <div className="filter-pagination">
                 <p>filter-pagination</p>
             </div>
-            {/* section 3 */}
-            <div className="populatedMeals">
-                <p>populatedMeals</p>
-
-                <div className="grid-containerB">
-                    <div onClick={() => handleAddMeal(0)} className="meal1">
-                        {recipes[0].title}
-                        <img src={recipes[0].image} alt={recipes[0].title} />
-                    </div>
-                    <div onClick={() => handleAddMeal(1)} className="meal2">
-                        {recipes[1].title}
-                        <img src={recipes[1].image} alt={recipes[1].title} />
-                    </div>
-                    <div onClick={() => handleAddMeal(2)} className="meal3">
-                        {recipes[2].title}
-                        <img src={recipes[2].image} alt={recipes[2].title} />
-                    </div>
-                    <div onClick={() => handleAddMeal(3)} className="meal4">
-                        {recipes[3].title}
-                        <img src={recipes[3].image} alt={recipes[3].title} />
-                    </div>
-
-                </div>
-            </div>
-
+            {/* bottom section */}
+            <PopulatedMealsGrid 
+            recipes={recipes}
+            handleAddMeal={handleAddMeal}
+            />
         </>
     )
 }

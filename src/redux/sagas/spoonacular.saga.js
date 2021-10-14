@@ -30,7 +30,7 @@ function* getAPIRecipes(action) {
 
 function* spoonacularSaga() {
     // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
-    // yield takeEvery('GET_API_RECIPES', getAPIRecipes)
+    yield takeEvery('GET_API_RECIPES', getAPIRecipes)
 }
 
 export default spoonacularSaga;
