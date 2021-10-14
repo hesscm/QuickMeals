@@ -28,18 +28,18 @@ const searchRecipes = (state = searchRecipesVar, action) => {
     }
 };//end randomRecipe reducer function*/
 
-const searchRecipeIngredients = (state = recipeIngredients, action) => {
+const userMeals = (state = [], action) => {
     switch (action.type) {
-        case 'SET_API_RECIPE_INGREDIENTS':
+        case 'SET_USER_MEALS':
             return action.payload;
         default:
             return state;
     }
-};//end randomRecipeIngredients reducer function*/
+};//end userMeals reducer function*/
 
 export default combineReducers({
     randomRecipeIngredients,
     randomRecipe,
     searchRecipes,
-    searchRecipeIngredients,
+    userMeals,
 });

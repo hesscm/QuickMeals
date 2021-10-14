@@ -39,10 +39,20 @@ function* postMeals(action) {
     }
 }//end saga function*/
 
+function* getUserMeals() {
+    try {
+        const response = yield axios.get(`/api/meals`);
+        yield takeEvery({ type: 'SET_USER_MEALS', payload: response });
+    } catch (error) {
+        console.log(error);
+    }
+}//end saga function*/
+
 function* spoonacularSaga() {
     // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
     yield takeEvery('GET_API_RECIPES', getAPIRecipes)
     yield takeEvery('POST_MEALS', postMeals);
+    yield takeEvery('GET_USER_MEALS', getUserMeals)
 }
 
 export default spoonacularSaga;
