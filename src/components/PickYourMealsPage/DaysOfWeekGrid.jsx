@@ -12,7 +12,6 @@ function DaysOfWeekGrid(props) {
 
         console.log('clicked');
         const action = [
-            {user_id: user.id},
             props.mondayMeal,
             props.tuesdayMeal,
             props.wednesdayMeal,

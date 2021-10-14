@@ -16,15 +16,47 @@ function PickYourMealsPage() {
     const [saturdayMeal, setSaturdayMeal] = useState({ title: '', image: '' });
     const [sundayMeal, setSundayMeal] = useState({ title: '', image: '' });
 
-
-    // console.log(recipes);
-    // console.log(mondayMeal);
-
-
     useEffect(() => {
         // dispatch({ type: 'GET_API_RECIPES' })
     }, []);
 
+
+
+    const parseIngredients = () => {
+        let ingredients = [];
+        ingredients = recipes[0].extendedIngredients;
+        let ingredientsString = '';
+
+        if (ingredients.length !== 0) {
+            for (let i = 0; i < ingredients.length; i++) {
+                if (i !== ingredients.length - 1) {
+                    ingredientsString += ingredients[i].original + '<br />';
+                } else {
+                    ingredientsString += ingredients[i].original;
+                }
+            }
+        }
+        return ingredientsString;
+    }
+    console.log(parseIngredients());
+
+    const parseInstructions = () => {
+        let instructions = [];
+        instructions = recipes[0].analyzedInstructions[0].steps;
+        let instructionsString = '';
+
+        if (instructions.length !== 0) {
+            for (let i = 0; i < instructions.length; i++) {
+                if (i !== instructions.length - 1) {
+                    instructionsString += (i + 1) + '. ' + instructions[i].step + '<br />';
+                } else {
+                    instructionsString += instructions[i].step;
+                }
+            }
+        }
+        return instructionsString;
+    }
+    console.log(parseInstructions());
 
     const handleAddMeal = (input) => {
         console.log('in handleAddMeal');

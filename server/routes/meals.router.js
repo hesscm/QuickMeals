@@ -15,27 +15,27 @@ router.get('/', async (req, res) => {
 /**
  * POST route template
  */
-router.post('/',  async (req, res) => {
+router.post('/', async (req, res) => {
     // POST route code here
+    console.log('id', req.user.id);
+    const meal = req.body[0];
+    console.log(meal);
     try {
         await pool.query('BEGIN');
         const queryTest = `WITH json_array AS ( SELECT
-         4463899,
-        'recipe name',
-        'desc',
-        'inst',
-        'img.path',
-        'Monday',
-        jsonb_array_elements('[{
-			"col1": "a",
-            "col2": 1,
-            "col3": 1,
-            "col4": "one"
-                 }]'::jsonb))
+        2,
+        $1,
+        $2,
+        $3,
+        $4,
+        $5,
+        jsonb_array_elements($6::jsonb))
         INSERT INTO meals(id, name, description, instructions, day, image_path, ingredients) 
         SELECT * FROM json_array;`;
-        const values = []; //FIX ME WHEN READY TO CONNECT THE WIRES FROM CLIENT
-        await pool.query(queryTest);
+        const values = [meal.title, meal.description, 'instructions', meal.day, meal.image, meal.ingredients]; //FIX ME WHEN READY TO CONNECT THE WIRES FROM CLIENT
+        await pool.query(queryTest, values);
+        const junctionQuery = `INSERT INTO user_meals (user_id, meals_id) VALUES(5, 44684);`;
+        await pool.query(junctionQuery);
         await pool.query('COMMIT');
         res.sendStatus(201);
     } catch(error) {
