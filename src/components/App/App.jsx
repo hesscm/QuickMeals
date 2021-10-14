@@ -21,6 +21,10 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import RecipeGeneratorPage from '../RecipeGeneratorPage/RecipeGeneratorPage';
 import PickYourMealsPage from '../PickYourMealsPage/PickYourMealsPage';
+import ShoppingListPage from '../UserShoppingListPage/ShoppingListPage';
+import ViewMealPlanPage from '../UserViewMealPlanPage/ViewMealPlanPage';
+import SavedMealsPage from '../UserSavedMealsPage/SavedMealsPage';
+import DashboardPage from '../UserDashboardPage/DashboardPage';
 
 import './App.css';
 
@@ -71,11 +75,43 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows Pick Your Meals Page
             exact
             path="/pickmeals"
           >
             <PickYourMealsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows View Your Meals Page
+            exact
+            path="/viewmeals"
+          >
+            <ViewMealPlanPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Saved Meals Page
+            exact
+            path="/savedmeals"
+          >
+            <SavedMealsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Shopping List Page
+            exact
+            path="/shoppinglist"
+          >
+            <ShoppingListPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows User Dashboard Page
+            exact
+            path="/dashboard"
+          >
+            <DashboardPage />
           </ProtectedRoute>
 
           <ProtectedRoute
