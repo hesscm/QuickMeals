@@ -83,8 +83,8 @@ function PickYourMealsPage() {
                     title: recipes[input].title,
                     image: recipes[input].image,
                     description: recipes[input].summary,
-                    instructions: recipes[input].analyzedInstructions[0].steps,
-                    ingredients: recipes[input].extendedIngredients,
+                    instructions: parseInstructions(input),
+                    ingredients: parseIngredients(input)[1],
                     id: recipes[input].id,
                     day: 'Tuesday'
                 })
@@ -95,8 +95,8 @@ function PickYourMealsPage() {
                     title: recipes[input].title,
                     image: recipes[input].image,
                     description: recipes[input].summary,
-                    instructions: recipes[input].analyzedInstructions[0].steps,
-                    ingredients: recipes[input].extendedIngredients,
+                    instructions: parseInstructions(input),
+                    ingredients: parseIngredients(input)[1],
                     id: recipes[input].id,
                     day: 'Wednesday'
                 })
@@ -107,8 +107,8 @@ function PickYourMealsPage() {
                     title: recipes[input].title,
                     image: recipes[input].image,
                     description: recipes[input].summary,
-                    instructions: recipes[input].analyzedInstructions[0].steps,
-                    ingredients: recipes[input].extendedIngredients,
+                    instructions: parseInstructions(input),
+                    ingredients: parseIngredients(input)[1],
                     id: recipes[input].id,
                     day: 'Thursday'
                 })
@@ -119,19 +119,20 @@ function PickYourMealsPage() {
                     title: recipes[input].title,
                     image: recipes[input].image,
                     description: recipes[input].summary,
-                    instructions: recipes[input].analyzedInstructions[0].steps,
-                    ingredients: recipes[input].extendedIngredients,
+                    instructions: parseInstructions(input),
+                    ingredients: parseIngredients(input)[1],
                     id: recipes[input].id,
                     day: 'Friday'
                 })
+                break;
             case 'Saturday':
             case 'saturday':
                 setSaturdayMeal({
                     title: recipes[input].title,
                     image: recipes[input].image,
                     description: recipes[input].summary,
-                    instructions: recipes[input].analyzedInstructions[0].steps,
-                    ingredients: recipes[input].extendedIngredients,
+                    instructions: parseInstructions(input),
+                    ingredients: parseIngredients(input)[1],
                     id: recipes[input].id,
                     day: 'Saturday'
                 })
@@ -142,8 +143,8 @@ function PickYourMealsPage() {
                     title: recipes[input].title,
                     image: recipes[input].image,
                     description: recipes[input].summary,
-                    instructions: recipes[input].analyzedInstructions[0].steps,
-                    ingredients: recipes[input].extendedIngredients,
+                    instructions: parseInstructions(input),
+                    ingredients: parseIngredients(input)[1],
                     id: recipes[input].id,
                     day: 'Sunday'
                 })
@@ -151,6 +152,10 @@ function PickYourMealsPage() {
             default:
                 break;
         }
+    }
+
+    const handleRefreshMeals = () => {
+        dispatch({ type: 'GET_API_RECIPES' })
     }
 
     return (
@@ -176,6 +181,7 @@ function PickYourMealsPage() {
             {/* middle section */}
             <div className="filter-pagination">
                 <p>filter-pagination</p>
+                <button className="btn" onClick={handleRefreshMeals}>Refresh Meals</button>
             </div>
             {/* bottom section */}
             <PopulatedMealsGrid 
