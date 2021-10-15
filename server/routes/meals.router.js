@@ -42,7 +42,22 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) => {
     }
 });
 
+router.post('/save', rejectUnauthenticated, async (req, res) => {
+    // GET route code here
+    try {
+        console.log(req.body);
+        await pool.query('BEGIN');
+        const queryText = `INSERT INTO user_saved_meals (user_id, meals_id) VALUES($1, $2);`;
+        const result = await pool.query(queryText, [req.user.id, req.body.id]);
+        await pool.query('COMMIT');
+        res.sendStatus(201);
 
+    } catch (error) {
+        console.log('ROLLBACK', error);
+        await pool.query('ROLLBACK');
+        throw error;
+    }
+});
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log('id', req.user.id);

@@ -48,9 +48,8 @@ CREATE TABLE "user_meals" (
 CREATE TABLE "user_saved_meals" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL,
-	"saved_meals_id" integer NOT NULL,
-	"date" timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"meals_id" integer NOT NULL,
+	"date" timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT "user_saved_meals_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE

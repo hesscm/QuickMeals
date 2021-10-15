@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { recipe, recipeIngredients, searchRecipesVar, defaultUserMeal } from '../../TestVariables';
+import { recipe, recipeIngredients, searchRecipesVar, defaultUserMeal } from '../../DefaultVariables';
 
 const randomRecipeIngredients = (state = recipeIngredients, action) => {
     switch (action.type) {
