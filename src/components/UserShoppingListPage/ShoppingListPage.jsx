@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
+import './ShoppingListPage.css'
 
 function ShoppingListPage() {
     const DOMPurify = require('dompurify')(window);
@@ -64,12 +65,12 @@ function ShoppingListPage() {
 
     return (
         <>
-        <p>ShoppingList.</p>
-            <label htmlFor="day">Choose a day:</label>
-            <select 
-            name="day" 
-            id="day"
-            onChange={(event) => handleDayOfWeek(event.target.value)}>
+            <p>ShoppingList.</p>
+            <label htmlFor="day">Choose a day: </label>
+            <select
+                name="day"
+                id="day"
+                onChange={(event) => handleDayOfWeek(event.target.value)}>
                 <option value="">Choose A Day</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
@@ -81,11 +82,38 @@ function ShoppingListPage() {
             </select>
 
             {dayOfWeek.id == -1 ?
-            <h4>No shopping for this day!</h4> :
-            <>
-            <h2>{dayOfWeek.day}</h2>
-        <h3>{dayOfWeek.name}</h3>
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(ingredientsToString(dayOfWeek.ingredients)) }} /></>}
+                <h4>No shopping for this day!</h4> :
+                <>
+                    <div className='dayOfWeekTable'>
+                    <h2>{dayOfWeek.day}</h2>
+                    <h3>{dayOfWeek.name}</h3>
+                    <table>
+
+                        <tbody>
+                            <tr>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Ingredient</th>
+                            </tr>
+
+                            {dayOfWeek.ingredients.map((ingredient, i) => (
+                                <tr key={i}>
+                                    <td >
+                                        {ingredient.amount}
+                                    </td>
+                                    <td>
+                                        {ingredient.unit}
+                                    </td>
+                                    <td>
+                                        {ingredient.name}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                </>
+            }
         </>
     )
 }
