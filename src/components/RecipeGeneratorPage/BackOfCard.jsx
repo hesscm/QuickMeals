@@ -3,6 +3,7 @@ import './RecipeGeneratorPage.css';
 
 
 function BackOfCard({ flipCard }) {
+    const DOMPurify = require('dompurify')(window);
     const recipes = useReduxStore().recipes;
 
     let ingredients = [];
@@ -25,9 +26,9 @@ function BackOfCard({ flipCard }) {
             <h1>Back of card.</h1>
             <h1>{recipes.randomRecipe.title}</h1>
             <h3>Ingredients</h3>
-            <div dangerouslySetInnerHTML={{ __html: ingredientsString }} />
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(ingredientsString) }} />
             <h3>Cooking Instructions</h3>
-            <div dangerouslySetInnerHTML={{ __html: recipes.randomRecipe.instructions }} />
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(recipes.randomRecipe.instructions) }} />
         </div>
     )
 }

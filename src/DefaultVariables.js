@@ -3489,7 +3489,7 @@ export const defaultUserMeal = {
     "api_id": -1,
     "name": "",
     "description": "",
-    "ingredients": [{}],
+    "ingredients": [],
     "image_path": "",
     "day": ""
 }

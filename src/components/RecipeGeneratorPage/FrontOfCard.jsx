@@ -1,8 +1,9 @@
 import useReduxStore from '../../hooks/useReduxStore';
 import './RecipeGeneratorPage.css';
 
-
 function FrontOfCard({ flipCard }) {
+
+    const DOMPurify = require('dompurify')(window);
     const recipes = useReduxStore().recipes;
     console.log('reducer', recipes);
     return (
@@ -11,7 +12,7 @@ function FrontOfCard({ flipCard }) {
             <h1>{recipes.randomRecipe.title}</h1>
             <img src={recipes.randomRecipe.image} alt={recipes.randomRecipe.title} />
             <h3>Description</h3>
-            <div dangerouslySetInnerHTML={{ __html: recipes.randomRecipe.summary }} />
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(recipes.randomRecipe.summary) }} />
         </div>
     )
 }
