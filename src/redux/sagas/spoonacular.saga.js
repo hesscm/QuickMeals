@@ -42,13 +42,10 @@ function* getUserMeals() {
     try {
         const response = yield axios.get(`/api/meals`);
         console.log('response', response.data);
-        const mealsWithArray = response.data;
         for (let i = 0; i < response.data.length; i++) {
             let ingredientsArray = JSON.parse(response.data[i].ingredients);
-            console.log(ingredientsArray);
             response.data[i].ingredients = ingredientsArray;
         }
-        console.log(response.data);
         yield put({ type: 'SET_USER_MEALS', payload: response.data });
     } catch (error) {
         console.log(error);
