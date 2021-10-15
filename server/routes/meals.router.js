@@ -18,18 +18,33 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
         console.log(result.rows);
         res.send(result.rows);
 
-    } catch(error) {
+    } catch (error) {
         console.log('ROLLBACK', error);
         await pool.query('ROLLBACK');
         throw error;
     }
 });
 
-/**
- * POST route template
- */
-router.post('/', async (req, res) => {
-    // POST route code here
+router.delete('/:id', rejectUnauthenticated, async (req, res) => {
+    try {
+        console.log(req.params.id);
+        await pool.query('BEGIN');
+        const queryText = `DELETE FROM "user_meals" WHERE "user_id" = $1 AND "meals_id" = $2;`
+        const result = await pool.query(queryText, [req.user.id, req.params.id]);
+        await pool.query('COMMIT');
+        console.log(result);
+        res.send(200);
+
+    } catch (error) {
+        console.log('ROLLBACK', error);
+        await pool.query('ROLLBACK');
+        throw error;
+    }
+});
+
+
+
+router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log('id', req.user.id);
     const meal = req.body;
     console.log(meal);
@@ -51,9 +66,7 @@ router.post('/', async (req, res) => {
                 junctionValues = [req.user.id, mealsID, meal[i].day];
                 await pool.query(junctionQuery, junctionValues);
             }
-            
         }
-
         await pool.query('COMMIT');
         res.sendStatus(201);
     } catch (error) {

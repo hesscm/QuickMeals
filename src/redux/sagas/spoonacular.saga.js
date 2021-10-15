@@ -48,11 +48,22 @@ function* getUserMeals() {
     }
 }//end saga function*/
 
+function* deleteUserMeal(action) {
+    try {
+        yield axios.delete(`/api/meals/${action.payload}`);
+        yield put({ type: 'GET_USER_MEALS'});
+    } catch (error) {
+        console.log(error);
+    }
+}//end saga function*/
+
+
 function* spoonacularSaga() {
     // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
     yield takeEvery('GET_API_RECIPES', getAPIRecipes)
     yield takeEvery('POST_MEALS', postMeals);
     yield takeEvery('GET_USER_MEALS', getUserMeals)
+    yield takeEvery('DELETE_USER_MEAL', deleteUserMeal)
 }
 
 export default spoonacularSaga;

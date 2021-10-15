@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
+import { useHistory } from 'react-router-dom';
 
 
 function ViewMealPlanPage() {
+    const history = useHistory();
     const dispatch = useDispatch();
     const recipes = useReduxStore().recipes;
 
@@ -13,12 +15,17 @@ function ViewMealPlanPage() {
 
     const handleRemoveButton = (id) => {
         console.log(id);
-        dispatch({type: 'DELETE_USER_MEAL', payload: id})
+        dispatch({type: 'DELETE_USER_MEAL', payload: id});
+        dispatch({ type: 'GET_USER_MEALS' })
     }
 
     const handleSaveButton = (id) => {
         console.log(id);
         dispatch({ type: 'SAVE_USER_MEAL', payload: id })
+    }
+
+    const generateShoppingList = () => {
+        history.push('/shoppinglist');
     }
 
     return (
@@ -37,7 +44,6 @@ function ViewMealPlanPage() {
                                     <img src={recipes.mondayMeal.image_path} alt={recipes.mondayMeal.name} />
                                     <button onClick={() => handleRemoveButton(recipes.mondayMeal.id)}>Remove</button>
                                     <button onClick={() => handleSaveButton(recipes.mondayMeal.id)}>Favorite</button>
-
                                 </>
                             }
                         </div>
@@ -50,7 +56,6 @@ function ViewMealPlanPage() {
                                     <img src={recipes.tuesdayMeal.image_path} alt={recipes.tuesdayMeal.name} />
                                     <button onClick={() => handleRemoveButton(recipes.tuesdayMeal.id)}>Remove</button>
                                     <button onClick={() => handleRemoveButton(recipes.tuesdayMeal.id)}>Favorite</button>
-
                                 </>
                             }
                         </div>
@@ -63,7 +68,6 @@ function ViewMealPlanPage() {
                                     <img src={recipes.wednesdayMeal.image_path} alt={recipes.wednesdayMeal.name} />
                                     <button onClick={() => handleRemoveButton(recipes.wednesdayMeal.id)}>Remove</button>
                                     <button onClick={() => handleRemoveButton(recipes.wednesdayMeal.id)}>Favorite</button>
-
                                 </>
                             }
                         </div>
@@ -76,8 +80,6 @@ function ViewMealPlanPage() {
                                     <img src={recipes.thursdayMeal.image_path} alt={recipes.thursdayMeal.name} />
                                     <button onClick={() => handleRemoveButton(recipes.thursdayMeal.id)}>Remove</button>
                                     <button onClick={() => handleRemoveButton(recipes.thursdayMeal.id)}>Favorite</button>
-
-
                                 </>
                             }
                         </div>
@@ -90,8 +92,6 @@ function ViewMealPlanPage() {
                                     <img src={recipes.fridayMeal.image_path} alt={recipes.fridayMeal.name} />
                                     <button onClick={() => handleRemoveButton(recipes.fridayMeal.id)}>Remove</button>
                                     <button onClick={() => handleRemoveButton(recipes.fridayMeal.id)}>Favorite</button>
-
-
                                 </>
                             }
                         </div>
@@ -104,8 +104,6 @@ function ViewMealPlanPage() {
                                     <img src={recipes.saturdayMeal.image_path} alt={recipes.saturdayMeal.name} />
                                     <button onClick={() => handleRemoveButton(recipes.saturdayMeal.id)}>Remove</button>
                                     <button onClick={() => handleRemoveButton(recipes.saturdayMeal.id)}>Favorite</button>
-
-
                                 </>
                             }
                         </div>
@@ -118,14 +116,12 @@ function ViewMealPlanPage() {
                                     <img src={recipes.sundayMeal.image_path} alt={recipes.sundayMeal.name} />
                                     <button onClick={() => handleRemoveButton(recipes.sundayMeal.id)}>Remove</button>
                                     <button onClick={() => handleRemoveButton(recipes.sundayMeal.id)}>Favorite</button>
-
-
                                 </>
                             }
                         </div>
                     </div>
                     <br /><br />
-                    <button  className='btn'>Generate Shopping List</button>
+                    <button  onClick={generateShoppingList} className='btn'>Generate Shopping List</button>
                 </div >
                 :
                 <></>
