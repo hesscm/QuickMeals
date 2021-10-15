@@ -32,6 +32,8 @@ function ProtectedRoute({ component, children, ...props }) {
         <ProtectedComponent />
         :
         // Otherwise, redirect to the Loginpage
+        //this was bothering me on refresh...
+        // <ProtectedComponent />
         <LoginPage />
       }
     </Route>

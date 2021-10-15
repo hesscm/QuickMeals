@@ -31,8 +31,7 @@ function* getAPIRecipes() {
 function* postMeals(action) {
     try {
         yield axios.post(`/api/meals`, action.payload);
-
-        yield takeEvery({ type: 'GET_MEAL_PLAN'});
+        yield put({type: 'GET_USER_MEALS'});
 
     } catch (error) {
         console.log(error);
@@ -42,7 +41,8 @@ function* postMeals(action) {
 function* getUserMeals() {
     try {
         const response = yield axios.get(`/api/meals`);
-        yield takeEvery({ type: 'SET_USER_MEALS', payload: response });
+        console.log('response', response);
+        yield put({ type: 'SET_USER_MEALS', payload: response.data });
     } catch (error) {
         console.log(error);
     }
