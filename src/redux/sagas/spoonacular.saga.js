@@ -31,18 +31,50 @@ function* getAPIRecipes() {
 function* postMeals(action) {
     try {
         yield axios.post(`/api/meals`, action.payload);
-
-        yield takeEvery({ type: 'GET_MEAL_PLAN'});
+        yield put({type: 'GET_USER_MEALS'});
 
     } catch (error) {
         console.log(error);
     }
 }//end saga function*/
 
+function* getUserMeals() {
+    try {
+        const response = yield axios.get(`/api/meals`);
+        console.log('response', response);
+        yield put({ type: 'SET_USER_MEALS', payload: response.data });
+    } catch (error) {
+        console.log(error);
+    }
+}//end saga function*/
+
+function* deleteUserMeal(action) {
+    try {
+        yield axios.delete(`/api/meals/${action.payload}`);
+        yield put({ type: 'GET_USER_MEALS'});
+    } catch (error) {
+        console.log(error);
+    }
+}//end saga function*/
+
+function* saveUserMeal(action) {
+    try {
+        yield axios.post(`/api/meals/save`, action.payload);
+        // yield put({ type: 'GET_USER_MEALS' });
+
+    } catch (error) {
+        console.log(error);
+    }
+}//end saga function*/
+
+
 function* spoonacularSaga() {
     // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
     yield takeEvery('GET_API_RECIPES', getAPIRecipes)
     yield takeEvery('POST_MEALS', postMeals);
+    yield takeEvery('GET_USER_MEALS', getUserMeals)
+    yield takeEvery('DELETE_USER_MEAL', deleteUserMeal)
+    yield takeEvery('SAVE_USER_MEAL', saveUserMeal)
 }
 
 export default spoonacularSaga;

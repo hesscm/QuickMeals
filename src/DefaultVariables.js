@@ -3483,3 +3483,13 @@ export const searchRecipesVar = [
         "unusedIngredients": []
     }
 ];
+
+export const defaultUserMeal = {
+    "id": -1,
+    "api_id": -1,
+    "name": "",
+    "description": "",
+    "ingredients": [{}],
+    "image_path": "",
+    "day": ""
+}

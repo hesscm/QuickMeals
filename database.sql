@@ -30,7 +30,6 @@ CREATE TABLE "meals" (
 	"instructions" TEXT NOT NULL,
 	"ingredients" TEXT NOT NULL,
 	"image_path" varchar(255),
-	"day" varchar(25) NOT NULL,
 	CONSTRAINT "meals_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -40,6 +39,7 @@ CREATE TABLE "user_meals" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL,
 	"meals_id" integer NOT NULL,
+	"day" varchar(25) NOT NULL,
 	CONSTRAINT "user_meals_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -48,9 +48,8 @@ CREATE TABLE "user_meals" (
 CREATE TABLE "user_saved_meals" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL,
-	"saved_meals_id" integer NOT NULL,
-	"date" timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"meals_id" integer NOT NULL,
+	"date" timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT "user_saved_meals_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE

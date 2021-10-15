@@ -5,18 +5,61 @@ const {
 } = require('../modules/authentication-middleware');
 const router = express.Router();
 
-/**
- * GET route template
- */
-router.get('/', async (req, res) => {
+router.get('/', rejectUnauthenticated, async (req, res) => {
     // GET route code here
+    try {
+        await pool.query('BEGIN');
+        const queryText = ` SELECT DISTINCT ON (api_id) meals.*,user_meals.day FROM meals
+                            JOIN "user_meals" ON meals.id = user_meals.meals_id
+                            JOIN "user" ON "user".id = user_meals.user_id
+                            WHERE "user".id = $1;`
+        const result = await pool.query(queryText, [req.user.id]);
+        await pool.query('COMMIT');
+        console.log(result.rows);
+        res.send(result.rows);
+
+    } catch (error) {
+        console.log('ROLLBACK', error);
+        await pool.query('ROLLBACK');
+        throw error;
+    }
 });
 
-/**
- * POST route template
- */
-router.post('/', async (req, res) => {
-    // POST route code here
+router.delete('/:id', rejectUnauthenticated, async (req, res) => {
+    try {
+        console.log(req.params.id);
+        await pool.query('BEGIN');
+        const queryText = `DELETE FROM "user_meals" WHERE "user_id" = $1 AND "meals_id" = $2;`
+        const result = await pool.query(queryText, [req.user.id, req.params.id]);
+        await pool.query('COMMIT');
+        console.log(result);
+        res.send(200);
+
+    } catch (error) {
+        console.log('ROLLBACK', error);
+        await pool.query('ROLLBACK');
+        throw error;
+    }
+});
+
+router.post('/save', rejectUnauthenticated, async (req, res) => {
+    // GET route code here
+    try {
+        console.log(req.body);
+        await pool.query('BEGIN');
+        const queryText = `INSERT INTO user_saved_meals (user_id, meals_id) VALUES($1, $2);`;
+        const result = await pool.query(queryText, [req.user.id, req.body.id]);
+        await pool.query('COMMIT');
+        res.sendStatus(201);
+
+    } catch (error) {
+        console.log('ROLLBACK', error);
+        await pool.query('ROLLBACK');
+        throw error;
+    }
+});
+
+router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log('id', req.user.id);
     const meal = req.body;
     console.log(meal);
@@ -27,20 +70,18 @@ router.post('/', async (req, res) => {
                 console.log('Nothing to input at element ' + i);
             } else {
                 const queryTest = `
-                INSERT INTO meals (api_id, name, description, instructions, image_path, day, ingredients)
-                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING "id";`;
-                const values = [meal[i].id, meal[i].title, meal[i].description, meal[i].instructions, meal[i].image, meal[i].day, JSON.stringify(meal[i].ingredients)]; //FIX ME WHEN READY TO CONNECT THE WIRES FROM CLIENT
+                INSERT INTO meals (api_id, name, description, instructions, image_path, ingredients)
+                VALUES ($1,$2,$3,$4,$5,$6) RETURNING "id";`;
+                const values = [meal[i].id, meal[i].title, meal[i].description, meal[i].instructions, meal[i].image, JSON.stringify(meal[i].ingredients)]; //FIX ME WHEN READY TO CONNECT THE WIRES FROM CLIENT
                 const mealsResult = await pool.query(queryTest, values);
                 console.log(mealsResult);
                 const mealsID = mealsResult.rows[0].id;
                 console.log(mealsID);
-                const junctionQuery = `INSERT INTO user_meals (user_id, meals_id) VALUES($1, $2);`;
-                junctionValues = [req.user.id, mealsID];
+                const junctionQuery = `INSERT INTO user_meals (user_id, meals_id, day) VALUES($1, $2, $3);`;
+                junctionValues = [req.user.id, mealsID, meal[i].day];
                 await pool.query(junctionQuery, junctionValues);
             }
-            
         }
-
         await pool.query('COMMIT');
         res.sendStatus(201);
     } catch (error) {

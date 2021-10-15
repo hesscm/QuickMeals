@@ -32,7 +32,19 @@ function Nav() {
         {user.id && (
           <>
             <Link className="navLink" to="/user">
+              User
+            </Link>
+            <Link className="navLink" to="/dashboard">
               Dashboard
+            </Link>
+            <Link className="navLink" to="/savedmeals">
+              Favorites
+            </Link>
+            <Link className="navLink" to="/viewmeals">
+              View Meal Plan
+            </Link>
+            <Link className="navLink" to="/shoppinglist">
+              Shopping List
             </Link>
             <Link className="navLink" to="/recipegenerator">
               Recipe Generator
