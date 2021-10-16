@@ -27,4 +27,17 @@ router.get('/search', (req, res) => {
         });
 });
 
+router.post('/totalIngredients', (req, res) => {
+    const apiObject = {items: req.body}
+    console.log(apiObject);
+    axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${process.env.SPOONACULAR_API_KEY}`, apiObject )
+        .then(response => {
+            console.log(response.data);
+            res.send(response.data);
+        }).catch(error => {
+            console.log('error', error);
+            res.sendStatus(500);
+        });
+});
+
 module.exports = router;
