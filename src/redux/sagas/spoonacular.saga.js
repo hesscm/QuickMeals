@@ -1,6 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
+
 //get random recipe from Spoonacular API and send to reducer
 function* getRandomRecipe() {
     try {
@@ -31,7 +32,7 @@ function* getAPIRecipes() {
 function* postMeals(action) {
     try {
         yield axios.post(`/api/meals`, action.payload);
-        yield put({type: 'GET_USER_MEALS'});
+        yield put({ type: 'GET_USER_MEALS' });
 
     } catch (error) {
         console.log(error);
@@ -41,12 +42,21 @@ function* postMeals(action) {
 function* getUserMeals() {
     try {
         const response = yield axios.get(`/api/meals`);
-        console.log('response', response.data);
         for (let i = 0; i < response.data.length; i++) {
             let ingredientsArray = JSON.parse(response.data[i].ingredients);
             response.data[i].ingredients = ingredientsArray;
         }
+        let totalIngredients = [];
+        for (let i = 0; i < response.data.length; i++) {
+            for (let j = 0; j < response.data[i].ingredients.length; j++) {
+                totalIngredients.push(response.data[i].ingredients[j]);
+            }
+
+        }
+        console.log('totalIngredients', totalIngredients);
+        console.log('response', response.data);
         yield put({ type: 'SET_USER_MEALS', payload: response.data });
+        yield put({ type: 'SET_TOTAL_INGREDIENTS', payload: totalIngredients })
     } catch (error) {
         console.log(error);
     }
@@ -55,7 +65,7 @@ function* getUserMeals() {
 function* deleteUserMeal(action) {
     try {
         yield axios.delete(`/api/meals/${action.payload}`);
-        yield put({ type: 'GET_USER_MEALS'});
+        yield put({ type: 'GET_USER_MEALS' });
     } catch (error) {
         console.log(error);
     }
