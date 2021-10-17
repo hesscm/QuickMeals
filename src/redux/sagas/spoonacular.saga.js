@@ -62,11 +62,13 @@ function* getUserMeals() {
         //post this list to the server so the API can combine our ingredient duplicates
         const postResponse = yield axios.post(`/api/spoonacular/totalingredients`, totalIngredients)
         const apiIngredients = postResponse.data.aisles;
+        console.log('apiIngredients', apiIngredients);
 
         //parse through the API return to something more manageable for the DOM
         let combinedIngredients = [];
         for (let i = 0; i < apiIngredients.length; i++) {
-            if (i == 1) {
+            if (apiIngredients[i].aisle === 'Pantry Items') {
+                console.log('found it');
             //element 1 is pantry items such as water, salt, pepper, flour, etc.
             //We don't need these in the shopping list.
                 continue;
@@ -109,6 +111,16 @@ function* saveUserMeal(action) {
     }
 }//end saga function*/
 
+function* getUserSavedMeals() {
+    try {
+        const response = yield axios.get(`/api/meals/savedmeals`);
+        yield put({ type: 'SET_USER_SAVED_MEALS', payload: response.data });
+
+    } catch (error) {
+        console.log(error);
+    }
+}//end saga function*/
+
 function* spoonacularSaga() {
     // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
     yield takeEvery('GET_API_RECIPES', getAPIRecipes)
@@ -116,6 +128,7 @@ function* spoonacularSaga() {
     yield takeEvery('GET_USER_MEALS', getUserMeals)
     yield takeEvery('DELETE_USER_MEAL', deleteUserMeal)
     yield takeEvery('SAVE_USER_MEAL', saveUserMeal)
+    yield takeEvery('GET_USER_SAVED_MEALS', getUserSavedMeals)
 }
 
 export default spoonacularSaga;

@@ -25,6 +25,25 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     }
 });
 
+router.get('/savedmeals', rejectUnauthenticated, async (req, res) => {
+    // GET route code here
+    try {
+        await pool.query('BEGIN');
+        const queryText = ` SELECT DISTINCT ON (api_id) meals.*, user_saved_meals.date FROM meals
+                            JOIN "user_saved_meals" ON meals.id = user_saved_meals.meals_id
+                            JOIN "user" ON "user".id = user_saved_meals.user_id
+                            WHERE "user".id = $1;`
+        const result = await pool.query(queryText, [req.user.id]);
+        await pool.query('COMMIT');
+        console.log(result.rows);
+        res.send(result.rows);
+    } catch (error) {
+        console.log('ROLLBACK', error);
+        await pool.query('ROLLBACK');
+        throw error;
+    }
+});
+
 router.delete('/:id', rejectUnauthenticated, async (req, res) => {
     try {
         console.log(req.params.id);
