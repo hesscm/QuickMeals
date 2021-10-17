@@ -4,16 +4,6 @@ import useReduxStore from '../../hooks/useReduxStore';
 function WeeklyShoppingList() {
     const ingredients = useReduxStore().recipes.totalUserIngredients;
 
-  const ingredientsToDispatch = () => {
-      let apiIngredients = [];
-      for (let i = 0; i < ingredients.length; i++) {
-          apiIngredients.push(ingredients[i].fullString);  
-      }
-      console.log('apiIngredients',apiIngredients);
-  }
-  ingredientsToDispatch();
-
-
     return (
         <>
             <div className="WeeklySection">
@@ -22,6 +12,8 @@ function WeeklyShoppingList() {
                     <>
                         <div className='WeeklyTable'>
                             <h2>Shopping List For The Week</h2>
+                            <h4>Note: This list IGNORES pantry items such as water, salt, pepper, flour, etc.</h4>
+
                             <table>
                                 <tbody>
                                     <tr>

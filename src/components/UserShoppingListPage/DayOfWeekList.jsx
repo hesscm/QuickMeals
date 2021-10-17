@@ -59,11 +59,12 @@ function DayOfWeekList() {
                 </select>
 
                 {dayOfWeek.id == -1 ?
-                    <h4>No shopping for this day!</h4> :
+                    <h4>No meal selected for this day!</h4> :
                     <>
                         <div className='dayOfWeekTable'>
                             <h2>{dayOfWeek.day}</h2>
                             <h3>{dayOfWeek.name}</h3>
+                            <h4>Note: This list contains everything you need for the recipe.</h4>
                             <table>
 
                                 <tbody>
