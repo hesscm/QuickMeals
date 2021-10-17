@@ -26,7 +26,16 @@ const searchRecipes = (state = searchRecipesVar, action) => {
         default:
             return state;
     }
-};//end randomRecipe reducer function*/
+};//end searchRecipes reducer function*/
+
+const totalUserIngredients = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_TOTAL_INGREDIENTS':
+            return action.payload;
+        default:
+            return state;
+    }
+};//end totalUserIngredients reducer function*/
 
 const mondayMeal = (state = defaultUserMeal, action) => {
     switch (action.type) {
@@ -176,6 +185,7 @@ export default combineReducers({
     randomRecipeIngredients,
     randomRecipe,
     searchRecipes,
+    totalUserIngredients,
     mondayMeal,
     tuesdayMeal,
     wednesdayMeal,

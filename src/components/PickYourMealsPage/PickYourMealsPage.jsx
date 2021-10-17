@@ -21,10 +21,9 @@ function PickYourMealsPage() {
     }, []);
 
 
-
-    const parseIngredients = () => {
+    const parseIngredients = (element) => {
         let ingredients = [];
-        ingredients = recipes[0].extendedIngredients;
+        ingredients = recipes[element].extendedIngredients;
         let ingredientsString = '';
         let ingredientsArray = [];
 
@@ -40,7 +39,6 @@ function PickYourMealsPage() {
         }
         return [ingredientsString, ingredientsArray];
     }
-    console.log(parseIngredients()[1]);
 
     //take the input from the API and convert the recipe instructions into a HTML ready listed string
     const parseInstructions = (element) => {
@@ -62,6 +60,9 @@ function PickYourMealsPage() {
 
     const handleAddMeal = (input) => {
         console.log('in handleAddMeal');
+        console.log('Monday', mondayMeal);
+        console.log('Wed', wednesdayMeal);
+        console.log('Thurs', thursdayMeal);
         let dayOfWeek = prompt('Please enter a day of the week:');
         console.log(dayOfWeek, input);
         switch (dayOfWeek) {
@@ -152,6 +153,8 @@ function PickYourMealsPage() {
             default:
                 break;
         }
+
+
     }
 
     const handleRefreshMeals = () => {
