@@ -39,28 +39,56 @@ function* postMeals(action) {
     }
 }//end saga function*/
 
+//lots happening here. Get the user meals from the DB, get them into reducers, then send the ingredients to the API to combine duplicates
 function* getUserMeals() {
     try {
+        //user meals from the db
         const response = yield axios.get(`/api/meals`);
+
+        //ingredients are currently a string, but we need them in JSON format
         for (let i = 0; i < response.data.length; i++) {
             let ingredientsArray = JSON.parse(response.data[i].ingredients);
             response.data[i].ingredients = ingredientsArray;
         }
+
+        //combine all the ingredients from each meal into 1 array
         let totalIngredients = [];
-        for (let i = 0; i < response.data.length; i++) {
-            for (let j = 0; j < response.data[i].ingredients.length; j++) {
+        for (let i = 0; i < response.data.length; i++) { //DB response array
+            for (let j = 0; j < response.data[i].ingredients.length; j++) { //day of the week ingredients list array
                 totalIngredients.push(response.data[i].ingredients[j]);
             }
-
         }
-        console.log('totalIngredients', totalIngredients);
-        console.log('response', response.data);
+
+        //post this list to the server so the API can combine our ingredient duplicates
+        const postResponse = yield axios.post(`/api/spoonacular/totalingredients`, totalIngredients)
+        const apiIngredients = postResponse.data.aisles;
+
+        //parse through the API return to something more manageable for the DOM
+        let combinedIngredients = [];
+        for (let i = 0; i < apiIngredients.length; i++) {
+            if (i == 1) {
+            //element 1 is pantry items such as water, salt, pepper, flour, etc.
+            //We don't need these in the shopping list.
+                continue;
+            }
+            //convert the API response to a DOM friendly format
+            for (let j = 0; j < apiIngredients[i].items.length; j++) {
+                combinedIngredients.push({
+                    //i=aisle, j=ingredient in that aisle
+                    name: apiIngredients[i].items[j].name,
+                    amount: apiIngredients[i].items[j].measures.original.amount,
+                    unit: apiIngredients[i].items[j].measures.original.unit
+                })
+            }
+        }
+        //set user meals to a reducer for each day of the week
         yield put({ type: 'SET_USER_MEALS', payload: response.data });
-        yield put({ type: 'SET_TOTAL_INGREDIENTS', payload: totalIngredients })
+        //send the API filtered/adjusted total ingredients to a reducer
+        yield put({ type: 'SET_TOTAL_INGREDIENTS', payload: combinedIngredients })
     } catch (error) {
         console.log(error);
     }
-}//end saga function*/
+}//end getUserMeals
 
 function* deleteUserMeal(action) {
     try {
@@ -80,7 +108,6 @@ function* saveUserMeal(action) {
         console.log(error);
     }
 }//end saga function*/
-
 
 function* spoonacularSaga() {
     // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);

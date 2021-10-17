@@ -9,7 +9,7 @@ function WeeklyShoppingList() {
       for (let i = 0; i < ingredients.length; i++) {
           apiIngredients.push(ingredients[i].fullString);  
       }
-      console.log(apiIngredients);
+      console.log('apiIngredients',apiIngredients);
   }
   ingredientsToDispatch();
 
@@ -18,7 +18,7 @@ function WeeklyShoppingList() {
         <>
             <div className="WeeklySection">
                 {ingredients.length == 0 ?
-                    <h4>No shopping for this day!</h4> :
+                    <h4>Give us a second. Combining your ingredients...</h4> :
                     <>
                         <div className='WeeklyTable'>
                             <h2>Shopping List For The Week</h2>

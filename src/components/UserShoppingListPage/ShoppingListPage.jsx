@@ -11,25 +11,25 @@ function ShoppingListPage() {
     const recipes = useReduxStore().recipes;
 
     useEffect(() => {
-        dispatch({ type: 'GET_USER_MEALS' })
+        dispatch({ type: 'GET_USER_MEALS' });        
     }, []);
 
-    const ingredientsToString = (meal) => {
-        let ingredientsString = '';
-        let ingredients = meal;
+    // const ingredientsToString = (meal) => {
+    //     let ingredientsString = '';
+    //     let ingredients = meal;
 
-        if (ingredients.length !== 0) {
-            for (let i = 0; i < ingredients.length; i++) {
-                if (i !== ingredients.length - 1) {
-                    ingredientsString += ingredients[i].fullString + '<br />';
-                } else {
-                    ingredientsString += ingredients[i].fullString;
-                }
-            }
-        }
-        console.log(ingredientsString);
-        return ingredientsString;
-    }
+    //     if (ingredients.length !== 0) {
+    //         for (let i = 0; i < ingredients.length; i++) {
+    //             if (i !== ingredients.length - 1) {
+    //                 ingredientsString += ingredients[i].fullString + '<br />';
+    //             } else {
+    //                 ingredientsString += ingredients[i].fullString;
+    //             }
+    //         }
+    //     }
+    //     console.log(ingredientsString);
+    //     return ingredientsString;
+    // }
 
     return (
         <>

@@ -27,12 +27,16 @@ router.get('/search', (req, res) => {
         });
 });
 
-router.post('/totalIngredients', (req, res) => {
-    const apiObject = {items: req.body}
+router.post('/totalingredients', (req, res) => {
+    let apiObject = { "items": [] };
+    const ingredients = req.body;
+    for (let i = 0; i < ingredients.length; i++) {
+        apiObject.items.push(ingredients[i].fullString);
+    }
     console.log(apiObject);
-    axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${process.env.SPOONACULAR_API_KEY}`, apiObject )
+    axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${process.env.SPOONACULAR_API_KEY}`, apiObject)
         .then(response => {
-            console.log(response.data);
+            console.log('response', response.data);
             res.send(response.data);
         }).catch(error => {
             console.log('error', error);
