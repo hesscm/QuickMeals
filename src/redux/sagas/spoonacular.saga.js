@@ -114,6 +114,13 @@ function* saveUserMeal(action) {
 function* getUserSavedMeals() {
     try {
         const response = yield axios.get(`/api/meals/savedmeals`);
+
+        //ingredients are currently a string, but we need them in JSON format
+        for (let i = 0; i < response.data.length; i++) {
+            let ingredientsArray = JSON.parse(response.data[i].ingredients);
+            response.data[i].ingredients = ingredientsArray;
+        }
+        
         yield put({ type: 'SET_USER_SAVED_MEALS', payload: response.data });
 
     } catch (error) {
