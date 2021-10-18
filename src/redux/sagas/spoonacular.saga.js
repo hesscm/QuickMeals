@@ -101,9 +101,20 @@ function* deleteUserMeal(action) {
     }
 }//end saga function*/
 
+function* deleteUserSavedMeal(action) {
+    try {
+        yield axios.delete(`/api/meals/savedmeals/${action.payload}`);
+        yield put({ type: 'GET_USER_SAVED_MEALS' });
+    } catch (error) {
+        console.log(error);
+    }
+}//end saga function*/
+
 function* saveUserMeal(action) {
     try {
-        yield axios.post(`/api/meals/save`, action.payload);
+        console.log('save saga',action.payload);
+        // yield axios.post(`/api/meals/save`, action.payload);
+        // yield axios.put(`api/meals/${action.payload}`)
         // yield put({ type: 'GET_USER_MEALS' });
 
     } catch (error) {
@@ -120,7 +131,7 @@ function* getUserSavedMeals() {
             let ingredientsArray = JSON.parse(response.data[i].ingredients);
             response.data[i].ingredients = ingredientsArray;
         }
-        
+
         yield put({ type: 'SET_USER_SAVED_MEALS', payload: response.data });
 
     } catch (error) {
@@ -128,14 +139,34 @@ function* getUserSavedMeals() {
     }
 }//end saga function*/
 
+//get function without the API call and combined ingredients parsing
+function* getUserMealsSimple() {
+    try {
+        //user meals from the db
+        const response = yield axios.get(`/api/meals`);
+
+        //ingredients are currently a string, but we need them in JSON format
+        for (let i = 0; i < response.data.length; i++) {
+            let ingredientsArray = JSON.parse(response.data[i].ingredients);
+            response.data[i].ingredients = ingredientsArray;
+        }
+        //set user meals to a reducer for each day of the week
+        yield put({ type: 'SET_USER_MEALS', payload: response.data });
+    } catch (error) {
+        console.log(error);
+    }
+}//end getUserMealsSimple
+
 function* spoonacularSaga() {
-    // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
+    yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
     yield takeEvery('GET_API_RECIPES', getAPIRecipes)
     yield takeEvery('POST_MEALS', postMeals);
     yield takeEvery('GET_USER_MEALS', getUserMeals)
     yield takeEvery('DELETE_USER_MEAL', deleteUserMeal)
     yield takeEvery('SAVE_USER_MEAL', saveUserMeal)
     yield takeEvery('GET_USER_SAVED_MEALS', getUserSavedMeals)
+    yield takeEvery('DELETE_USER_SAVED_MEAL', deleteUserSavedMeal)
+    yield takeEvery('GET_USER_MEALS_SIMPLE', getUserMealsSimple)
 }
 
 export default spoonacularSaga;

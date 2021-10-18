@@ -1,7 +1,11 @@
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+
 
 
 function UserSavedMealsItem(props) {
+    const dispatch = useDispatch();
+
 
     const formatTime = (time) => {
         time = moment().format("MMM Do YY");
@@ -19,6 +23,11 @@ function UserSavedMealsItem(props) {
                 ingredientsString += ingredients[i].fullString;
             }
         }
+    }
+
+    const handleRemoveButton = () => {
+        dispatch({ type: 'DELETE_USER_SAVED_MEAL', payload: props.meal.id });
+        // dispatch({ type: 'GET_USER_SAVED_MEALS' });
     }
 
 
@@ -40,7 +49,7 @@ function UserSavedMealsItem(props) {
                 {formatTime(props.meal.date)}
             </td>
             <td>
-                <button>Remove</button>
+                <button onClick={handleRemoveButton}>Remove</button>
             </td>
         </tr>
     )

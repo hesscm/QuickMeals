@@ -1,7 +1,7 @@
 function PopulatedMealsGrid({recipes, handleAddMeal}) {
     return(
         <>            <div className="populatedMeals">
-            <p>populatedMeals</p>
+            <h3>Pick what you like!</h3>
             <div className="grid-containerB">
                 <div onClick={() => handleAddMeal(0)} className="meal1">
                     {recipes[0].title}

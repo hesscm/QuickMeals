@@ -4,7 +4,6 @@ import useReduxStore from '../../hooks/useReduxStore';
 import UserSavedMealsItem from './UserSavedMealsItem';
 const DOMPurify = require('dompurify')(window);
 
-
 import './UserSavedMealsPage.css'
 
 function SavedMealsPage() {
@@ -22,30 +21,32 @@ function SavedMealsPage() {
 
     const handleDescriptionView = (description) => {
         if (details.descriptionStatus === false) {
-            setDetails({ descriptionStatus: true, descData: description });
+            setDetails({ ...details, descriptionStatus: true, descData: description });
         } else {
-            setDetails({ descriptionStatus: false });
+            setDetails({ ...details, descriptionStatus: false });
         }
         console.log(details.descriptionStatus);
     }
 
     const handleIngredientsView = (ingredients) => {
         if (details.ingredientsStatus === false) {
-            setDetails({ ingredientsStatus: true, ingrData: ingredients });
+            setDetails({ ...details, ingredientsStatus: true, ingrData: ingredients });
         } else {
-            setDetails({ ingredientsStatus: false });
+            setDetails({ ...details, ingredientsStatus: false });
         }
         console.log(details.ingredientsStatus);
     }
 
     const handleInstructionsView = (instructions) => {
         if (details.instructionsStatus === false) {
-            setDetails({ instructionsStatus: true, instrData: instructions });
+            setDetails({ ...details, instructionsStatus: true, instrData: instructions });
         } else {
-            setDetails({ instructionsStatus: false });
+            setDetails({ ...details, instructionsStatus: false });
         }
         console.log(details.instructionsStatus);
     }
+
+
 
 
     return (
@@ -74,12 +75,11 @@ function SavedMealsPage() {
 
                                         {meals.map((meal, i) => {
                                             return <UserSavedMealsItem
-                                                key={meal.date}
+                                                key={meal.id}
                                                 meal={meal}
                                                 handleDescriptionView={handleDescriptionView}
                                                 handleIngredientsView={handleIngredientsView}
                                                 handleInstructionsView={handleInstructionsView}
-
                                             />
                                         })}
 
