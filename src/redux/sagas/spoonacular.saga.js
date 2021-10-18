@@ -69,8 +69,8 @@ function* getUserMeals() {
         for (let i = 0; i < apiIngredients.length; i++) {
             if (apiIngredients[i].aisle === 'Pantry Items') {
                 console.log('found it');
-            //element 1 is pantry items such as water, salt, pepper, flour, etc.
-            //We don't need these in the shopping list.
+                //element 1 is pantry items such as water, salt, pepper, flour, etc.
+                //We don't need these in the shopping list.
                 continue;
             }
             //convert the API response to a DOM friendly format
@@ -112,11 +112,15 @@ function* deleteUserSavedMeal(action) {
 
 function* saveUserMeal(action) {
     try {
-        console.log('save saga',action.payload);
-        // yield axios.post(`/api/meals/save`, action.payload);
-        // yield axios.put(`api/meals/${action.payload}`)
-        // yield put({ type: 'GET_USER_MEALS' });
-
+        console.log('save saga', action.payload);
+        if (action.payload.saved == true) {
+            yield axios.post(`/api/meals/save`, action.payload);
+        } else if (action.payload.saved == false) {
+            yield axios.delete(`/api/meals/savedmeals/${action.payload.id}`);
+        }
+        yield axios.put(`api/meals/${action.payload.id}/${action.payload.saved}`)
+        yield put({ type: 'GET_USER_MEALS_SIMPLE' });
+        
     } catch (error) {
         console.log(error);
     }
