@@ -39,6 +39,7 @@ CREATE TABLE "user_meals" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL,
 	"meals_id" integer NOT NULL,
+	"is_saved" boolean NOT NULL DEFAULT FALSE,
 	"day" varchar(25) NOT NULL,
 	CONSTRAINT "user_meals_pk" PRIMARY KEY ("id")
 ) WITH (

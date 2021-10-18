@@ -1,19 +1,12 @@
 // import './SpoonacularTesting.css'
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import useReduxStore from '../../hooks/useReduxStore';
 import BackOfCard from './BackOfCard';
 import FrontOfCard from './FrontOfCard';
 import './RecipeGeneratorPage.css';
 
 function RecipeGeneratorPage() {
     const dispatch = useDispatch();
-    const reduxStore = useReduxStore();
-    // const [recipe, setRecipe] = useState({
-    //     name: 'Name',
-    //     picture: 'image',
-    //     description: 'Lots of words.'
-    // });
     const [sideOfCard, setSideOfCard] = useState(true);
 
     useEffect(() => {
@@ -38,12 +31,13 @@ function RecipeGeneratorPage() {
     return (
         <div>
             <section className='recipeSection'>
+                <h1>The Recipe Generator</h1>
                 {sideOfCard ?
                     <FrontOfCard flipCard={flipCard} /> :
                     <BackOfCard flipCard={flipCard} />
                 }
                 <br /><br />
-                <button className="btn" onClick={handleButtonClick}>Get A Recipe</button>
+                <button className="btn" onClick={handleButtonClick}>Get A Random Recipe</button>
 
             </section>
         </div>

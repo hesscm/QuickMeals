@@ -1,121 +1,65 @@
+![MIT LICENSE](https://img.shields.io/github/license/scottbromander/the_marketplace.svg?style=flat-square)
+![REPO SIZE](https://img.shields.io/github/repo-size/scottbromander/the_marketplace.svg?style=flat-square)
+![TOP_LANGUAGE](https://img.shields.io/github/languages/top/scottbromander/the_marketplace.svg?style=flat-square)
+![FORKS](https://img.shields.io/github/forks/scottbromander/the_marketplace.svg?style=social)
 
-# EDA Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+# QuickMeals
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+## CURRENTLY IN DEVELOPMENT 10/18/21
 
-## Use the Template for This Repository (Don't Clone)
+## Description
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
+_Duration: 2 Week Sprint_
 
+Can’t decide what’s for dinner? QuickMeals is a random recipe picker/meal planner App with help from the spoonacular API. If you just want to quickly find a recipe without thinking, you can randomly search for recipes on the Recipe Generator page. If not, you can plan meals for one day or the entire week. You can then take that meal plan and generate a shopping list. If you find a recipe that you love, you can also save it to your favorites.
 
-## Prerequisites
+### Visit: Heroku Deployment Coming Soon
 
-Before you get started, make sure you have the following software installed on your computer:
+## Scope Document
+See: [Scope Document](https://docs.google.com/document/d/1-JiniI-LnAbEoI7cYLXNBrbgpZj1vpY2_2h-W1HLSms/edit#heading=h.vhvkcjgwsn55)
 
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
+This has the details of all of my initial planning. This includes wireframes for each feature, scheduling estimates for each piece of the project, my server routes, and my technologies used.
 
-## Create database and table
+## Screen Shot
 
-Create a new database called `prime_app` and create a `user` table:
+Coming Soon
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
+### Prerequisites
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+- Any IDE such as VS Code or a web browser, Node.js, postgresql and associated database software.
+- This app uses the Spoonacular API and requires an internet connection to enjoy full functionality.
 
-## Development Setup Instructions
+## Installation
+1. Fork the repository
+2. Ensure that [git is installed](https://git-scm.com/downloads) on your Mac/PC.
+2. Copy the SSH link under 'Code'.
+3. Enter terminal(Mac) or Git Bash(Windows) and in your desired folder, type 'git clone git@github.com:hesscm/movies-sagas.git'.
+4. Open with your preferred IDE.
+5. You will need node.js installed. In the repo folder, type "npm install" to install all of the included dependencies.
+6. You will also need postgres installed. Install a SQL database titled 'QuickMeals' with the data in the data.sql file.
+7. Type "npm run server" to get the server running.
+8. Open a new terminal and type "npm run client" to get the react client going.
+9. Run the app in the browser at "localhost:3000".
+10. A browser window should pop up, otherwise navigate to 'localhost:3000'.
 
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
+## Usage
 
-## Debugging
+1. Create an account or log in as an existing user.
+2. You will be redirected to the Recipe Generator page, where you can select and save a random recipe.
+3. Navigation links are currently available at the top of the page.
+4. The 'Pick Your Meals' page allows you to pick and refresh new recipes and add them to a day of the week.
+5. The 'View Meal Plan' page shows all of your current meals. Here you can favorite a meal, remove a meal, or generate a shopping list.
+6. The 'Shopping List' page shows you ingredients for either, individual days of the week, or combined ingredients for the entire meal plan.
+7. The 'Favorites' page shows all of your saved meals as a long-running history that you can access at any time.
+8. The 'User/Dashboard' page is TBD.
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+## Built With
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+HTML, CSS, JavaScript, Node.js, Postgres, SQL, React, Redux, Redux-Saga, Material-UI, Passport, Axios, Heroku,
+React-Beautiful-DND, Moment.js, Spoonacular API.
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+## Acknowledgement
+Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. (Shout out to my instructor, Chris Black!)
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
-## Testing Routes with Postman
-
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+## Support
+If you have suggestions or issues, please email me at [chrishessmusic@gmail.com]

@@ -1,7 +1,9 @@
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
+import  { useHistory } from 'react-router-dom';
 
 function DaysOfWeekGrid(props) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const user = useReduxStore().user;
 
@@ -21,6 +23,7 @@ function DaysOfWeekGrid(props) {
             props.sundayMeal,
         ]
         dispatch({ type: 'POST_MEALS', payload: action })
+        history.push('/viewmeals')
     }
 
     const handleRemoveButton = (dayOfWeek) => {

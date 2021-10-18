@@ -23,7 +23,6 @@ function BackOfCard({ flipCard }) {
 
     return (
         <div className="recipeBox" onClick={flipCard}>
-            <h1>Back of card.</h1>
             <h1>{recipes.randomRecipe.title}</h1>
             <h3>Ingredients</h3>
             <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(ingredientsString) }} />

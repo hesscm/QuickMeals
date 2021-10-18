@@ -9,7 +9,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     // GET route code here
     try {
         await pool.query('BEGIN');
-        const queryText = ` SELECT DISTINCT ON (api_id) meals.*,user_meals.day FROM meals
+        const queryText = ` SELECT DISTINCT ON (api_id) meals.*,user_meals.day,user_meals.is_saved FROM meals
                             JOIN "user_meals" ON meals.id = user_meals.meals_id
                             JOIN "user" ON "user".id = user_meals.user_id
                             WHERE "user".id = $1;`
@@ -17,6 +17,42 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
         await pool.query('COMMIT');
         console.log(result.rows);
         res.send(result.rows);
+
+    } catch (error) {
+        console.log('ROLLBACK', error);
+        await pool.query('ROLLBACK');
+        throw error;
+    }
+});
+
+router.get('/savedmeals', rejectUnauthenticated, async (req, res) => {
+    // GET route code here
+    try {
+        await pool.query('BEGIN');
+        const queryText = ` SELECT DISTINCT ON (api_id) meals.*, user_saved_meals.date FROM meals
+                            JOIN "user_saved_meals" ON meals.id = user_saved_meals.meals_id
+                            JOIN "user" ON "user".id = user_saved_meals.user_id
+                            WHERE "user".id = $1;`
+        const result = await pool.query(queryText, [req.user.id]);
+        await pool.query('COMMIT');
+        console.log(result.rows);
+        res.send(result.rows);
+    } catch (error) {
+        console.log('ROLLBACK', error);
+        await pool.query('ROLLBACK');
+        throw error;
+    }
+});
+
+router.put('/:id/:saved', rejectUnauthenticated, async (req, res) => {
+    try {
+        console.log(req.params.id);
+        await pool.query('BEGIN');
+        const queryText = `UPDATE "user_meals" SET "is_saved" = $3 WHERE "user_id" = $1 AND "meals_id" = $2;`
+        const result = await pool.query(queryText, [req.user.id, req.params.id, req.params.saved]);
+        await pool.query('COMMIT');
+        console.log(result);
+        res.sendStatus(200);
 
     } catch (error) {
         console.log('ROLLBACK', error);
@@ -33,7 +69,24 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) => {
         const result = await pool.query(queryText, [req.user.id, req.params.id]);
         await pool.query('COMMIT');
         console.log(result);
-        res.send(200);
+        res.sendStatus(200);
+
+    } catch (error) {
+        console.log('ROLLBACK', error);
+        await pool.query('ROLLBACK');
+        throw error;
+    }
+});
+
+router.delete('/savedmeals/:id', rejectUnauthenticated, async (req, res) => {
+    try {
+        console.log(req.params.id);
+        await pool.query('BEGIN');
+        const queryText = `DELETE FROM "user_saved_meals" WHERE "user_id" = $1 AND "meals_id" = $2;`
+        const result = await pool.query(queryText, [req.user.id, req.params.id]);
+        await pool.query('COMMIT');
+        console.log(result);
+        res.sendStatus(200);
 
     } catch (error) {
         console.log('ROLLBACK', error);
