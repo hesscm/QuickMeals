@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import DaysOfWeekGrid from './DaysOfWeekGrid';
 import PopulatedMealsGrid from './PopulatedMealsGrid';
+import Button from '@mui/material/Button';
+
 
 function PickYourMealsPage() {
     const dispatch = useDispatch();
@@ -184,7 +186,7 @@ function PickYourMealsPage() {
             {/* middle section */}
             <div className="filter-pagination">
                 <p>filter-pagination</p>
-                <button className="btn" onClick={handleRefreshMeals}>Refresh Meals</button>
+                <Button size="large" color="primary" variant="contained" onClick={handleRefreshMeals}>Refresh Meals</Button>
             </div>
             {/* bottom section */}
             <PopulatedMealsGrid 

@@ -5,6 +5,7 @@ import BackOfCard from './BackOfCard';
 import FrontOfCard from './FrontOfCard';
 import './RecipeGeneratorPage.css';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 function RecipeGeneratorPage() {
     const dispatch = useDispatch();
@@ -33,12 +34,14 @@ function RecipeGeneratorPage() {
             
             <section className='recipeSection'>
                 <h1>The Recipe Generator</h1>
+                <Box>
                 {sideOfCard ?
                     <FrontOfCard flipCard={flipCard} /> :
                     <BackOfCard flipCard={flipCard} />
                 }
                 <br /><br />
-                <button className="btn" onClick={handleButtonClick}>Get A Random Recipe</button>
+                <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
+                </Box>
             </section>
         </div>
     )

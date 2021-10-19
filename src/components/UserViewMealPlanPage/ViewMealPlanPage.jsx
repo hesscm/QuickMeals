@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import { useHistory } from 'react-router-dom';
+import { Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function ViewMealPlanPage() {
@@ -55,10 +58,15 @@ function ViewMealPlanPage() {
 
                                     <img src={recipes.mondayMeal.image_path} alt={recipes.mondayMeal.name} />
 
-                                    <button onClick={() => handleRemoveButton(recipes.mondayMeal.id)}>Remove</button>
+                                    <IconButton aria-label="delete" size="large" color="warning" onClick={() => handleRemoveButton(recipes.mondayMeal.id)}>
+                                        <DeleteIcon fontSize="inherit" />
+                                    </IconButton>
 
-                                    {!recipes.mondayMeal.is_saved ? <button onClick={() => handleSaveButton(recipes.mondayMeal.id, 'true')}>Favorite</button> :
-                                        <button onClick={() => handleSaveButton(recipes.mondayMeal.id, 'false')}>Unfavorite</button>}
+                                    {!recipes.mondayMeal.is_saved ?
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.mondayMeal.id, 'true')}>Favorite</Button>
+                                        :
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.mondayMeal.id, 'false')}>Unfavorite</Button>
+                                    }
                                 </>
                             }
                         </div>
@@ -70,10 +78,15 @@ function ViewMealPlanPage() {
                                     <h3>{recipes.tuesdayMeal.name}</h3>
                                     <img src={recipes.tuesdayMeal.image_path} alt={recipes.tuesdayMeal.name} />
 
-                                    <button onClick={() => handleRemoveButton(recipes.tuesdayMeal.id)}>Remove</button>
+                                    <IconButton aria-label="delete" size="large" color="warning" onClick={() => handleRemoveButton(recipes.tuesdayMeal.id)}>
+                                        <DeleteIcon fontSize="inherit" />
+                                    </IconButton>
 
-                                    {!recipes.tuesdayMeal.is_saved ? <button onClick={() => handleSaveButton(recipes.tuesdayMeal.id, 'true')}>Favorite</button> :
-                                        <button onClick={() => handleSaveButton(recipes.tuesdayMeal.id, 'false')}>Unfavorite</button>}
+                                    {!recipes.tuesdayMeal.is_saved ?
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.tuesdayMeal.id, 'true')}>Favorite</Button>
+                                        :
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.tuesdayMeal.id, 'false')}>Unfavorite</Button>
+                                    }
                                 </>
                             }
                         </div>
@@ -85,10 +98,15 @@ function ViewMealPlanPage() {
                                     <h3>{recipes.wednesdayMeal.name}</h3>
                                     <img src={recipes.wednesdayMeal.image_path} alt={recipes.wednesdayMeal.name} />
 
-                                    <button onClick={() => handleRemoveButton(recipes.wednesdayMeal.id)}>Remove</button>
+                                    <IconButton aria-label="delete" size="large" color="warning" onClick={() => handleRemoveButton(recipes.wednesdayMeal.id)}>
+                                        <DeleteIcon fontSize="inherit" />
+                                    </IconButton>
 
-                                    {!recipes.wednesdayMeal.is_saved ? <button onClick={() => handleSaveButton(recipes.wednesdayMeal.id, 'true')}>Favorite</button> :
-                                        <button onClick={() => handleSaveButton(recipes.wednesdayMeal.id, 'false')}>Unfavorite</button>}
+                                    {!recipes.wednesdayMeal.is_saved ?
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.wednesdayMeal.id, 'true')}>Favorite</Button>
+                                        :
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.wednesdayMeal.id, 'false')}>Unfavorite</Button>
+                                    }
                                 </>
                             }
                         </div>
@@ -100,10 +118,15 @@ function ViewMealPlanPage() {
                                     <h3>{recipes.thursdayMeal.name}</h3>
                                     <img src={recipes.thursdayMeal.image_path} alt={recipes.thursdayMeal.name} />
 
-                                    <button onClick={() => handleRemoveButton(recipes.thursdayMeal.id)}>Remove</button>
+                                    <IconButton aria-label="delete" size="large" color="warning" onClick={() => handleRemoveButton(recipes.thursdayMeal.id)}>
+                                        <DeleteIcon fontSize="inherit" />
+                                    </IconButton>
 
-                                    {!recipes.thursdayMeal.is_saved ? <button onClick={() => handleSaveButton(recipes.thursdayMeal.id, 'true')}>Favorite</button> :
-                                        <button onClick={() => handleSaveButton(recipes.thursdayMeal.id, 'false')}>Unfavorite</button>}
+                                    {!recipes.thursdayMeal.is_saved ?
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.thursdayMeal.id, 'true')}>Favorite</Button>
+                                        :
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.thursdayMeal.id, 'false')}>Unfavorite</Button>
+                                    }
                                 </>
                             }
                         </div>
@@ -115,10 +138,15 @@ function ViewMealPlanPage() {
                                     <h3>{recipes.fridayMeal.name}</h3>
                                     <img src={recipes.fridayMeal.image_path} alt={recipes.fridayMeal.name} />
 
-                                    <button onClick={() => handleRemoveButton(recipes.fridayMeal.id)}>Remove</button>
+                                    <IconButton aria-label="delete" size="large" color="warning" onClick={() => handleRemoveButton(recipes.fridayMeal.id)}>
+                                        <DeleteIcon fontSize="inherit" />
+                                    </IconButton>
 
-                                    {!recipes.fridayMeal.is_saved ? <button onClick={() => handleSaveButton(recipes.fridayMeal.id, 'true')}>Favorite</button> :
-                                        <button onClick={() => handleSaveButton(recipes.fridayMeal.id, 'false')}>Unfavorite</button>}
+                                    {!recipes.fridayMeal.is_saved ?
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.fridayMeal.id, 'true')}>Favorite</Button>
+                                        :
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.fridayMeal.id, 'false')}>Unfavorite</Button>
+                                    }
                                 </>
                             }
                         </div>
@@ -130,10 +158,15 @@ function ViewMealPlanPage() {
                                     <h3>{recipes.saturdayMeal.name}</h3>
                                     <img src={recipes.saturdayMeal.image_path} alt={recipes.saturdayMeal.name} />
 
-                                    <button onClick={() => handleRemoveButton(recipes.saturdayMeal.id)}>Remove</button>
+                                    <IconButton aria-label="delete" size="large" color="warning" onClick={() => handleRemoveButton(recipes.saturdayMeal.id)}>
+                                        <DeleteIcon fontSize="inherit" />
+                                    </IconButton>
 
-                                    {!recipes.saturdayMeal.is_saved ? <button onClick={() => handleSaveButton(recipes.saturdayMeal.id, 'true')}>Favorite</button> :
-                                        <button onClick={() => handleSaveButton(recipes.saturdayMeal.id, 'false')}>Unfavorite</button>}
+                                    {!recipes.saturdayMeal.is_saved ?
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.saturdayMeal.id, 'true')}>Favorite</Button>
+                                        :
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.saturdayMeal.id, 'false')}>Unfavorite</Button>
+                                    }
                                 </>
                             }
                         </div>
@@ -145,16 +178,21 @@ function ViewMealPlanPage() {
                                     <h3>{recipes.sundayMeal.name}</h3>
                                     <img src={recipes.sundayMeal.image_path} alt={recipes.sundayMeal.name} />
 
-                                    <button onClick={() => handleRemoveButton(recipes.sundayMeal.id)}>Remove</button>
+                                    <IconButton aria-label="delete" size="large" color="warning" onClick={() => handleRemoveButton(recipes.sundayMeal.id)}>
+                                        <DeleteIcon fontSize="inherit" />
+                                    </IconButton>
 
-                                    {!recipes.sundayMeal.is_saved ? <button onClick={() => handleSaveButton(recipes.sundayMeal.id, 'true')}>Favorite</button> :
-                                        <button onClick={() => handleSaveButton(recipes.sundayMeal.id, 'false')}>Unfavorite</button>}
+                                    {!recipes.sundayMeal.is_saved ?
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.sundayMeal.id, 'true')}>Favorite</Button>
+                                        :
+                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.sundayMeal.id, 'false')}>Unfavorite</Button>
+                                    }
                                 </>
                             }
                         </div>
                     </div>
                     <br /><br />
-                    <button onClick={generateShoppingList} className='btn'>Generate Shopping List</button>
+                    <Button size="large" color="secondary" variant="contained" onClick={generateShoppingList} className='btn'>Generate Shopping List</Button>
                 </div >
                 :
                 <></>

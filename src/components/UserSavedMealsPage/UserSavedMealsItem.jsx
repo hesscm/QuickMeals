@@ -1,5 +1,8 @@
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import { Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
@@ -37,19 +40,21 @@ function UserSavedMealsItem(props) {
                 {props.meal.name}
             </td>
             <td>
-                <button onClick={() => props.handleDescriptionView(props.meal.description)}>View</button>
+                <Button size="small" color="primary" variant="contained" onClick={() => props.handleDescriptionView(props.meal.description)}>View</Button>
             </td>
             <td>
-                <button onClick={() => props.handleIngredientsView(ingredientsString)}>View</button>
+                <Button size="small" color="primary" variant="contained" onClick={() => props.handleIngredientsView(ingredientsString)}>View</Button>
             </td>
             <td>
-                <button onClick={() => props.handleInstructionsView(props.meal.instructions)}>View</button>
+                <Button size="small" color="primary" variant="contained" onClick={() => props.handleInstructionsView(props.meal.instructions)}>View</Button>
             </td>
             <td>
                 {formatTime(props.meal.date)}
             </td>
             <td>
-                <button onClick={handleRemoveButton}>Remove</button>
+                <IconButton aria-label="delete" size="large" color="warning" onClick={handleRemoveButton}>
+                    <DeleteIcon fontSize="inherit" />
+                </IconButton>
             </td>
         </tr>
     )

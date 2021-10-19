@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import  { useHistory } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 function DaysOfWeekGrid(props) {
     const history = useHistory();
@@ -65,7 +66,7 @@ function DaysOfWeekGrid(props) {
                         <>
                             <h3>{props.mondayMeal.title}</h3>
                             <img src={props.mondayMeal.image} alt={props.mondayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Monday')}>Remove</button>
+                            <Button size="large" color="primary" variant="contained" onClick={() => handleRemoveButton('Monday')}>Remove</Button>
                         </>
                     }
                 </div>
@@ -76,7 +77,7 @@ function DaysOfWeekGrid(props) {
                         <>
                             <h3>{props.tuesdayMeal.title}</h3>
                             <img src={props.tuesdayMeal.image} alt={props.tuesdayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Tuesday')}>Remove</button>
+                            <Button size="large" color="primary" variant="contained" onClick={() => handleRemoveButton('Tuesday')}>Remove</Button>
                         </>
                     }
                 </div>
@@ -87,7 +88,7 @@ function DaysOfWeekGrid(props) {
                         <>
                             <h3>{props.wednesdayMeal.title}</h3>
                             <img src={props.wednesdayMeal.image} alt={props.wednesdayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Wednesday')}>Remove</button>
+                            <Button size="large" color="primary" variant="contained" onClick={() => handleRemoveButton('Wednesday')}>Remove</Button>
                         </>
                     }
                 </div>
@@ -98,7 +99,7 @@ function DaysOfWeekGrid(props) {
                         <>
                             <h3>{props.thursdayMeal.title}</h3>
                             <img src={props.thursdayMeal.image} alt={props.thursdayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Thursday')}>Remove</button>
+                            <Button size="large" color="primary" variant="contained" onClick={() => handleRemoveButton('Thursday')}>Remove</Button>
 
                         </>
                     }
@@ -110,7 +111,7 @@ function DaysOfWeekGrid(props) {
                         <>
                             <h3>{props.fridayMeal.title}</h3>
                             <img src={props.fridayMeal.image} alt={props.fridayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Friday')}>Remove</button>
+                            <Button size="large" color="primary" variant="contained" onClick={() => handleRemoveButton('Friday')}>Remove</Button>
 
                         </>
                     }
@@ -122,7 +123,7 @@ function DaysOfWeekGrid(props) {
                         <>
                             <h3>{props.saturdayMeal.title}</h3>
                             <img src={props.saturdayMeal.image} alt={props.saturdayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Saturday')}>Remove</button>
+                            <Button size="large" color="primary" variant="contained" onClick={() => handleRemoveButton('Saturday')}>Remove</Button>
 
                         </>
                     }
@@ -134,14 +135,14 @@ function DaysOfWeekGrid(props) {
                         <>
                             <h3>{props.sundayMeal.title}</h3>
                             <img src={props.sundayMeal.image} alt={props.sundayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Sunday')}>Remove</button>
+                            <Button size="large" color="primary" variant="contained" onClick={() => handleRemoveButton('Sunday')}>Remove</Button>
 
                         </>
                     }
                 </div>
             </div>
             <br /><br />
-            <button onClick={handleButtonClick} className='btn'>Let's Eat!</button>
+            <Button size="large" color="primary" variant="contained" onClick={handleButtonClick} className='btn'>Let's Eat!</Button>
         </div >
     )
 }
