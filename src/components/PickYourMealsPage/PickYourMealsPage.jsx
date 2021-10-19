@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import DaysOfWeekGrid from './DaysOfWeekGrid';
 import PopulatedMealsGrid from './PopulatedMealsGrid';
-import Button from '@mui/material/Button';
+import { Grid, Button, Paper } from '@mui/material';
 
 
 function PickYourMealsPage() {
@@ -33,7 +33,7 @@ function PickYourMealsPage() {
             for (let i = 0; i < ingredients.length; i++) {
                 if (i !== ingredients.length - 1) {
                     ingredientsString += ingredients[i].original + '<br />';
-                    ingredientsArray.push({ name: ingredients[i].name, amount: ingredients[i].amount, unit: ingredients[i].unit, fullString: ingredients[i].original});
+                    ingredientsArray.push({ name: ingredients[i].name, amount: ingredients[i].amount, unit: ingredients[i].unit, fullString: ingredients[i].original });
                 } else {
                     ingredientsString += ingredients[i].original;
                 }
@@ -70,15 +70,15 @@ function PickYourMealsPage() {
         switch (dayOfWeek) {
             case 'Monday':
             case 'monday':
-                setMondayMeal({ 
-                    title: recipes[input].title, 
-                    image: recipes[input].image, 
+                setMondayMeal({
+                    title: recipes[input].title,
+                    image: recipes[input].image,
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
                     id: recipes[input].id,
                     day: 'Monday'
-                 })
+                })
                 break;
             case 'Tuesday':
             case 'tuesday':
@@ -165,34 +165,48 @@ function PickYourMealsPage() {
 
     return (
         <>
-        <h1>Pick Your Meals</h1>
-        {/* top section */}
-            <DaysOfWeekGrid
-                mondayMeal={mondayMeal}
-                setMondayMeal={setMondayMeal}
-                tuesdayMeal={tuesdayMeal}
-                setTuesdayMeal={setTuesdayMeal}
-                wednesdayMeal={wednesdayMeal}
-                setWednesdayMeal={setWednesdayMeal}
-                thursdayMeal={thursdayMeal}
-                setThursdayMeal={setThursdayMeal}
-                fridayMeal={fridayMeal}
-                setFridayMeal={setFridayMeal}
-                saturdayMeal={saturdayMeal}
-                setSaturdayMeal={setSaturdayMeal}
-                sundayMeal={sundayMeal}
-                setSundayMeal={setSundayMeal}
-            />
+            <h1>Pick Your Meals</h1>
+            {/* top section */}
+            <Grid
+                container
+                spacing={2}
+            >
+                <DaysOfWeekGrid
+                    mondayMeal={mondayMeal}
+                    setMondayMeal={setMondayMeal}
+                    tuesdayMeal={tuesdayMeal}
+                    setTuesdayMeal={setTuesdayMeal}
+                    wednesdayMeal={wednesdayMeal}
+                    setWednesdayMeal={setWednesdayMeal}
+                    thursdayMeal={thursdayMeal}
+                    setThursdayMeal={setThursdayMeal}
+                    fridayMeal={fridayMeal}
+                    setFridayMeal={setFridayMeal}
+                    saturdayMeal={saturdayMeal}
+                    setSaturdayMeal={setSaturdayMeal}
+                    sundayMeal={sundayMeal}
+                    setSundayMeal={setSundayMeal}
+                />
+            </Grid>
             {/* middle section */}
-            <div className="filter-pagination">
+            <Grid
+                container
+                justifyContent="space-between"
+            >
                 <p>filter-pagination</p>
                 <Button size="large" color="primary" variant="contained" onClick={handleRefreshMeals}>Refresh Meals</Button>
-            </div>
+            </Grid>
             {/* bottom section */}
-            <PopulatedMealsGrid 
-            recipes={recipes}
-            handleAddMeal={handleAddMeal}
+            <Grid 
+            container
+            spacing={2}
+            >
+            <PopulatedMealsGrid
+                recipes={recipes}
+                handleAddMeal={handleAddMeal}
             />
+            </Grid>
+
         </>
     )
 }
