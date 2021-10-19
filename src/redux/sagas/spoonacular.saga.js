@@ -162,7 +162,7 @@ function* getUserMealsSimple() {
 }//end getUserMealsSimple
 
 function* spoonacularSaga() {
-    yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
+    // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
     yield takeEvery('GET_API_RECIPES', getAPIRecipes)
     yield takeEvery('POST_MEALS', postMeals);
     yield takeEvery('GET_USER_MEALS', getUserMeals)

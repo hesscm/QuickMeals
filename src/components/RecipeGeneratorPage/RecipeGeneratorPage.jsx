@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import BackOfCard from './BackOfCard';
 import FrontOfCard from './FrontOfCard';
 import './RecipeGeneratorPage.css';
+import Button from '@mui/material/Button';
 
 function RecipeGeneratorPage() {
     const dispatch = useDispatch();
@@ -27,9 +28,9 @@ function RecipeGeneratorPage() {
             setSideOfCard(true);
         }
     }
-
     return (
         <div>
+            
             <section className='recipeSection'>
                 <h1>The Recipe Generator</h1>
                 {sideOfCard ?
@@ -38,7 +39,6 @@ function RecipeGeneratorPage() {
                 }
                 <br /><br />
                 <button className="btn" onClick={handleButtonClick}>Get A Random Recipe</button>
-
             </section>
         </div>
     )
