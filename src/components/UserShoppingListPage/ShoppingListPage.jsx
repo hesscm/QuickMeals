@@ -4,6 +4,7 @@ import useReduxStore from '../../hooks/useReduxStore';
 import DayOfWeekList from './DayOfWeekList';
 import './ShoppingListPage.css'
 import WeeklyShoppingList from './WeeklyShoppingList';
+import { Typography } from '@mui/material';
 
 function ShoppingListPage() {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function ShoppingListPage() {
 
     return (
         <>
-            <h1>Your Shopping List</h1>
+            <Typography variant="h2" gutterBottom>Your Shopping List</Typography>
             <DayOfWeekList />
             <WeeklyShoppingList />
     

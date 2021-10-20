@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import UserSavedMealsItem from './UserSavedMealsItem';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 const DOMPurify = require('dompurify')(window);
@@ -57,13 +57,13 @@ function SavedMealsPage() {
             <div className="savedMealsPage">
                 {
                     meals.length == 0 ?
-                        <h4>No meal selected for this day!</h4> :
+                        <Typography variant="h4">No meal selected for this day!</Typography> :
                         <>
 
 
                             <div className='savedMealsTable'>
-                                <h1>Your Saved Meals</h1>
-                                <h4>Click the buttons to check the details.</h4>
+                                <Typography variant="h2">Your Saved Meals</Typography>
+                                <Typography variant="h6">Click the buttons to check the details.</Typography>
                                 <table>
 
                                     <tbody>

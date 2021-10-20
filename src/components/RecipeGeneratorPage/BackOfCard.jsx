@@ -1,6 +1,6 @@
 import useReduxStore from '../../hooks/useReduxStore';
 import './RecipeGeneratorPage.css';
-
+import { Typography } from '@mui/material';
 
 function BackOfCard({ flipCard }) {
     const DOMPurify = require('dompurify')(window);
@@ -22,12 +22,14 @@ function BackOfCard({ flipCard }) {
     console.log(ingredientsString);
 
     return (
-        <div className="recipeBox" onClick={flipCard}>
-            <h1>{recipes.randomRecipe.title}</h1>
-            <h3>Ingredients</h3>
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(ingredientsString) }} />
-            <h3>Cooking Instructions</h3>
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(recipes.randomRecipe.instructions) }} />
+        <div onClick={flipCard}>
+            <Typography variant="h4">{recipes.randomRecipe.title}</Typography>
+            <br />
+            <Typography variant="h5">Ingredients</Typography>
+            <Typography component="span" variant="body2"><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(ingredientsString) }} /></Typography>
+            <br />
+            <Typography variant="h5">Cooking Instructions</Typography>
+            <Typography align="left" component="span" variant="body2"><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(recipes.randomRecipe.instructions) }} /></Typography>
         </div>
     )
 }

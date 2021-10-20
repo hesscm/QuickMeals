@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import DaysOfWeekGrid from './DaysOfWeekGrid';
 import PopulatedMealsGrid from './PopulatedMealsGrid';
-import { Grid, Button, Paper } from '@mui/material';
+import { Grid, Button, Paper, Typography } from '@mui/material';
 
 
 function PickYourMealsPage() {
@@ -165,11 +165,12 @@ function PickYourMealsPage() {
 
     return (
         <>
-            <h1>Pick Your Meals</h1>
+            <Typography variant="h2" gutterBottom>Pick Your Meals</Typography>
             {/* top section */}
             <Grid
                 container
                 spacing={2}
+                justifyContent="space-around"
             >
                 <DaysOfWeekGrid
                     mondayMeal={mondayMeal}

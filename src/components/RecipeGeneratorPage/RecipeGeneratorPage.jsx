@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import BackOfCard from './BackOfCard';
 import FrontOfCard from './FrontOfCard';
 import './RecipeGeneratorPage.css';
-import { Paper, Box, Button, Typography } from '@mui/material';
+import { Paper, Button, Typography, Card, Grid } from '@mui/material';
 
 function RecipeGeneratorPage() {
     const dispatch = useDispatch();
@@ -31,19 +31,26 @@ function RecipeGeneratorPage() {
     return (
         <div>
             
-            <section>
-                <Typography variant="h1">The Recipe Generator</Typography>
-                <Box>
+            <Grid container justifyContent="center">
+                <Grid item xs={12} >
+                <Typography variant="h2" component="h2" gutterBottom>The Recipe Generator</Typography>
+                </Grid>
+                
                     <Paper elevation={3}>
+                        <Card>
+                        <Grid item >
                 {sideOfCard ?
                     <FrontOfCard flipCard={flipCard} /> :
                     <BackOfCard flipCard={flipCard} />
                 }
+                        </Grid>
                 <br /><br />
+                <Grid item xs={12}>
                 <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
+                </Grid>
+                </Card>
                 </Paper>
-                </Box>
-            </section>
+            </Grid>
         </div>
     )
 }

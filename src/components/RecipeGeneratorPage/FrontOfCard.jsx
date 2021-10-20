@@ -1,5 +1,6 @@
 import useReduxStore from '../../hooks/useReduxStore';
 import './RecipeGeneratorPage.css';
+import { Typography } from '@mui/material';
 
 function FrontOfCard({ flipCard }) {
 
@@ -7,11 +8,12 @@ function FrontOfCard({ flipCard }) {
     const recipes = useReduxStore().recipes;
     console.log('reducer', recipes);
     return (
-        <div className="recipeBox" onClick={flipCard}>
-            <h1>{recipes.randomRecipe.title}</h1>
+        <div onClick={flipCard}>
+            <Typography variant="h4" gutterBottom>{recipes.randomRecipe.title}</Typography>
             <img src={recipes.randomRecipe.image} alt={recipes.randomRecipe.title} />
-            <h3>Description</h3>
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(recipes.randomRecipe.summary) }} />
+            <br />
+            <Typography variant="h4" component="h4" gutterBottom>Description</Typography>
+            <Typography component="span" variant="body1"><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(recipes.randomRecipe.summary) }} /></Typography>
         </div>
     )
 }
