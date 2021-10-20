@@ -65,9 +65,9 @@ function ViewMealPlanPage() {
                                                 <br />
                                                 <ButtonGroup variant="outlined" aria-label="outlined button group">
                                                     {!recipes.mondayMeal.is_saved ?
-                                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.mondayMeal.id, 'true')}>Favorite</Button>
+                                                        <Button color="primary" variant="contained" onClick={() => handleSaveButton(recipes.mondayMeal.id, 'true')}>Favorite</Button>
                                                         :
-                                                        <Button size="small" color="primary" variant="contained" onClick={() => handleSaveButton(recipes.mondayMeal.id, 'false')}>Unfavorite</Button>
+                                                        <Button color="primary" variant="contained" onClick={() => handleSaveButton(recipes.mondayMeal.id, 'false')}>Unfavorite</Button>
                                                     }
                                                     <IconButton aria-label="delete" size="large" color="warning" onClick={() => handleRemoveButton(recipes.mondayMeal.id)}>
                                                         <DeleteIcon fontSize="inherit" />

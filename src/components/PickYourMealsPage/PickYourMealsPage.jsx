@@ -76,6 +76,7 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
                     id: recipes[input].id,
                     day: 'Monday'
                 })
@@ -88,6 +89,7 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
                     id: recipes[input].id,
                     day: 'Tuesday'
                 })
@@ -100,6 +102,7 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
                     id: recipes[input].id,
                     day: 'Wednesday'
                 })
@@ -112,6 +115,7 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
                     id: recipes[input].id,
                     day: 'Thursday'
                 })
@@ -124,6 +128,7 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
                     id: recipes[input].id,
                     day: 'Friday'
                 })
@@ -136,6 +141,7 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
                     id: recipes[input].id,
                     day: 'Saturday'
                 })
@@ -148,6 +154,7 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
                     id: recipes[input].id,
                     day: 'Sunday'
                 })
@@ -187,6 +194,8 @@ function PickYourMealsPage() {
                     setSaturdayMeal={setSaturdayMeal}
                     sundayMeal={sundayMeal}
                     setSundayMeal={setSundayMeal}
+                    parseIngredients={parseIngredients}
+                    parseInstructions={parseInstructions}
                 />
             </Grid>
             {/* middle section */}
@@ -205,6 +214,8 @@ function PickYourMealsPage() {
             <PopulatedMealsGrid
                 recipes={recipes}
                 handleAddMeal={handleAddMeal}
+                parseIngredients={parseIngredients}
+                parseInstructions={parseInstructions}
             />
             </Grid>
 
