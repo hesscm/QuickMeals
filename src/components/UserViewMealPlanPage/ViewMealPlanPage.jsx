@@ -243,7 +243,7 @@ function ViewMealPlanPage() {
                             </Paper>
                         </Grid>
                         <br /><br />
-                        <Grid item sx={12}>
+                        <Grid item xs={12}>
                             <Button size="large" color="secondary" variant="contained" onClick={generateShoppingList} className='btn'>Generate Shopping List</Button>
                         </Grid>
                     </Grid>

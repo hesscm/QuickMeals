@@ -18,11 +18,14 @@ function MUIDialogBox(props) {
 
     const descriptionElementRef = useRef(null);
 
+
+
     return(
         <>
             <ButtonGroup>
                 <Button variant="contained" onClick={handleClickOpen(props.dayID)}>Details</Button>
                 <Button color="warning" variant="contained" onClick={() => props.handleRemoveButton(props.dayID)}>Remove</Button>
+
             </ButtonGroup>
             <Dialog
                 open={open}

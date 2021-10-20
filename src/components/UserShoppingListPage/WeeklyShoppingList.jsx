@@ -1,7 +1,6 @@
 import useReduxStore from '../../hooks/useReduxStore';
 import { Typography } from '@mui/material';
 
-
 function WeeklyShoppingList() {
     const ingredients = useReduxStore().recipes.totalUserIngredients;
 

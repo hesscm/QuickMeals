@@ -123,9 +123,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 console.log('Nothing to input at element ' + i);
             } else {
                 const queryTest = `
-                INSERT INTO meals (api_id, name, description, instructions, image_path, ingredients)
-                VALUES ($1,$2,$3,$4,$5,$6) RETURNING "id";`;
-                const values = [meal[i].id, meal[i].title, meal[i].description, meal[i].instructions, meal[i].image, JSON.stringify(meal[i].ingredients)]; //FIX ME WHEN READY TO CONNECT THE WIRES FROM CLIENT
+                INSERT INTO meals (api_id, name, description, instructions, image_path, ingredients, ingredients_string)
+                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING "id";`;
+                const values = [meal[i].id, meal[i].title, meal[i].description, meal[i].instructions, meal[i].image, JSON.stringify(meal[i].ingredients), meal[i].ingredientsString]; //FIX ME WHEN READY TO CONNECT THE WIRES FROM CLIENT
                 const mealsResult = await pool.query(queryTest, values);
                 console.log(mealsResult);
                 const mealsID = mealsResult.rows[0].id;

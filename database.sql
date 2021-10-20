@@ -29,6 +29,7 @@ CREATE TABLE "meals" (
 	"description" TEXT NOT NULL,
 	"instructions" TEXT NOT NULL,
 	"ingredients" TEXT NOT NULL,
+	"ingredients_string" TEXT NOT NULL,
 	"image_path" varchar(255),
 	CONSTRAINT "meals_pk" PRIMARY KEY ("id")
 ) WITH (
