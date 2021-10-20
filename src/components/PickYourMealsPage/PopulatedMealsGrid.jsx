@@ -1,4 +1,4 @@
-import { Paper, Grid, Typography } from "@mui/material";
+import { Paper, Grid, Typography, Box } from "@mui/material";
 
 function PopulatedMealsGrid({ recipes, handleAddMeal }) {
     return (
@@ -9,26 +9,34 @@ function PopulatedMealsGrid({ recipes, handleAddMeal }) {
 
             <Grid item xs={3} onClick={() => handleAddMeal(0)}>
                 <Paper>
-                    <Typography variant="h6">{recipes[0].title}</Typography>
-                    <img src={recipes[0].image} alt={recipes[0].title} />
+                    <Box p={2}>
+                        <Typography variant="h6" gutterBottom>{recipes[0].title}</Typography>
+                        <img src={recipes[0].image} alt={recipes[0].title} />
+                    </Box>
                 </Paper>
             </Grid>
             <Grid item xs={3} onClick={() => handleAddMeal(1)}>
                 <Paper>
-                    <Typography variant="h6">{recipes[1].title}</Typography>
+                    <Box p={2}>
+                    <Typography variant="h6" gutterBottom>{recipes[1].title}</Typography>
                     <img src={recipes[1].image} alt={recipes[1].title} />
+                    </Box>
                 </Paper>
             </Grid>
             <Grid item xs={3} onClick={() => handleAddMeal(2)}>
                 <Paper>
-                    <Typography variant="h6">{recipes[2].title}</Typography>
+                    <Box p={2}>
+                    <Typography variant="h6" gutterBottom>{recipes[2].title}</Typography>
                     <img src={recipes[2].image} alt={recipes[2].title} />
+                    </Box>
                 </Paper>
             </Grid>
             <Grid item xs={3} onClick={() => handleAddMeal(3)}>
                 <Paper>
-                    <Typography variant="h6">{recipes[3].title}</Typography>
+                    <Box p={2}>
+                    <Typography variant="h6" gutterBottom>{recipes[3].title}</Typography>
                     <img src={recipes[3].image} alt={recipes[3].title} />
+                    </Box>
                 </Paper>
             </Grid>
         </>

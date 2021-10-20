@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import { useHistory } from 'react-router-dom';
-import { Button, Paper, Grid, Card, Typography } from '@mui/material';
+import { Button, Paper, Grid, Card, Typography, Box } from '@mui/material';
 
 function DaysOfWeekGrid(props) {
     const history = useHistory();
@@ -62,6 +62,7 @@ function DaysOfWeekGrid(props) {
             <Grid item xs={3}>
                 <Paper>
                     <Card>
+                        <Box p={2}>
                         <Typography variant="h4" gutterBottom>Monday</Typography>
                         {props.mondayMeal.title == '' ?
                             <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
@@ -71,12 +72,14 @@ function DaysOfWeekGrid(props) {
                                 <Button size="large" color="primary" variant="contained" onClick={() => handleRemoveButton('Monday')}>Remove</Button>
                             </>
                         }
+                        </Box>
                     </Card>
                 </Paper>
             </Grid>
             <Grid item xs={3}>
                 <Paper>
                     <Card>
+                        <Box p={2}>
                         <Typography variant="h4" gutterBottom>Tuesday</Typography>
                         {props.tuesdayMeal.title == '' ?
                             <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
@@ -86,12 +89,14 @@ function DaysOfWeekGrid(props) {
                                 <Button size="large" color="primary" variant="contained" onClick={() => handleRemoveButton('Tuesday')}>Remove</Button>
                             </>
                         }
+                        </Box>
                     </Card>
                 </Paper>
             </Grid>
             <Grid item xs={3}>
                 <Paper>
                     <Card>
+                        <Box p={2}>
                         <Typography variant="h4" gutterBottom>Wednesday</Typography>
                         {props.wednesdayMeal.title == '' ?
                             <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
@@ -101,12 +106,14 @@ function DaysOfWeekGrid(props) {
                                 <Button size="large" color="primary" variant="contained" onClick={() => handleRemoveButton('Wednesday')}>Remove</Button>
                             </>
                         }
+                        </Box>
                     </Card>
                 </Paper>
             </Grid>
             <Grid item xs={3}>
                 <Paper>
                     <Card>
+                        <Box p={2}>
                         <Typography variant="h4" gutterBottom>Thursday</Typography>
                         {props.thursdayMeal.title == '' ?
                             <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
@@ -117,12 +124,14 @@ function DaysOfWeekGrid(props) {
 
                             </>
                         }
+                        </Box>
                     </Card>
                 </Paper>
             </Grid >
             <Grid item xs={4}>
                 <Paper>
                     <Card>
+                        <Box p={2}>
                         <Typography variant="h4" gutterBottom>Friday</Typography>
                         {props.fridayMeal.title == '' ?
                             <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
@@ -133,12 +142,14 @@ function DaysOfWeekGrid(props) {
 
                             </>
                         }
+                        </Box>
                     </Card>
                 </Paper>
             </Grid >
             <Grid item xs={4}>
                 <Paper>
                     <Card>
+                        <Box p={2}>
                         <Typography variant="h4" gutterBottom>Saturday</Typography>
                         {props.saturdayMeal.title == '' ?
                             <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
@@ -149,12 +160,14 @@ function DaysOfWeekGrid(props) {
 
                             </>
                         }
+                        </Box>
                     </Card>
                 </Paper>
             </Grid >
             <Grid item xs={4}>
                 <Paper>
                     <Card>
+                        <Box p={2}>
                         <Typography variant="h4" gutterBottom>Sunday</Typography>
                         {props.sundayMeal.title == '' ?
                             <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
@@ -165,6 +178,7 @@ function DaysOfWeekGrid(props) {
 
                             </>
                         }
+                        </Box>
                     </Card>
                 </Paper>
             </Grid >

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import BackOfCard from './BackOfCard';
 import FrontOfCard from './FrontOfCard';
 import './RecipeGeneratorPage.css';
-import { Paper, Button, Typography, Card, Grid } from '@mui/material';
+import { Paper, Button, Typography, Card, Grid, Box } from '@mui/material';
 
 function RecipeGeneratorPage() {
     const dispatch = useDispatch();
@@ -30,25 +30,27 @@ function RecipeGeneratorPage() {
     }
     return (
         <div>
-            
+
             <Grid container justifyContent="center">
                 <Grid item xs={12} >
-                <Typography variant="h2" component="h2" gutterBottom>The Recipe Generator</Typography>
+                    <Typography variant="h2" component="h2" gutterBottom>The Recipe Generator</Typography>
                 </Grid>
-                
-                    <Paper elevation={3}>
-                        <Card>
-                        <Grid item >
-                {sideOfCard ?
-                    <FrontOfCard flipCard={flipCard} /> :
-                    <BackOfCard flipCard={flipCard} />
-                }
-                        </Grid>
-                <br /><br />
-                <Grid item xs={12}>
-                <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
-                </Grid>
-                </Card>
+                <Paper elevation={12}>
+                    <Card>
+                        <Box p={4}>
+                            <Grid item >
+                                {sideOfCard ?
+                                    <FrontOfCard flipCard={flipCard} /> :
+                                    <BackOfCard flipCard={flipCard} />
+                                }
+                            </Grid>
+                            <br /><br />
+                            <Grid item xs={12}>
+                                <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
+                            </Grid>
+                        </Box>
+                    </Card>
+
                 </Paper>
             </Grid>
         </div>
