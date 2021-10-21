@@ -6,11 +6,11 @@ const {
 const router = express.Router();
 
 //async/await comments for ALL routes:
-    //async: establish the function
-    //await: do not perform the next task until this has a valid response
-    //BEGIN: try to send to the database
-    //COMMIT: if no errors, send a response
-    //ROLLBACK: if error, do not add anything to the database and send errors.
+//async: establish the function
+//await: do not perform the next task until this has a valid response
+//BEGIN: try to send to the database
+//COMMIT: if no errors, send a response
+//ROLLBACK: if error, do not add anything to the database and send errors.
 
 //get all of the current user's meals for the 'View Meal Plan' page
 router.get('/', rejectUnauthenticated, async (req, res) => {
@@ -49,6 +49,53 @@ router.get('/savedmeals', rejectUnauthenticated, async (req, res) => {
     }
 });
 
+router.post('/recipegenerator', rejectUnauthenticated, async (req, res) => {
+    const meal = req.body;
+    // console.log(meal);
+
+    try {
+        await pool.query('BEGIN');
+        //add the meal data to the meals table, return the ID
+        const queryTest = `
+                INSERT INTO meals (
+                    api_id, 
+                    name, 
+                    description, 
+                    instructions, 
+                    image_path, 
+                    ingredients, 
+                    ingredients_string, 
+                    number_servings)
+                VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING "id";`;
+        const values = [
+            meal.id,
+            meal.title,
+            meal.description,
+            meal.instructions,
+            meal.image,
+            JSON.stringify(meal.ingredients),
+            meal.ingredientsString,
+            meal.number_servings
+        ];
+        const mealsResult = await pool.query(queryTest, values);
+        const mealsID = mealsResult.rows[0].id;
+        console.log(mealsID);
+        //add the new meal and user id to the user_meals table
+        const junctionQuery = `INSERT INTO user_meals (user_id, meals_id, is_saved, day) VALUES($1, $2, $3, $4);`;
+        junctionValues = [req.user.id, mealsID, true, meal.day];
+        await pool.query(junctionQuery, junctionValues);
+        const savedQuery = `INSERT INTO user_saved_meals (user_id, meals_id) VALUES($1, $2);`;
+        await pool.query(savedQuery, [req.user.id, mealsID]);
+        await pool.query('COMMIT');
+        res.sendStatus(201);
+
+    } catch (error) {
+    console.log('ROLLBACK', error);
+    await pool.query('ROLLBACK');
+    throw error;
+}
+});
+
 //a user wants to add an array of meals to their meal plan. add it to the database.
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const meal = req.body;
@@ -66,9 +113,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             } else {
                 //add all of the meal data to the meals table, return the ID
                 const queryTest = `
-                INSERT INTO meals (api_id, name, description, instructions, image_path, ingredients, ingredients_string)
-                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING "id";`;
-                const values = [meal[i].id, meal[i].title, meal[i].description, meal[i].instructions, meal[i].image, JSON.stringify(meal[i].ingredients), meal[i].ingredientsString]; //FIX ME WHEN READY TO CONNECT THE WIRES FROM CLIENT
+                INSERT INTO meals (api_id, name, description, instructions, image_path, ingredients, ingredients_string, number_servings)
+                VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING "id";`;
+                const values = [meal[i].id, meal[i].title, meal[i].description, meal[i].instructions, meal[i].image, JSON.stringify(meal[i].ingredients), meal[i].ingredientsString, meal[i].number_servings]; //FIX ME WHEN READY TO CONNECT THE WIRES FROM CLIENT
                 const mealsResult = await pool.query(queryTest, values);
                 const mealsID = mealsResult.rows[0].id;
                 console.log(mealsID);
@@ -80,7 +127,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         } //end loop
 
         await pool.query('COMMIT');
-        res.sendStatus(201);
+        res.sendStatus(201, mealsID);
     } catch (error) {
         console.log('ROLLBACK', error);
         await pool.query('ROLLBACK');

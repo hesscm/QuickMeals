@@ -80,6 +80,7 @@ function PickYourMealsPage() {
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
                     ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Monday'
                 })
@@ -93,6 +94,7 @@ function PickYourMealsPage() {
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
                     ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Tuesday'
                 })
@@ -106,6 +108,7 @@ function PickYourMealsPage() {
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
                     ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Wednesday'
                 })
@@ -119,6 +122,7 @@ function PickYourMealsPage() {
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
                     ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Thursday'
                 })
@@ -132,6 +136,7 @@ function PickYourMealsPage() {
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
                     ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Friday'
                 })
@@ -145,6 +150,7 @@ function PickYourMealsPage() {
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
                     ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Saturday'
                 })
@@ -158,6 +164,7 @@ function PickYourMealsPage() {
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
                     ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Sunday'
                 })

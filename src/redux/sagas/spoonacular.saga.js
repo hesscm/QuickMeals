@@ -166,8 +166,19 @@ function* getUserMealsSimple() {
     }
 }//end getUserMealsSimple
 
+//save OR unsave a particular meal to the database
+function* saveRecipeGeneratorMeal(action) {
+    try {
+        yield axios.post(`/api/meals/recipegenerator`, action.payload);
+        //update the user_meals table to reflect if a meal is saved or not
+        yield put({ type: 'GET_USER_SAVED_MEALS' }); //refresh
+    } catch (error) {
+        console.log(error);
+    }
+}//end saveRecipeGeneratorMeal
+
 function* spoonacularSaga() {
-    yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
+    // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
     yield takeEvery('GET_API_RECIPES', getAPIRecipes)
     yield takeEvery('POST_MEALS', postMeals);
     yield takeEvery('GET_USER_MEALS', getUserMeals)
@@ -176,6 +187,8 @@ function* spoonacularSaga() {
     yield takeEvery('GET_USER_SAVED_MEALS', getUserSavedMeals)
     yield takeEvery('DELETE_USER_SAVED_MEAL', deleteUserSavedMeal)
     yield takeEvery('GET_USER_MEALS_SIMPLE', getUserMealsSimple)
+    yield takeEvery('SAVE_RECIPE_GENERATOR_MEAL', saveRecipeGeneratorMeal)
+
 }
 
 export default spoonacularSaga;
