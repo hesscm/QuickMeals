@@ -2,8 +2,10 @@ import useReduxStore from '../../hooks/useReduxStore';
 import { Typography } from '@mui/material';
 
 function WeeklyShoppingList() {
+    //check out saga getUserMeal if you want to see how this is computated
     const ingredients = useReduxStore().recipes.totalUserIngredients;
 
+    //this is ALL changing to MUI. under construction.
     return (
         <>
             <div className="WeeklySection">

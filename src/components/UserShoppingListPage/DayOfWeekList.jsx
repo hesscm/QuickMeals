@@ -2,14 +2,12 @@ import useReduxStore from '../../hooks/useReduxStore';
 import { useState } from 'react';
 import { Typography } from '@mui/material';
 
-
-
 function DayOfWeekList() {
     const recipes = useReduxStore().recipes;
     const [dayOfWeek, setDayOfWeek] = useState(recipes.mondayMeal);
 
+    // what day of the week is it? taken from a select form.
     const handleDayOfWeek = (day) => {
-        console.log('hello', day);
         switch (day) {
             case 'Monday':
                 setDayOfWeek(recipes.mondayMeal)
@@ -35,12 +33,13 @@ function DayOfWeekList() {
             default:
                 break;
         }
+        // something went very, very wrong...
         if (dayOfWeek.id == -1) {
-            console.log('oops');
+            console.log('oh no...what happened in the shopping list select?');
         }
     }
 
-
+    // this is ALL changing to MUI. under construction.
     return (
         <>
             <div className="dayOfWeekSection">

@@ -13,6 +13,7 @@ function SavedMealsPage() {
         dispatch({ type: 'GET_USER_SAVED_MEALS' });
     }, []);
 
+    //table needs to be changed to MUI. Under construction...
     return (
         <>
             <div className="savedMealsPage">
@@ -33,7 +34,8 @@ function SavedMealsPage() {
                                             <th>Date Saved</th>
                                             <th>Action</th>
                                         </tr>
-
+                                        
+                                        {/* loop/map through all returned meals */}
                                         {meals.map((meal, i) => {
                                             return <UserSavedMealsItem
                                                 key={meal.id}

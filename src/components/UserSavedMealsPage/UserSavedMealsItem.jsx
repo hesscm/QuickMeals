@@ -7,28 +7,17 @@ import MUIDialogBox from './MUIDialogBoxSavedPage'
 function UserSavedMealsItem(props) {
     const dispatch = useDispatch();
 
+    //take database timestamp and make it human-friendly
     const formatTime = (time) => {
         time = moment().format("MMM Do YY");
         return time;
     }
 
-    let ingredients = [];
-    ingredients = props.meal.ingredients;
-    let ingredientsString = '';
-    if (ingredients.length !== 0) {
-        for (let i = 0; i < ingredients.length; i++) {
-            if (i !== ingredients.length - 1) {
-                ingredientsString += ingredients[i].fullString + '<br />';
-            } else {
-                ingredientsString += ingredients[i].fullString;
-            }
-        }
-    }
-
+    //remove the meal from the database/table
     const handleRemoveButton = () => {
         dispatch({ type: 'DELETE_USER_SAVED_MEAL', payload: props.meal.id });
-        // dispatch({ type: 'GET_USER_SAVED_MEALS' });
     }
+
 
     return(
         <tr>
@@ -36,6 +25,7 @@ function UserSavedMealsItem(props) {
                 {props.meal.name}
             </td>
             <td>
+                {/* this is a button that display a pop-up when clicked. See MUIDialogBoxSavedPaged.jsx */}
                 <MUIDialogBox 
                 title={'Description'}
                 details={props.meal.description}/>
@@ -52,9 +42,11 @@ function UserSavedMealsItem(props) {
                     details={props.meal.instructions} />             
                     </td>
             <td>
+                {/* format the returned database time to something nicer */}
                 {formatTime(props.meal.date)}
             </td>
             <td>
+                {/* delete the meal */}
                 <IconButton aria-label="delete" size="large" color="warning" onClick={handleRemoveButton}>
                     <DeleteIcon fontSize="inherit" />
                 </IconButton>

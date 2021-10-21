@@ -1,32 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import { useHistory } from 'react-router-dom';
 import { Button, ButtonGroup, Grid, Paper, Typography, Card, Box } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 import MUIDialogBox from '../PickYourMealsPage/MUIDialogBox';
-
 
 function ViewMealPlanPage() {
     const history = useHistory();
     const dispatch = useDispatch();
     const recipes = useReduxStore().recipes;
 
+    //just get the meals from the DB. no API involved here
     useEffect(() => {
         dispatch({ type: 'GET_USER_MEALS_SIMPLE' })
     }, []);
 
+    //remove the meal and refresh the meals
     const handleRemoveButton = (id) => {
         console.log(id);
         dispatch({ type: 'DELETE_USER_MEAL', payload: id });
         dispatch({ type: 'GET_USER_MEALS_SIMPLE' })
     }
 
+    //go to the shopping list page
     const generateShoppingList = () => {
         history.push('/shoppinglist');
     }
 
+    //update this meal as a saved meal or an UNSAVED meal
     const handleSaveButton = (id, updateIsSaved) => {
         switch (updateIsSaved) {
             case 'true':
@@ -43,40 +44,42 @@ function ViewMealPlanPage() {
     return (
         <>
             <Typography variant="h2" gutterBottom>View Meal Plan</Typography>
+            {/* some conditional rendering to help prevent exploding rendering syndrome */}
             {recipes.length != 0 ?
-                < div className="chosenMeals" >
-                    {/* section 1 */}
                     <Grid
                         container
                         spacing={2}
                         alignItems="baseline"
                         justifyContent="center"
                     >
+                        {/* card for each day of the week */}
                         <Grid item xs={3}>
                             <Paper>
                                 <Card>
-                                    <Box p={2}>
+                                    <Box p={2}> 
                                         <Typography variant="h4" gutterBottom>Monday</Typography>
-                                        {recipes.mondayMeal.name == '' ?
+                                        {recipes.mondayMeal.name == '' ? //if meal is empty, show that there is nothing there
                                             <><br /><Typography variant="body1" gutterBottom>Seem to be missing a meal. Go back and add one!</Typography></> :
                                             <>
+                                                {/* else, display the meal */}
                                                 <Typography variant="h6">{recipes.mondayMeal.name}</Typography>
-
                                                 <img src={recipes.mondayMeal.image_path} alt={recipes.mondayMeal.name} />
                                                 <br />
                                                 <ButtonGroup size="small" variant="outlined" aria-label="outlined button group">
+                                                    {/* button to display the details of this meal */}
                                                     <MUIDialogBox
                                                         meal={recipes.mondayMeal}
                                                         ingredientsString={recipes.mondayMeal.ingredients_string}
                                                     />
+                                                    {/* is this meal saved? change buttons depending on the boolean */}
                                                     {!recipes.mondayMeal.is_saved ?
                                                         <Button size="small" color="secondary" variant="contained" onClick={() => handleSaveButton(recipes.mondayMeal.id, 'true')}>Favorite</Button>
                                                         :
                                                         <Button size="small" color="success" variant="contained" onClick={() => handleSaveButton(recipes.mondayMeal.id, 'false')}>Unfavorite</Button>
                                                     }
+                                                    {/* remove the meal from the meal plan */}
                                                     <Button size="small" variant="contained"color="warning" onClick={() => handleRemoveButton(recipes.mondayMeal.id)}>Remove</Button>
                                                 </ButtonGroup>
-
                                             </>
                                         }
                                     </Box>
@@ -259,10 +262,10 @@ function ViewMealPlanPage() {
                         </Grid>
                         <br /><br />
                         <Grid item xs={12}>
+                            {/* send us to the shopping list page */}
                             <Button size="large" color="secondary" variant="contained" onClick={generateShoppingList} className='btn'>Generate Shopping List</Button>
                         </Grid>
                     </Grid>
-                </div >
                 :
                 <></>
             }

@@ -2,8 +2,14 @@ import { Button, Typography, Dialog, DialogTitle, DialogActions, DialogContent, 
 import { useState, useRef } from "react";
 const DOMPurify = require('dompurify')(window);
 
+/*Regarding DOMPurify/dangerouslySetInnerHTML...
+ API returns some HTML.
+ We will display the HTML as intended but also use DOMPurify for some added security against XSS(cross site scripting)
+*/
+
 function MUIDialogBox(props) {
     /* BEGIN MATERIAL-UI CODE FROM https://mui.com/components/dialogs/ */
+    //Note: edited slightly
     const [open, setOpen] = useState(false);
 
     const [scroll, setScroll] = useState('paper');
@@ -21,7 +27,6 @@ function MUIDialogBox(props) {
     return (
         <>
             <Button size="small" variant="contained" onClick={handleClickOpen()}>View</Button>
-            {/* <Button size="small" color="primary" variant="contained" onClick={() => props.handleDescriptionView(props.meal.description)}>View</Button> */}
 
             <Dialog
                 open={open}
