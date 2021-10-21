@@ -1,15 +1,15 @@
 import { useDispatch } from 'react-redux';
-import useReduxStore from '../../hooks/useReduxStore';
-import  { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { Button, ButtonGroup, Paper, Grid, Card, Typography, Box } from '@mui/material';
+import MUIDialogBox from './ViewDetailsDialog';
 
 function DaysOfWeekGrid(props) {
     const history = useHistory();
     const dispatch = useDispatch();
-    const user = useReduxStore().user;
 
-
-
+    //send the meals to the server
     const handleButtonClick = () => {
+        //doesn't do anything yet. shh....
         confirm('Are you sure you want to submit this?');
 
         console.log('clicked');
@@ -23,30 +23,31 @@ function DaysOfWeekGrid(props) {
             props.sundayMeal,
         ]
         dispatch({ type: 'POST_MEALS', payload: action })
-        history.push('/viewmeals')
+        history.push('/viewmeals') //go to next page
     }
 
+    //take an input of a day of the week and reset that local state
     const handleRemoveButton = (dayOfWeek) => {
         switch (dayOfWeek) {
-            case 'Monday':
+            case 0:
                 props.setMondayMeal({ title: '' })
                 break;
-            case 'Tuesday':
+            case 1:
                 props.setTuesdayMeal({ title: '' })
                 break;
-            case 'Wednesday':
+            case 2:
                 props.setWednesdayMeal({ title: '' })
                 break;
-            case 'Thursday':
+            case 3:
                 props.setThursdayMeal({ title: '' })
                 break;
-            case 'Friday':
+            case 4:
                 props.setFridayMeal({ title: '' })
                 break;
-            case 'Saturday':
+            case 5:
                 props.setSaturdayMeal({ title: '' })
                 break;
-            case 'Sunday':
+            case 6:
                 props.setSundayMeal({ title: '' })
                 break;
             default:
@@ -55,94 +56,192 @@ function DaysOfWeekGrid(props) {
     }
 
     return (
-        < div className="chosenMeals" >
-            {/* section 1 */}
-            <div className="grid-containerA">
-                <div className="item1">
-                    <h1>Monday</h1>
-                    {props.mondayMeal.title == '' ?
-                        <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                        <>
-                            <h3>{props.mondayMeal.title}</h3>
-                            <img src={props.mondayMeal.image} alt={props.mondayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Monday')}>Remove</button>
-                        </>
-                    }
-                </div>
-                <div className="item2">
-                    <h1>Tuesday</h1>
-                    {props.tuesdayMeal.title == '' ?
-                        <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                        <>
-                            <h3>{props.tuesdayMeal.title}</h3>
-                            <img src={props.tuesdayMeal.image} alt={props.tuesdayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Tuesday')}>Remove</button>
-                        </>
-                    }
-                </div>
-                <div className="item3">
-                    <h1>Wednesday</h1>
-                    {props.wednesdayMeal.title == '' ?
-                        <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                        <>
-                            <h3>{props.wednesdayMeal.title}</h3>
-                            <img src={props.wednesdayMeal.image} alt={props.wednesdayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Wednesday')}>Remove</button>
-                        </>
-                    }
-                </div>
-                <div className="item4">
-                    <h1>Thursday</h1>
-                    {props.thursdayMeal.title == '' ?
-                        <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                        <>
-                            <h3>{props.thursdayMeal.title}</h3>
-                            <img src={props.thursdayMeal.image} alt={props.thursdayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Thursday')}>Remove</button>
+        <>
+        {/* these are the individual cards for the day of the week */}
+            <Grid item xs={3}>
+                <Paper>
+                    <Card>
+                        <Box p={2}> 
+                            <Typography variant="h4" gutterBottom>Monday</Typography>
+                            {/* conditional rendering to see if there is a monday meal */}
+                            {props.mondayMeal.title == '' ?
+                            // if not...
+                                <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
+                                <>
+                                {/* if so... */}
+                                    <Typography variant="h6">{props.mondayMeal.title}</Typography>
+                                    <img src={props.mondayMeal.image} alt={props.mondayMeal.title} />
+                                    <ButtonGroup>
+                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                    <MUIDialogBox
+                                        meal={props.mondayMeal}
+                                        ingredientsString={props.mondayMeal.ingredientsString}
+                                    />
+                                    <Button color="warning" variant="contained" onClick={() => handleRemoveButton(0)}>Remove</Button>
+                                    </ButtonGroup>
+                                </>
+                            }
+                        </Box>
+                    </Card>
+                </Paper>
+            </Grid>
 
-                        </>
-                    }
-                </div>
-                <div className="item5">
-                    <h1>Friday</h1>
-                    {props.fridayMeal.title == '' ?
-                        <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                        <>
-                            <h3>{props.fridayMeal.title}</h3>
-                            <img src={props.fridayMeal.image} alt={props.fridayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Friday')}>Remove</button>
 
-                        </>
-                    }
-                </div>
-                <div className="item6">
-                    <h1>Saturday</h1>
-                    {props.saturdayMeal.title == '' ?
-                        <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                        <>
-                            <h3>{props.saturdayMeal.title}</h3>
-                            <img src={props.saturdayMeal.image} alt={props.saturdayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Saturday')}>Remove</button>
+            <Grid item xs={3}>
+                <Paper>
+                    <Card>
+                        <Box p={2}>
+                            <Typography variant="h4" gutterBottom>Tuesday</Typography>
+                            {props.tuesdayMeal.title == '' ?
+                                <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
+                                <>
+                                    <h3>{props.tuesdayMeal.title}</h3>
+                                    <img src={props.tuesdayMeal.image} alt={props.tuesdayMeal.title} />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.tuesdayMeal}
+                                            ingredientsString={props.tuesdayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(1)}>Remove</Button>
+                                    </ButtonGroup>
+                                </>
+                            }
+                        </Box>
+                    </Card>
+                </Paper>
+            </Grid>
 
-                        </>
-                    }
-                </div>
-                <div className="item7">
-                    <h1>Sunday</h1>
-                    {props.sundayMeal.title == '' ?
-                        <><br /><br /><p>Click a recipe and choose a day!</p></> :
-                        <>
-                            <h3>{props.sundayMeal.title}</h3>
-                            <img src={props.sundayMeal.image} alt={props.sundayMeal.title} />
-                            <button onClick={() => handleRemoveButton('Sunday')}>Remove</button>
 
-                        </>
-                    }
-                </div>
-            </div>
-            <br /><br />
-            <button onClick={handleButtonClick} className='btn'>Let's Eat!</button>
-        </div >
+            <Grid item xs={3}>
+                <Paper>
+                    <Card>
+                        <Box p={2}>
+                            <Typography variant="h4" gutterBottom>Wednesday</Typography>
+                            {props.wednesdayMeal.title == '' ?
+                                <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
+                                <>
+                                    <h3>{props.wednesdayMeal.title}</h3>
+                                    <img src={props.wednesdayMeal.image} alt={props.wednesdayMeal.title} />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.wednesdayMeal}
+                                            ingredientsString={props.wednesdayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(2)}>Remove</Button>
+                                    </ButtonGroup>
+                                </>
+                            }
+                        </Box>
+                    </Card>
+                </Paper>
+            </Grid>
+
+
+            <Grid item xs={3}>
+                <Paper>
+                    <Card>
+                        <Box p={2}>
+                            <Typography variant="h4" gutterBottom>Thursday</Typography>
+                            {props.thursdayMeal.title == '' ?
+                                <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
+                                <>
+                                    <h3>{props.thursdayMeal.title}</h3>
+                                    <img src={props.thursdayMeal.image} alt={props.thursdayMeal.title} />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.thursdayMeal}
+                                            ingredientsString={props.thursdayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(3)}>Remove</Button>
+                                    </ButtonGroup>
+                                </>
+                            }
+                        </Box>
+                    </Card>
+                </Paper>
+            </Grid >
+
+
+            <Grid item xs={4}>
+                <Paper>
+                    <Card>
+                        <Box p={2}>
+                            <Typography variant="h4" gutterBottom>Friday</Typography>
+                            {props.fridayMeal.title == '' ?
+                                <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
+                                <>
+                                    <h3>{props.fridayMeal.title}</h3>
+                                    <img src={props.fridayMeal.image} alt={props.fridayMeal.title} />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.fridayMeal}
+                                            ingredientsString={props.fridayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(4)}>Remove</Button>
+                                    </ButtonGroup>
+                                </>
+                            }
+                        </Box>
+                    </Card>
+                </Paper>
+            </Grid >
+
+
+            <Grid item xs={4}>
+                <Paper>
+                    <Card>
+                        <Box p={2}>
+                            <Typography variant="h4" gutterBottom>Saturday</Typography>
+                            {props.saturdayMeal.title == '' ?
+                                <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
+                                <>
+                                    <h3>{props.saturdayMeal.title}</h3>
+                                    <img src={props.saturdayMeal.image} alt={props.saturdayMeal.title} />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.saturdayMeal}
+                                            ingredientsString={props.saturdayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(5)}>Remove</Button>
+                                    </ButtonGroup>
+                                </>
+                            }
+                        </Box>
+                    </Card>
+                </Paper>
+            </Grid >
+
+
+            <Grid item xs={4}>
+                <Paper>
+                    <Card>
+                        <Box p={2}>
+                            <Typography variant="h4" gutterBottom>Sunday</Typography>
+                            {props.sundayMeal.title == '' ?
+                                <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
+                                <>
+                                    <h3>{props.sundayMeal.title}</h3>
+                                    <img src={props.sundayMeal.image} alt={props.sundayMeal.title} />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.sundayMeal}
+                                            ingredientsString={props.sundayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(6)}>Remove</Button>
+                                    </ButtonGroup>
+                                </>
+                            }
+                        </Box>
+                    </Card>
+                </Paper>
+            </Grid >
+
+            {/* button to send chosen meals to the server */}
+            <Grid item xs={12}>
+                <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Let's Eat!</Button>
+            </Grid>
+        </>
+
     )
 }
 

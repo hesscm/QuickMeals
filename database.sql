@@ -15,7 +15,6 @@ CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"username" varchar(80) NOT NULL UNIQUE,
 	"password" varchar(1000) NOT NULL,
-	"number_servings" integer NOT NULL,
 	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -29,6 +28,8 @@ CREATE TABLE "meals" (
 	"description" TEXT NOT NULL,
 	"instructions" TEXT NOT NULL,
 	"ingredients" TEXT NOT NULL,
+	"ingredients_string" TEXT NOT NULL,
+	"number_servings" integer NOT NULL,
 	"image_path" varchar(255),
 	CONSTRAINT "meals_pk" PRIMARY KEY ("id")
 ) WITH (

@@ -2,33 +2,28 @@ import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-//get random recipe from Spoonacular API and send to reducer
+//get random recipe from Spoonacular API and send to the randomRecipe reducer
 function* getRandomRecipe() {
     try {
         const response = yield axios.get(`/api/spoonacular/random`);
         yield put({ type: 'SET_RANDOM_RECIPE', payload: response.data.recipes[0] });
-        yield put({ type: 'SET_RANDOM_RECIPE_INGREDIENTS', payload: response.data.recipes[0].extendedIngredients });
-
     } catch (error) {
         console.log(error);
     }
-}//end saga function*/
+}//end getRandomRecipe
 
-//get random recipe from Spoonacular API and send to reducer
+//search recipes from Spoonacular API and send to the searchRecipes reducers
 function* getAPIRecipes() {
     try {
         const response = yield axios.get(`/api/spoonacular/search`);
         console.log('search response', response.data.results)
-        console.log('ingredients test', response.data.results[0].extendedIngredients[0].original);
-
         yield put({ type: 'SET_API_RECIPES', payload: response.data.results });
-        // yield put({ type: 'SET_API_RECIPE_INGREDIENTS', payload: response.data.recipes.extendedIngredients });
-
     } catch (error) {
         console.log(error);
     }
-}//end saga function*/
+}//end getAPIRecipes
 
+//send user's meal plan to the server/database
 function* postMeals(action) {
     try {
         yield axios.post(`/api/meals`, action.payload);
@@ -37,9 +32,10 @@ function* postMeals(action) {
     } catch (error) {
         console.log(error);
     }
-}//end saga function*/
+}//end postMeals
 
-//lots happening here. Get the user meals from the DB, get them into reducers, then send the ingredients to the API to combine duplicates
+//lots happening here. Get the user meals from the DB, get them into reducers...
+//then combine the duplicate ingredients with another API request
 function* getUserMeals() {
     try {
         //user meals from the db
@@ -53,8 +49,9 @@ function* getUserMeals() {
 
         //combine all the ingredients from each meal into 1 array
         let totalIngredients = [];
-        for (let i = 0; i < response.data.length; i++) { //DB response array
-            for (let j = 0; j < response.data[i].ingredients.length; j++) { //day of the week ingredients list array
+        for (let i = 0; i < response.data.length; i++) { //Array of meals
+            for (let j = 0; j < response.data[i].ingredients.length; j++) { //Array of ingredients per meal
+                //add each ingredient to a new array
                 totalIngredients.push(response.data[i].ingredients[j]);
             }
         }
@@ -64,17 +61,17 @@ function* getUserMeals() {
         const apiIngredients = postResponse.data.aisles;
         console.log('apiIngredients', apiIngredients);
 
-        //parse through the API return to something more manageable for the DOM
+        //parse through the API return and turn it into something more manageable for the DOM
         let combinedIngredients = [];
-        for (let i = 0; i < apiIngredients.length; i++) {
+        for (let i = 0; i < apiIngredients.length; i++) { //array of ingredients
             if (apiIngredients[i].aisle === 'Pantry Items') {
-                console.log('found it');
-                //element 1 is pantry items such as water, salt, pepper, flour, etc.
+                //pantry items are things such as water, salt, pepper, flour, etc.
                 //We don't need these in the shopping list.
                 continue;
             }
             //convert the API response to a DOM friendly format
-            for (let j = 0; j < apiIngredients[i].items.length; j++) {
+            for (let j = 0; j < apiIngredients[i].items.length; j++) { //returned ingredients with a ton of properties
+                //we don't need everything. let's just add what we need
                 combinedIngredients.push({
                     //i=aisle, j=ingredient in that aisle
                     name: apiIngredients[i].items[j].name,
@@ -92,15 +89,17 @@ function* getUserMeals() {
     }
 }//end getUserMeals
 
+//delete a user's meal from their current meal plan
 function* deleteUserMeal(action) {
     try {
         yield axios.delete(`/api/meals/${action.payload}`);
-        yield put({ type: 'GET_USER_MEALS' });
+        yield put({ type: 'GET_USER_MEALS' }); //refresh
     } catch (error) {
         console.log(error);
     }
-}//end saga function*/
+}//end deleteUserMeal
 
+//delete a user's saved meal from their current favorite's list
 function* deleteUserSavedMeal(action) {
     try {
         yield axios.delete(`/api/meals/savedmeals/${action.payload}`);
@@ -108,24 +107,29 @@ function* deleteUserSavedMeal(action) {
     } catch (error) {
         console.log(error);
     }
-}//end saga function*/
+}//end deleteUserSavedMeal
 
+//save OR unsave a particular meal to the database
 function* saveUserMeal(action) {
     try {
-        console.log('save saga', action.payload);
-        if (action.payload.saved == true) {
+        //if we need to save it, we are sending true as the payload
+        if (action.payload.saved == true) { 
             yield axios.post(`/api/meals/save`, action.payload);
+            //if we want to unsave it, we send false
         } else if (action.payload.saved == false) {
+            //get rid of it!
             yield axios.delete(`/api/meals/savedmeals/${action.payload.id}`);
         }
+        //update the user_meals table to reflect if a meal is saved or not
         yield axios.put(`api/meals/${action.payload.id}/${action.payload.saved}`)
-        yield put({ type: 'GET_USER_MEALS_SIMPLE' });
+        yield put({ type: 'GET_USER_MEALS_SIMPLE' }); //refresh
         
     } catch (error) {
         console.log(error);
     }
-}//end saga function*/
+}//end saveUserMeal
 
+//get the saved user meals from the DB
 function* getUserSavedMeals() {
     try {
         const response = yield axios.get(`/api/meals/savedmeals`);
@@ -141,9 +145,10 @@ function* getUserSavedMeals() {
     } catch (error) {
         console.log(error);
     }
-}//end saga function*/
+}//end getUserSavedMeals
 
 //get function without the API call and combined ingredients parsing
+//specifically for View Meal Page for faster loading
 function* getUserMealsSimple() {
     try {
         //user meals from the db
@@ -161,8 +166,19 @@ function* getUserMealsSimple() {
     }
 }//end getUserMealsSimple
 
+//save OR unsave a particular meal to the database
+function* saveRecipeGeneratorMeal(action) {
+    try {
+        yield axios.post(`/api/meals/recipegenerator`, action.payload);
+        //update the user_meals table to reflect if a meal is saved or not
+        yield put({ type: 'GET_USER_SAVED_MEALS' }); //refresh
+    } catch (error) {
+        console.log(error);
+    }
+}//end saveRecipeGeneratorMeal
+
 function* spoonacularSaga() {
-    yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
+    // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
     yield takeEvery('GET_API_RECIPES', getAPIRecipes)
     yield takeEvery('POST_MEALS', postMeals);
     yield takeEvery('GET_USER_MEALS', getUserMeals)
@@ -171,6 +187,8 @@ function* spoonacularSaga() {
     yield takeEvery('GET_USER_SAVED_MEALS', getUserSavedMeals)
     yield takeEvery('DELETE_USER_SAVED_MEAL', deleteUserSavedMeal)
     yield takeEvery('GET_USER_MEALS_SIMPLE', getUserMealsSimple)
+    yield takeEvery('SAVE_RECIPE_GENERATOR_MEAL', saveRecipeGeneratorMeal)
+
 }
 
 export default spoonacularSaga;

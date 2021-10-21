@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import { Typography } from '@mui/material'; //using this soon
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -40,17 +41,17 @@ function Nav() {
             <Link className="navLink" to="/savedmeals">
               Favorites
             </Link>
-            <Link className="navLink" to="/viewmeals">
-              View Meal Plan
-            </Link>
             <Link className="navLink" to="/shoppinglist">
               Shopping List
             </Link>
-            <Link className="navLink" to="/recipegenerator">
-              Recipe Generator
+            <Link className="navLink" to="/viewmeals">
+              View Meal Plan
             </Link>
             <Link className="navLink" to="/pickmeals">
               Pick Your Meals
+            </Link>
+            <Link className="navLink" to="/recipegenerator">
+              Recipe Generator
             </Link>
             <Link className="navLink" to="/about">
               About
@@ -58,10 +59,6 @@ function Nav() {
             <LogOutButton className="navLink" />
           </>
         )}
-
-
-
-
       </div>
     </div>
   );

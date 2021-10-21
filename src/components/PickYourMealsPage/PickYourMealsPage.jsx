@@ -4,10 +4,14 @@ import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import DaysOfWeekGrid from './DaysOfWeekGrid';
 import PopulatedMealsGrid from './PopulatedMealsGrid';
+import { Grid, Button, Typography } from '@mui/material';
+
 
 function PickYourMealsPage() {
     const dispatch = useDispatch();
     const recipes = useReduxStore().recipes.searchRecipes;
+
+    //local states for holding each individual recipe
     const [mondayMeal, setMondayMeal] = useState({ title: '', image: '' });
     const [tuesdayMeal, setTuesdayMeal] = useState({ title: '', image: '' });
     const [wednesdayMeal, setWednesdayMeal] = useState({ title: '', image: '' });
@@ -16,22 +20,25 @@ function PickYourMealsPage() {
     const [saturdayMeal, setSaturdayMeal] = useState({ title: '', image: '' });
     const [sundayMeal, setSundayMeal] = useState({ title: '', image: '' });
 
+    //this may be commented out but it's just for saving API quotas while testing. feel free to uncomment
     useEffect(() => {
         // dispatch({ type: 'GET_API_RECIPES' })
     }, []);
 
-
+    //function to take in a recipe's ingredients and change it to HTML friendly format
     const parseIngredients = (element) => {
         let ingredients = [];
-        ingredients = recipes[element].extendedIngredients;
-        let ingredientsString = '';
+        ingredients = recipes[element].extendedIngredients; //recipe provided
+        //we're going to output both an array and a string
+        let ingredientsString = ''; 
         let ingredientsArray = [];
 
+        //if we even have ingredients...
         if (ingredients.length !== 0) {
             for (let i = 0; i < ingredients.length; i++) {
                 if (i !== ingredients.length - 1) {
                     ingredientsString += ingredients[i].original + '<br />';
-                    ingredientsArray.push({ name: ingredients[i].name, amount: ingredients[i].amount, unit: ingredients[i].unit, fullString: ingredients[i].original});
+                    ingredientsArray.push({ name: ingredients[i].name, amount: ingredients[i].amount, unit: ingredients[i].unit, fullString: ingredients[i].original });
                 } else {
                     ingredientsString += ingredients[i].original;
                 }
@@ -58,25 +65,24 @@ function PickYourMealsPage() {
         return instructionsString;
     }
 
-    const handleAddMeal = (input) => {
-        console.log('in handleAddMeal');
-        console.log('Monday', mondayMeal);
-        console.log('Wed', wednesdayMeal);
-        console.log('Thurs', thursdayMeal);
-        let dayOfWeek = prompt('Please enter a day of the week:');
-        console.log(dayOfWeek, input);
+    //big function but all we are doing is taking the chosen recipe from the user and setting that to a day of the week
+    //hopefully this will change when I add Drag and Drop
+    const handleAddMeal = (input, dayOfWeek) => {
+        console.log('handleAddMeal function',dayOfWeek, input);
         switch (dayOfWeek) {
             case 'Monday':
             case 'monday':
-                setMondayMeal({ 
-                    title: recipes[input].title, 
-                    image: recipes[input].image, 
+                setMondayMeal({
+                    title: recipes[input].title,
+                    image: recipes[input].image,
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Monday'
-                 })
+                })
                 break;
             case 'Tuesday':
             case 'tuesday':
@@ -86,6 +92,8 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Tuesday'
                 })
@@ -98,6 +106,8 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Wednesday'
                 })
@@ -110,6 +120,8 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Thursday'
                 })
@@ -122,6 +134,8 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Friday'
                 })
@@ -134,6 +148,8 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Saturday'
                 })
@@ -146,6 +162,8 @@ function PickYourMealsPage() {
                     description: recipes[input].summary,
                     instructions: parseInstructions(input),
                     ingredients: parseIngredients(input)[1],
+                    ingredientsString: parseIngredients(input)[0],
+                    number_servings: recipes[input].servings,
                     id: recipes[input].id,
                     day: 'Sunday'
                 })
@@ -153,44 +171,61 @@ function PickYourMealsPage() {
             default:
                 break;
         }
-
-
     }
 
+    //get some more meals
     const handleRefreshMeals = () => {
         dispatch({ type: 'GET_API_RECIPES' })
     }
 
     return (
         <>
-        <h1>Pick Your Meals</h1>
-        {/* top section */}
-            <DaysOfWeekGrid
-                mondayMeal={mondayMeal}
-                setMondayMeal={setMondayMeal}
-                tuesdayMeal={tuesdayMeal}
-                setTuesdayMeal={setTuesdayMeal}
-                wednesdayMeal={wednesdayMeal}
-                setWednesdayMeal={setWednesdayMeal}
-                thursdayMeal={thursdayMeal}
-                setThursdayMeal={setThursdayMeal}
-                fridayMeal={fridayMeal}
-                setFridayMeal={setFridayMeal}
-                saturdayMeal={saturdayMeal}
-                setSaturdayMeal={setSaturdayMeal}
-                sundayMeal={sundayMeal}
-                setSundayMeal={setSundayMeal}
-            />
+            <Typography variant="h2" gutterBottom>Pick Your Meals</Typography>
+            <Grid
+                container
+                spacing={2}
+                justifyContent="space-around"
+            >
+                {/* top section */}
+                <DaysOfWeekGrid
+                    mondayMeal={mondayMeal}
+                    setMondayMeal={setMondayMeal}
+                    tuesdayMeal={tuesdayMeal}
+                    setTuesdayMeal={setTuesdayMeal}
+                    wednesdayMeal={wednesdayMeal}
+                    setWednesdayMeal={setWednesdayMeal}
+                    thursdayMeal={thursdayMeal}
+                    setThursdayMeal={setThursdayMeal}
+                    fridayMeal={fridayMeal}
+                    setFridayMeal={setFridayMeal}
+                    saturdayMeal={saturdayMeal}
+                    setSaturdayMeal={setSaturdayMeal}
+                    sundayMeal={sundayMeal}
+                    setSundayMeal={setSundayMeal}
+                    parseIngredients={parseIngredients}
+                    parseInstructions={parseInstructions}
+                />
+            </Grid>
             {/* middle section */}
-            <div className="filter-pagination">
+            <Grid
+                container
+                justifyContent="space-between"
+            >
                 <p>filter-pagination</p>
-                <button className="btn" onClick={handleRefreshMeals}>Refresh Meals</button>
-            </div>
+                <Button size="large" color="primary" variant="contained" onClick={handleRefreshMeals}>Refresh Meals</Button>
+            </Grid>
             {/* bottom section */}
-            <PopulatedMealsGrid 
-            recipes={recipes}
-            handleAddMeal={handleAddMeal}
+            <Grid 
+            container
+            spacing={2}
+            >
+            <PopulatedMealsGrid
+                recipes={recipes}
+                handleAddMeal={handleAddMeal}
+                parseIngredients={parseIngredients}
+                parseInstructions={parseInstructions}
             />
+            </Grid>
         </>
     )
 }

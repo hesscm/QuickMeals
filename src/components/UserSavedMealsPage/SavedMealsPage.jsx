@@ -1,17 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import UserSavedMealsItem from './UserSavedMealsItem';
-const DOMPurify = require('dompurify')(window);
-
+import { Typography } from '@mui/material';
 import './UserSavedMealsPage.css'
 
 function SavedMealsPage() {
-    const [details, setDetails] = useState({
-        descriptionStatus: false, descData: '',
-        ingredientsStatus: false, ingrData: '',
-        instructionsStatus: false, instrData: ''
-    });
     const dispatch = useDispatch();
     const meals = useReduxStore().recipes.userSavedMeals;
 
@@ -19,50 +13,18 @@ function SavedMealsPage() {
         dispatch({ type: 'GET_USER_SAVED_MEALS' });
     }, []);
 
-    const handleDescriptionView = (description) => {
-        if (details.descriptionStatus === false) {
-            setDetails({ ...details, descriptionStatus: true, descData: description });
-        } else {
-            setDetails({ ...details, descriptionStatus: false });
-        }
-        console.log(details.descriptionStatus);
-    }
-
-    const handleIngredientsView = (ingredients) => {
-        if (details.ingredientsStatus === false) {
-            setDetails({ ...details, ingredientsStatus: true, ingrData: ingredients });
-        } else {
-            setDetails({ ...details, ingredientsStatus: false });
-        }
-        console.log(details.ingredientsStatus);
-    }
-
-    const handleInstructionsView = (instructions) => {
-        if (details.instructionsStatus === false) {
-            setDetails({ ...details, instructionsStatus: true, instrData: instructions });
-        } else {
-            setDetails({ ...details, instructionsStatus: false });
-        }
-        console.log(details.instructionsStatus);
-    }
-
-
-
-
+    //table needs to be changed to MUI. Under construction...
     return (
         <>
             <div className="savedMealsPage">
                 {
                     meals.length == 0 ?
-                        <h4>No meal selected for this day!</h4> :
+                        <Typography variant="h4">No meal selected for this day!</Typography> :
                         <>
-
-
                             <div className='savedMealsTable'>
-                                <h1>Your Saved Meals</h1>
-                                <h4>Click the buttons to check the details.</h4>
+                                <Typography variant="h2">Your Saved Meals</Typography>
+                                <Typography variant="h6">Click the buttons to check the details.</Typography>
                                 <table>
-
                                     <tbody>
                                         <tr>
                                             <th>Name</th>
@@ -72,26 +34,17 @@ function SavedMealsPage() {
                                             <th>Date Saved</th>
                                             <th>Action</th>
                                         </tr>
-
+                                        
+                                        {/* loop/map through all returned meals */}
                                         {meals.map((meal, i) => {
                                             return <UserSavedMealsItem
                                                 key={meal.id}
                                                 meal={meal}
-                                                handleDescriptionView={handleDescriptionView}
-                                                handleIngredientsView={handleIngredientsView}
-                                                handleInstructionsView={handleInstructionsView}
                                             />
                                         })}
 
                                     </tbody>
                                 </table>
-                                {details.descriptionStatus && <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(details.descData) }} />}
-                                {details.ingredientsStatus && <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(details.ingrData) }} />}
-                                {details.instructionsStatus && <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(details.instrData) }} />}
-
-
-
-
                             </div>
                         </>
                 }

@@ -1,14 +1,13 @@
 import useReduxStore from '../../hooks/useReduxStore';
 import { useState } from 'react';
-
-
+import { Typography } from '@mui/material';
 
 function DayOfWeekList() {
     const recipes = useReduxStore().recipes;
     const [dayOfWeek, setDayOfWeek] = useState(recipes.mondayMeal);
 
+    // what day of the week is it? taken from a select form.
     const handleDayOfWeek = (day) => {
-        console.log('hello', day);
         switch (day) {
             case 'Monday':
                 setDayOfWeek(recipes.mondayMeal)
@@ -34,42 +33,44 @@ function DayOfWeekList() {
             default:
                 break;
         }
+        // something went very, very wrong...
         if (dayOfWeek.id == -1) {
-            console.log('oops');
+            console.log('oh no...what happened in the shopping list select?');
         }
     }
 
-
+    // this is ALL changing to MUI. under construction.
     return (
         <>
             <div className="dayOfWeekSection">
-                <label htmlFor="day">Choose a day: </label>
+                <Typography htmlFor="day" variant="body1" component="label">Choose A Day: </Typography>
+
                 <select
                     name="day"
                     id="day"
                     onChange={(event) => handleDayOfWeek(event.target.value)}>
-                    <option value="">Choose A Day</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                    <option value="Saturday">Saturday</option>
-                    <option value="Sunday">Sunday</option>
+                    <Typography variant="body2" component="option">Choose A Day</Typography>
+                    <Typography variant="body2" component="option">Monday</Typography>
+                    <Typography variant="body2" component="option">Tuesday</Typography>
+                    <Typography variant="body2" component="option">Wednesday</Typography>
+                    <Typography variant="body2" component="option">Thursday</Typography>
+                    <Typography variant="body2" component="option">Friday</Typography>
+                    <Typography variant="body2" component="option">Saturday</Typography>
+                    <Typography variant="body2" component="option">Sunday</Typography>
                 </select>
 
                 {dayOfWeek.id == -1 ?
-                    <h4>No meal selected for this day!</h4> :
+                    <Typography variant="h6">No meal selected for this day!</Typography> :
                     <>
                         <div className='dayOfWeekTable'>
-                            <h2>{dayOfWeek.day}</h2>
-                            <h3>{dayOfWeek.name}</h3>
-                            <h4>Note: This list contains everything you need for the recipe.</h4>
+                            <Typography variant="h4" gutterBottom>{dayOfWeek.day}</Typography>
+                            <Typography variant="h5" gutterBottom>{dayOfWeek.name}</Typography>
+                            <Typography variant="body1" gutterBottom>Note: This list contains everything you need for the recipe.</Typography>
                             <table>
 
                                 <tbody>
                                     <tr>
-                                        <th>Quantity</th>
+                                        <Typography variant="body1" component="th">Quantity</Typography>
                                         <th>Unit</th>
                                         <th>Ingredient</th>
                                     </tr>
