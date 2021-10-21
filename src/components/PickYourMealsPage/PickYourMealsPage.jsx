@@ -67,9 +67,8 @@ function PickYourMealsPage() {
 
     //big function but all we are doing is taking the chosen recipe from the user and setting that to a day of the week
     //hopefully this will change when I add Drag and Drop
-    const handleAddMeal = (input) => {
-        let dayOfWeek = prompt('Please enter a day of the week:');
-        console.log(dayOfWeek, input);
+    const handleAddMeal = (input, dayOfWeek) => {
+        console.log('handleAddMeal function',dayOfWeek, input);
         switch (dayOfWeek) {
             case 'Monday':
             case 'monday':

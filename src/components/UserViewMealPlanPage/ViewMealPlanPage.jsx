@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import { useHistory } from 'react-router-dom';
 import { Button, ButtonGroup, Grid, Paper, Typography, Card, Box } from '@mui/material';
-import MUIDialogBox from '../PickYourMealsPage/MUIDialogBox';
+import MUIDialogBox from '../PickYourMealsPage/ViewDetailsDialog';
 
 function ViewMealPlanPage() {
     const history = useHistory();

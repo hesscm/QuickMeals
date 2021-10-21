@@ -1,6 +1,7 @@
-import { Paper, Grid, Typography, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import { Paper, Grid, Typography, Box, Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import { useState, useRef } from "react";
 const DOMPurify = require('dompurify')(window);
+import AddMealDialog from "./AddMealDialog";
 
 // added MUI, so this is under construction. It works, but I need to refactor this so I am using the MUIDialogBox component
 function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseInstructions }) {
@@ -41,7 +42,6 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
 
         const descriptionElementRef = useRef(null);
         /* END MATERIAL-UI CODE FROM https://mui.com/components/dialogs/ */
-
         return (
             <>
             {/* 4 meals are populated from the API. We use MUI organize them. More comments to come */}
@@ -53,8 +53,11 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
                     <Paper>
                         <Box p={2}>
                             <Typography variant="h6" gutterBottom>{recipes[0].title}</Typography>
-                            <img onClick={() => handleAddMeal(0)} src={recipes[0].image} alt={recipes[0].title} />
+                            <img src={recipes[0].image} alt={recipes[0].title} />
+                            <ButtonGroup>
+                            <AddMealDialog thisMeal={0} handleAddMeal={handleAddMeal}/>
                             <Button variant="contained" onClick={handleClickOpen(0)}>Details</Button>
+                            </ButtonGroup>
                             <Dialog
                                 open={open0}
                                 onClose={handleClose}
@@ -89,8 +92,10 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
                         <Box p={2}>
                             <Typography variant="h6" gutterBottom>{recipes[1].title}</Typography>
                             <img onClick={() => handleAddMeal(1)} src={recipes[1].image} alt={recipes[1].title} />
-                            <Button variant="contained" onClick={handleClickOpen(1)}>Details</Button>
-                            <Dialog
+                            <ButtonGroup>
+                                <AddMealDialog thisMeal={1} handleAddMeal={handleAddMeal} />
+                                <Button variant="contained" onClick={handleClickOpen(1)}>Details</Button>
+                            </ButtonGroup>                            <Dialog
                                 open={open1}
                                 onClose={handleClose}
                                 scroll={scroll}
@@ -124,8 +129,10 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
                         <Box p={2}>
                             <Typography variant="h6" gutterBottom>{recipes[2].title}</Typography>
                             <img onClick={() => handleAddMeal(2)} src={recipes[2].image} alt={recipes[2].title} />
-                            <Button variant="contained" onClick={handleClickOpen(2)}>Details</Button>
-                            <Dialog
+                            <ButtonGroup>
+                                <AddMealDialog thisMeal={2} handleAddMeal={handleAddMeal} />
+                                <Button variant="contained" onClick={handleClickOpen(2)}>Details</Button>
+                            </ButtonGroup>                            <Dialog
                                 open={open2}
                                 onClose={handleClose}
                                 scroll={scroll}
@@ -159,8 +166,10 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
                         <Box p={2}>
                             <Typography variant="h6" gutterBottom>{recipes[3].title}</Typography>
                             <img onClick={() => handleAddMeal(3)} src={recipes[3].image} alt={recipes[3].title} />
-                            <Button variant="contained" onClick={handleClickOpen(3)}>Details</Button>
-                            <Dialog
+                            <ButtonGroup>
+                                <AddMealDialog thisMeal={3} handleAddMeal={handleAddMeal} />
+                                <Button variant="contained" onClick={handleClickOpen(3)}>Details</Button>
+                            </ButtonGroup>                            <Dialog
                                 open={open3}
                                 onClose={handleClose}
                                 scroll={scroll}

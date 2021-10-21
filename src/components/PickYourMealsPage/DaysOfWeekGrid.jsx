@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, ButtonGroup, Paper, Grid, Card, Typography, Box } from '@mui/material';
-import MUIDialogBox from './MUIDialogBox';
+import MUIDialogBox from './ViewDetailsDialog';
 
 function DaysOfWeekGrid(props) {
     const history = useHistory();
