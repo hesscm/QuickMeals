@@ -50,7 +50,6 @@ function RecipeGeneratorPage() {
                             </Grid>
                         </Box>
                     </Card>
-
                 </Paper>
             </Grid>
         </div>

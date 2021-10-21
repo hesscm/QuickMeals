@@ -7,7 +7,7 @@ function BackOfCard({ flipCard }) {
     const recipes = useReduxStore().recipes;
 
     let ingredients = [];
-    ingredients = recipes.randomRecipeIngredients;
+    ingredients = recipes.randomRecipe.extendedIngredients;
     let ingredientsString = '';
 
     if (ingredients.length !== 0) {

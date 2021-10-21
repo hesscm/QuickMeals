@@ -1,12 +1,14 @@
 const express = require('express');
-const pool = require('../modules/pool');
 const axios = require('axios');
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 require('dotenv').config();
 
 const router = express.Router();
 
-//get route to for a RANDOM spoonacular search
-router.get('/random', (req, res) => {
+//get route for a RANDOM spoonacular search. return only 1
+router.get('/random', rejectUnauthenticated, (req, res) => {
     axios.get(`https://api.spoonacular.com/recipes/random?number=1&apiKey=${process.env.SPOONACULAR_API_KEY}`)
         .then(response => {
             console.log(response.data);
@@ -17,7 +19,8 @@ router.get('/random', (req, res) => {
 });
 
 //get route to for a specified spoonacular search
-router.get('/search', (req, res) => {
+router.get('/search', rejectUnauthenticated, (req, res) => {
+    //base parameters: main course, random, limit 4, bring ingredients list, bring recipe info
     axios.get(`https://api.spoonacular.com/recipes/complexSearch?type=maincourse&sort=random&number=4&fillIngredients=true&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`)
         .then(response => {
             console.log(response.data);
@@ -27,13 +30,15 @@ router.get('/search', (req, res) => {
         });
 });
 
-router.post('/totalingredients', (req, res) => {
-    let apiObject = { "items": [] };
+//post route to send spoonacular a list of ingredients with duplicates. returns no duplicates.
+router.post('/totalingredients', rejectUnauthenticated, (req, res) => {
+    const apiObject = { "items": [] };
     const ingredients = req.body;
+
+    //loop to add ingredients to our API friendly object
     for (let i = 0; i < ingredients.length; i++) {
         apiObject.items.push(ingredients[i].fullString);
     }
-    console.log(apiObject);
     axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${process.env.SPOONACULAR_API_KEY}`, apiObject)
         .then(response => {
             console.log('response', response.data);

@@ -1,15 +1,8 @@
 import { combineReducers } from 'redux';
-import { recipe, recipeIngredients, searchRecipesVar, defaultUserMeal } from '../../DefaultVariables';
+//below are some default/test variables
+import { recipe, searchRecipesVar, defaultUserMeal } from '../../DefaultVariables';
 
-const randomRecipeIngredients = (state = recipeIngredients, action) => {
-    switch (action.type) {
-        case 'SET_RANDOM_RECIPE_INGREDIENTS':
-            return action.payload;
-        default:
-            return state;
-    }
-};//end randomRecipeIngredients reducer function*/
-
+//set the random recipe in its own reducer
 const randomRecipe = (state = recipe, action) => {
     switch (action.type) {
         case 'SET_RANDOM_RECIPE':
@@ -17,8 +10,9 @@ const randomRecipe = (state = recipe, action) => {
         default:
             return state;
     }
-};//end randomRecipe reducer function*/
+};//end randomRecipe reducer
 
+//set array of 4 recipes in its own reducer
 const searchRecipes = (state = searchRecipesVar, action) => {
     switch (action.type) {
         case 'SET_API_RECIPES':
@@ -26,8 +20,9 @@ const searchRecipes = (state = searchRecipesVar, action) => {
         default:
             return state;
     }
-};//end searchRecipes reducer function*/
+};//end searchRecipes reducer
 
+//set parsed/combined user ingredients in a reducer for the Shopping List page
 const totalUserIngredients = (state = [], action) => {
     switch (action.type) {
         case 'SET_TOTAL_INGREDIENTS':
@@ -35,8 +30,9 @@ const totalUserIngredients = (state = [], action) => {
         default:
             return state;
     }
-};//end totalUserIngredients reducer function*/
+};//end totalUserIngredients reducer
 
+//set a user's saved meals to its own reducer
 const userSavedMeals = (state = [], action) => {
     switch (action.type) {
         case 'SET_USER_SAVED_MEALS':
@@ -44,7 +40,11 @@ const userSavedMeals = (state = [], action) => {
         default:
             return state;
     }
-};//end totalUserIngredients reducer function*/
+};//end userSavedMeals reducer
+
+/*----------------------------DAYS OF THE WEEK REDUCERS--------------------------------*/
+//take the GetUserMeals saga 'put' blast and figure out what day of the week each meal is in
+//hold them in their own reducer
 
 const mondayMeal = (state = defaultUserMeal, action) => {
     switch (action.type) {
@@ -54,13 +54,14 @@ const mondayMeal = (state = defaultUserMeal, action) => {
                 //if this is a Monday meal, set this as the state
                 if (action.payload[i].day == 'Monday') {
                     return action.payload[i];
+
                     //if this the last element...
                 } else if (i === action.payload.length - 1) {
                     //if this is a Monday meal, set it
                     if (action.payload[i].day == 'Monday') {
                         return action.payload[i];
                     }
-                    else { //else, reset the state    
+                    else { //else, return the default state    
                         return defaultUserMeal;
                     }
                 }
@@ -191,7 +192,6 @@ const sundayMeal = (state = defaultUserMeal, action) => {
 };//end sundayMeal reducer function*/
 
 export default combineReducers({
-    randomRecipeIngredients,
     randomRecipe,
     searchRecipes,
     totalUserIngredients,
