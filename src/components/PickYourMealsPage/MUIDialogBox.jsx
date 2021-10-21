@@ -1,11 +1,17 @@
-import { Button, ButtonGroup, Paper, Grid, Card, Typography, Box, Dialog, DialogActions, DialogContent, DialogContentText } from '@mui/material';
+import { Button, Typography, Dialog, DialogActions, DialogContent, DialogContentText } from '@mui/material';
 import { useState, useRef } from "react";
 const DOMPurify = require('dompurify')(window);
 
-function MUIDialogBox(props) {
-    /* BEGIN MATERIAL-UI CODE FROM https://mui.com/components/dialogs/ */
-    const [open, setOpen] = useState(false);
+/*Regarding DOMPurify/dangerouslySetInnerHTML...
+ API returns some HTML.
+ We will display the HTML as intended but also use DOMPurify for some added security against XSS(cross site scripting)
+*/
 
+/* BEGIN MATERIAL-UI CODE FROM https://mui.com/components/dialogs/ */
+//Note: adjusted slightly
+
+function MUIDialogBox(props) {
+    const [open, setOpen] = useState(false);
     const [scroll, setScroll] = useState('paper');
 
     const handleClickOpen = () => () => {
@@ -21,6 +27,7 @@ function MUIDialogBox(props) {
     return(
         <>
             <Button size="small" variant="contained" onClick={handleClickOpen()}>Details</Button>
+            {/* pop-up code from MUI */}
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -37,6 +44,7 @@ function MUIDialogBox(props) {
                         <Typography
                             component="span"
                             variant="body1"
+                            // here is what we are displaying
                             dangerouslySetInnerHTML={{
                                 __html:
                                     DOMPurify.sanitize('<h2>Ingredients</h2>' + props.ingredientsString + '<hr><h2>Instructions</h2>' + props.meal.instructions)

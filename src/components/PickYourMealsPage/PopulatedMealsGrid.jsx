@@ -2,7 +2,7 @@ import { Paper, Grid, Typography, Box, Button, Dialog, DialogActions, DialogCont
 import { useState, useRef } from "react";
 const DOMPurify = require('dompurify')(window);
 
-
+// added MUI, so this is under construction. It works, but I need to refactor this so I am using the MUIDialogBox component
 function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseInstructions }) {
 
     /* BEGIN MATERIAL-UI CODE FROM https://mui.com/components/dialogs/ */
@@ -42,10 +42,9 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
         const descriptionElementRef = useRef(null);
         /* END MATERIAL-UI CODE FROM https://mui.com/components/dialogs/ */
 
-
-
         return (
             <>
+            {/* 4 meals are populated from the API. We use MUI organize them. More comments to come */}
                 <Grid item xs={12}>
                     <Typography variant="h5">Pick what you like!</Typography>
                 </Grid>

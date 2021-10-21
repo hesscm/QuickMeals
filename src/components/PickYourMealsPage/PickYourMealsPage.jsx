@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import DaysOfWeekGrid from './DaysOfWeekGrid';
 import PopulatedMealsGrid from './PopulatedMealsGrid';
-import { Grid, Button, Paper, Typography } from '@mui/material';
+import { Grid, Button, Typography } from '@mui/material';
 
 
 function PickYourMealsPage() {
     const dispatch = useDispatch();
     const recipes = useReduxStore().recipes.searchRecipes;
+
+    //local states for holding each individual recipe
     const [mondayMeal, setMondayMeal] = useState({ title: '', image: '' });
     const [tuesdayMeal, setTuesdayMeal] = useState({ title: '', image: '' });
     const [wednesdayMeal, setWednesdayMeal] = useState({ title: '', image: '' });
@@ -18,17 +20,20 @@ function PickYourMealsPage() {
     const [saturdayMeal, setSaturdayMeal] = useState({ title: '', image: '' });
     const [sundayMeal, setSundayMeal] = useState({ title: '', image: '' });
 
+    //this may be commented out but it's just for saving API quotas while testing. feel free to uncomment
     useEffect(() => {
         // dispatch({ type: 'GET_API_RECIPES' })
     }, []);
 
-
+    //function to take in a recipe's ingredients and change it to HTML friendly format
     const parseIngredients = (element) => {
         let ingredients = [];
-        ingredients = recipes[element].extendedIngredients;
-        let ingredientsString = '';
+        ingredients = recipes[element].extendedIngredients; //recipe provided
+        //we're going to output both an array and a string
+        let ingredientsString = ''; 
         let ingredientsArray = [];
 
+        //if we even have ingredients...
         if (ingredients.length !== 0) {
             for (let i = 0; i < ingredients.length; i++) {
                 if (i !== ingredients.length - 1) {
@@ -60,11 +65,9 @@ function PickYourMealsPage() {
         return instructionsString;
     }
 
+    //big function but all we are doing is taking the chosen recipe from the user and setting that to a day of the week
+    //hopefully this will change when I add Drag and Drop
     const handleAddMeal = (input) => {
-        console.log('in handleAddMeal');
-        console.log('Monday', mondayMeal);
-        console.log('Wed', wednesdayMeal);
-        console.log('Thurs', thursdayMeal);
         let dayOfWeek = prompt('Please enter a day of the week:');
         console.log(dayOfWeek, input);
         switch (dayOfWeek) {
@@ -162,10 +165,9 @@ function PickYourMealsPage() {
             default:
                 break;
         }
-
-
     }
 
+    //get some more meals
     const handleRefreshMeals = () => {
         dispatch({ type: 'GET_API_RECIPES' })
     }
@@ -173,12 +175,12 @@ function PickYourMealsPage() {
     return (
         <>
             <Typography variant="h2" gutterBottom>Pick Your Meals</Typography>
-            {/* top section */}
             <Grid
                 container
                 spacing={2}
                 justifyContent="space-around"
             >
+                {/* top section */}
                 <DaysOfWeekGrid
                     mondayMeal={mondayMeal}
                     setMondayMeal={setMondayMeal}
@@ -218,7 +220,6 @@ function PickYourMealsPage() {
                 parseInstructions={parseInstructions}
             />
             </Grid>
-
         </>
     )
 }

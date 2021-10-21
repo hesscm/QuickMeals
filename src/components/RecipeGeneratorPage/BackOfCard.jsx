@@ -2,10 +2,16 @@ import useReduxStore from '../../hooks/useReduxStore';
 import './RecipeGeneratorPage.css';
 import { Typography } from '@mui/material';
 
+/*Regarding DOMPurify/dangerouslySetInnerHTML...
+ API returns some HTML.
+ We will display the HTML as intended but also use DOMPurify for some added security against XSS(cross site scripting)
+*/
+
 function BackOfCard({ flipCard }) {
     const DOMPurify = require('dompurify')(window);
     const recipes = useReduxStore().recipes;
 
+    //take an array of ingredients and turn it into a string that is HTML friendly
     let ingredients = [];
     ingredients = recipes.randomRecipe.extendedIngredients;
     let ingredientsString = '';
@@ -19,9 +25,9 @@ function BackOfCard({ flipCard }) {
             }
         }
     }
-    console.log(ingredientsString);
 
     return (
+        // display the ingredients and instructions
         <div onClick={flipCard}>
             <Typography variant="h4">{recipes.randomRecipe.title}</Typography>
             <br />

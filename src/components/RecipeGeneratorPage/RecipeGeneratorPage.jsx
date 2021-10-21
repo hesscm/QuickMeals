@@ -1,4 +1,3 @@
-// import './SpoonacularTesting.css'
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import BackOfCard from './BackOfCard';
@@ -8,6 +7,7 @@ import { Paper, Button, Typography, Card, Grid, Box } from '@mui/material';
 
 function RecipeGeneratorPage() {
     const dispatch = useDispatch();
+    //boolean to check if we are looking at the front or back of the recipe card
     const [sideOfCard, setSideOfCard] = useState(true);
 
     useEffect(() => {
@@ -15,12 +15,11 @@ function RecipeGeneratorPage() {
     }, []);
 
     const handleButtonClick = () => {
-        console.log('clicked');
         dispatch({ type: 'GET_RANDOM_RECIPE' })
     }
 
+    //set card state from true to false or vice versa
     const flipCard = () => {
-        console.log('card state', sideOfCard);
         if (sideOfCard === true) {
             setSideOfCard(false);
         }
@@ -28,9 +27,10 @@ function RecipeGeneratorPage() {
             setSideOfCard(true);
         }
     }
+
     return (
         <div>
-
+            {/* MUI grid */}
             <Grid container justifyContent="center">
                 <Grid item xs={12} >
                     <Typography variant="h2" component="h2" gutterBottom>The Recipe Generator</Typography>
@@ -39,6 +39,7 @@ function RecipeGeneratorPage() {
                     <Card>
                         <Box p={4}>
                             <Grid item >
+                                {/* conditional rendering. front or back of the card */}
                                 {sideOfCard ?
                                     <FrontOfCard flipCard={flipCard} /> :
                                     <BackOfCard flipCard={flipCard} />

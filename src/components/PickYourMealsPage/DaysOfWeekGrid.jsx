@@ -1,17 +1,15 @@
 import { useDispatch } from 'react-redux';
-import useReduxStore from '../../hooks/useReduxStore';
 import { useHistory } from 'react-router-dom';
-import { Button, ButtonGroup, Paper, Grid, Card, Typography, Box, Dialog, DialogActions, DialogContent, DialogContentText } from '@mui/material';
-import { useState, useRef } from "react";
-const DOMPurify = require('dompurify')(window);
+import { Button, ButtonGroup, Paper, Grid, Card, Typography, Box } from '@mui/material';
 import MUIDialogBox from './MUIDialogBox';
 
 function DaysOfWeekGrid(props) {
     const history = useHistory();
     const dispatch = useDispatch();
-    const user = useReduxStore().user;
 
+    //send the meals to the server
     const handleButtonClick = () => {
+        //doesn't do anything yet. shh....
         confirm('Are you sure you want to submit this?');
 
         console.log('clicked');
@@ -25,9 +23,10 @@ function DaysOfWeekGrid(props) {
             props.sundayMeal,
         ]
         dispatch({ type: 'POST_MEALS', payload: action })
-        history.push('/viewmeals')
+        history.push('/viewmeals') //go to next page
     }
 
+    //take an input of a day of the week and reset that local state
     const handleRemoveButton = (dayOfWeek) => {
         switch (dayOfWeek) {
             case 0:
@@ -58,19 +57,22 @@ function DaysOfWeekGrid(props) {
 
     return (
         <>
-            {/* section 1 */}
-
+        {/* these are the individual cards for the day of the week */}
             <Grid item xs={3}>
                 <Paper>
                     <Card>
-                        <Box p={2}>
+                        <Box p={2}> 
                             <Typography variant="h4" gutterBottom>Monday</Typography>
+                            {/* conditional rendering to see if there is a monday meal */}
                             {props.mondayMeal.title == '' ?
+                            // if not...
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
+                                {/* if so... */}
                                     <Typography variant="h6">{props.mondayMeal.title}</Typography>
                                     <img src={props.mondayMeal.image} alt={props.mondayMeal.title} />
                                     <ButtonGroup>
+                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
                                     <MUIDialogBox
                                         meal={props.mondayMeal}
                                         ingredientsString={props.mondayMeal.ingredientsString}
@@ -83,6 +85,8 @@ function DaysOfWeekGrid(props) {
                     </Card>
                 </Paper>
             </Grid>
+
+
             <Grid item xs={3}>
                 <Paper>
                     <Card>
@@ -106,6 +110,8 @@ function DaysOfWeekGrid(props) {
                     </Card>
                 </Paper>
             </Grid>
+
+
             <Grid item xs={3}>
                 <Paper>
                     <Card>
@@ -129,6 +135,8 @@ function DaysOfWeekGrid(props) {
                     </Card>
                 </Paper>
             </Grid>
+
+
             <Grid item xs={3}>
                 <Paper>
                     <Card>
@@ -152,6 +160,8 @@ function DaysOfWeekGrid(props) {
                     </Card>
                 </Paper>
             </Grid >
+
+
             <Grid item xs={4}>
                 <Paper>
                     <Card>
@@ -175,6 +185,8 @@ function DaysOfWeekGrid(props) {
                     </Card>
                 </Paper>
             </Grid >
+
+
             <Grid item xs={4}>
                 <Paper>
                     <Card>
@@ -198,6 +210,8 @@ function DaysOfWeekGrid(props) {
                     </Card>
                 </Paper>
             </Grid >
+
+
             <Grid item xs={4}>
                 <Paper>
                     <Card>
@@ -221,6 +235,8 @@ function DaysOfWeekGrid(props) {
                     </Card>
                 </Paper>
             </Grid >
+
+            {/* button to send chosen meals to the server */}
             <Grid item xs={12}>
                 <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Let's Eat!</Button>
             </Grid>
