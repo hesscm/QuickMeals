@@ -82,10 +82,11 @@ router.delete('/savedmeals/:id', rejectUnauthenticated, async (req, res) => {
     try {
         console.log(req.params.id);
         await pool.query('BEGIN');
-        const queryText = `DELETE FROM "user_saved_meals" WHERE "user_id" = $1 AND "meals_id" = $2;`
-        const result = await pool.query(queryText, [req.user.id, req.params.id]);
+        const queryTextSavedMeals = `DELETE FROM "user_saved_meals" WHERE "user_id" = $1 AND "meals_id" = $2;`
+        await pool.query(queryTextSavedMeals, [req.user.id, req.params.id]);
+        const queryTextMeals = `UPDATE "user_meals" SET "is_saved" = $3 WHERE "user_id" = $1 AND "meals_id" = $2;`
+        await pool.query(queryTextMeals, [req.user.id, req.params.id, 'false']);
         await pool.query('COMMIT');
-        console.log(result);
         res.sendStatus(200);
 
     } catch (error) {

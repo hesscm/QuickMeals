@@ -1,13 +1,11 @@
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import { Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MUIDialogBox from './MUIDialogBox'
+import MUIDialogBox from './MUIDialogBoxSavedPage'
 
 function UserSavedMealsItem(props) {
     const dispatch = useDispatch();
-
 
     const formatTime = (time) => {
         time = moment().format("MMM Do YY");
@@ -31,7 +29,6 @@ function UserSavedMealsItem(props) {
         dispatch({ type: 'DELETE_USER_SAVED_MEAL', payload: props.meal.id });
         // dispatch({ type: 'GET_USER_SAVED_MEALS' });
     }
-
 
     return(
         <tr>
