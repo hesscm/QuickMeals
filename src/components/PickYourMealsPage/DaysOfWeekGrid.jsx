@@ -70,13 +70,13 @@ function DaysOfWeekGrid(props) {
                                 <>
                                     <Typography variant="h6">{props.mondayMeal.title}</Typography>
                                     <img src={props.mondayMeal.image} alt={props.mondayMeal.title} />
+                                    <ButtonGroup>
                                     <MUIDialogBox
-                                        dayID={0}
                                         meal={props.mondayMeal}
-                                        parseIngredients={props.parseIngredients}
-                                        parseInstructions={props.parseInstructions}
-                                        handleRemoveButton={handleRemoveButton}
+                                        ingredientsString={props.mondayMeal.ingredientsString}
                                     />
+                                    <Button color="warning" variant="contained" onClick={() => handleRemoveButton(0)}>Remove</Button>
+                                    </ButtonGroup>
                                 </>
                             }
                         </Box>
@@ -93,13 +93,13 @@ function DaysOfWeekGrid(props) {
                                 <>
                                     <h3>{props.tuesdayMeal.title}</h3>
                                     <img src={props.tuesdayMeal.image} alt={props.tuesdayMeal.title} />
-                                    <MUIDialogBox
-                                        dayID={1}
-                                        meal={props.tuesdayMeal}
-                                        parseIngredients={props.parseIngredients}
-                                        parseInstructions={props.parseInstructions}
-                                        handleRemoveButton={handleRemoveButton}
-                                    />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.tuesdayMeal}
+                                            ingredientsString={props.tuesdayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(1)}>Remove</Button>
+                                    </ButtonGroup>
                                 </>
                             }
                         </Box>
@@ -116,13 +116,13 @@ function DaysOfWeekGrid(props) {
                                 <>
                                     <h3>{props.wednesdayMeal.title}</h3>
                                     <img src={props.wednesdayMeal.image} alt={props.wednesdayMeal.title} />
-                                    <MUIDialogBox
-                                        dayID={2}
-                                        meal={props.wednesdayMeal}
-                                        parseIngredients={props.parseIngredients}
-                                        parseInstructions={props.parseInstructions}
-                                        handleRemoveButton={handleRemoveButton}
-                                    />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.wednesdayMeal}
+                                            ingredientsString={props.wednesdayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(2)}>Remove</Button>
+                                    </ButtonGroup>
                                 </>
                             }
                         </Box>
@@ -139,13 +139,13 @@ function DaysOfWeekGrid(props) {
                                 <>
                                     <h3>{props.thursdayMeal.title}</h3>
                                     <img src={props.thursdayMeal.image} alt={props.thursdayMeal.title} />
-                                    <MUIDialogBox
-                                        dayID={3}
-                                        meal={props.thursdayMeal}
-                                        parseIngredients={props.parseIngredients}
-                                        parseInstructions={props.parseInstructions}
-                                        handleRemoveButton={handleRemoveButton}
-                                    />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.thursdayMeal}
+                                            ingredientsString={props.thursdayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(3)}>Remove</Button>
+                                    </ButtonGroup>
                                 </>
                             }
                         </Box>
@@ -162,13 +162,13 @@ function DaysOfWeekGrid(props) {
                                 <>
                                     <h3>{props.fridayMeal.title}</h3>
                                     <img src={props.fridayMeal.image} alt={props.fridayMeal.title} />
-                                    <MUIDialogBox
-                                        dayID={4}
-                                        meal={props.fridayMeal}
-                                        parseIngredients={props.parseIngredients}
-                                        parseInstructions={props.parseInstructions}
-                                        handleRemoveButton={handleRemoveButton}
-                                    />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.fridayMeal}
+                                            ingredientsString={props.fridayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(4)}>Remove</Button>
+                                    </ButtonGroup>
                                 </>
                             }
                         </Box>
@@ -185,13 +185,13 @@ function DaysOfWeekGrid(props) {
                                 <>
                                     <h3>{props.saturdayMeal.title}</h3>
                                     <img src={props.saturdayMeal.image} alt={props.saturdayMeal.title} />
-                                    <MUIDialogBox
-                                        dayID={5}
-                                        meal={props.saturdayMeal}
-                                        parseIngredients={props.parseIngredients}
-                                        parseInstructions={props.parseInstructions}
-                                        handleRemoveButton={handleRemoveButton}
-                                    />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.saturdayMeal}
+                                            ingredientsString={props.saturdayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(5)}>Remove</Button>
+                                    </ButtonGroup>
                                 </>
                             }
                         </Box>
@@ -208,13 +208,13 @@ function DaysOfWeekGrid(props) {
                                 <>
                                     <h3>{props.sundayMeal.title}</h3>
                                     <img src={props.sundayMeal.image} alt={props.sundayMeal.title} />
-                                    <MUIDialogBox
-                                        dayID={6}
-                                        meal={props.sundayMeal}
-                                        parseIngredients={props.parseIngredients}
-                                        parseInstructions={props.parseInstructions}
-                                        handleRemoveButton={handleRemoveButton}
-                                    />
+                                    <ButtonGroup>
+                                        <MUIDialogBox
+                                            meal={props.sundayMeal}
+                                            ingredientsString={props.sundayMeal.ingredientsString}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(6)}>Remove</Button>
+                                    </ButtonGroup>
                                 </>
                             }
                         </Box>

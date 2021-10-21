@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Paper, Grid, Card, Typography, Box, Dialog, DialogActions, DialogContent, DialogContentText } from '@mui/material';
+import { Button, ButtonGroup, Paper, Grid, Card, Typography, Box, Dialog, DialogTitle, DialogActions, DialogContent, DialogContentText } from '@mui/material';
 import { useState, useRef } from "react";
 const DOMPurify = require('dompurify')(window);
 
@@ -18,9 +18,11 @@ function MUIDialogBox(props) {
 
     const descriptionElementRef = useRef(null);
 
-    return(
+    return (
         <>
-            <Button size="small" variant="contained" onClick={handleClickOpen()}>Details</Button>
+            <Button size="small" variant="contained" onClick={handleClickOpen()}>View</Button>
+            {/* <Button size="small" color="primary" variant="contained" onClick={() => props.handleDescriptionView(props.meal.description)}>View</Button> */}
+
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -28,6 +30,7 @@ function MUIDialogBox(props) {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
+                <DialogTitle id="scroll-dialog-title">{props.title}</DialogTitle>
                 <DialogContent dividers={scroll === 'paper'}>
                     <DialogContentText
                         id="scroll-dialog-description"
@@ -39,7 +42,7 @@ function MUIDialogBox(props) {
                             variant="body1"
                             dangerouslySetInnerHTML={{
                                 __html:
-                                    DOMPurify.sanitize('<h2>Ingredients</h2>' + props.ingredientsString + '<hr><h2>Instructions</h2>' + props.meal.instructions)
+                                    DOMPurify.sanitize(props.details)
                             }} />
                     </DialogContentText>
                 </DialogContent>

@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-
+import MUIDialogBox from './MUIDialogBox'
 
 function UserSavedMealsItem(props) {
     const dispatch = useDispatch();
@@ -40,14 +39,21 @@ function UserSavedMealsItem(props) {
                 {props.meal.name}
             </td>
             <td>
-                <Button size="small" color="primary" variant="contained" onClick={() => props.handleDescriptionView(props.meal.description)}>View</Button>
+                <MUIDialogBox 
+                title={'Description'}
+                details={props.meal.description}/>
             </td>
             <td>
-                <Button size="small" color="primary" variant="contained" onClick={() => props.handleIngredientsView(ingredientsString)}>View</Button>
-            </td>
+                <MUIDialogBox
+                    title={'Ingredients'}
+                    details={props.meal.ingredients_string} />            
+                    </td>
             <td>
-                <Button size="small" color="primary" variant="contained" onClick={() => props.handleInstructionsView(props.meal.instructions)}>View</Button>
-            </td>
+                <MUIDialogBox
+                    title={'Instructions'}
+
+                    details={props.meal.instructions} />             
+                    </td>
             <td>
                 {formatTime(props.meal.date)}
             </td>
