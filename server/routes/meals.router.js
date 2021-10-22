@@ -16,7 +16,8 @@ const router = express.Router();
 router.get('/', rejectUnauthenticated, async (req, res) => {
     try {
         await pool.query('BEGIN');
-        const queryText = ` SELECT DISTINCT ON (api_id) meals.*,user_meals.day,user_meals.is_saved FROM meals
+        // DISTINCT ON (api_id)
+        const queryText = ` SELECT meals.*,user_meals.day,user_meals.is_saved FROM meals
                             JOIN "user_meals" ON meals.id = user_meals.meals_id
                             JOIN "user" ON "user".id = user_meals.user_id
                             WHERE "user".id = $1;`
@@ -127,7 +128,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         } //end loop
 
         await pool.query('COMMIT');
-        res.sendStatus(201, mealsID);
+        res.sendStatus(201);
     } catch (error) {
         console.log('ROLLBACK', error);
         await pool.query('ROLLBACK');

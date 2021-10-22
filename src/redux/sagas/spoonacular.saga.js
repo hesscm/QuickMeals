@@ -93,7 +93,9 @@ function* getUserMeals() {
 function* deleteUserMeal(action) {
     try {
         yield axios.delete(`/api/meals/${action.payload}`);
-        yield put({ type: 'GET_USER_MEALS' }); //refresh
+        // yield put({ type: 'GET_USER_MEALS' }); //refresh
+        yield put({ type: 'GET_USER_MEALS_SIMPLE' })
+
     } catch (error) {
         console.log(error);
     }
@@ -153,6 +155,7 @@ function* getUserMealsSimple() {
     try {
         //user meals from the db
         const response = yield axios.get(`/api/meals`);
+        console.log('simple get', response);
 
         //ingredients are currently a string, but we need them in JSON format
         for (let i = 0; i < response.data.length; i++) {

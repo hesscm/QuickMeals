@@ -19,7 +19,6 @@ function ViewMealPlanPage() {
     const handleRemoveButton = (id) => {
         console.log(id);
         dispatch({ type: 'DELETE_USER_MEAL', payload: id });
-        dispatch({ type: 'GET_USER_MEALS_SIMPLE' })
     }
 
     //go to the shopping list page

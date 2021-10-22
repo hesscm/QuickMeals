@@ -2,10 +2,13 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, ButtonGroup, Paper, Grid, Card, Typography, Box } from '@mui/material';
 import MUIDialogBox from './ViewDetailsDialog';
+import useReduxStore from '../../hooks/useReduxStore';
 
 function DaysOfWeekGrid(props) {
     const history = useHistory();
     const dispatch = useDispatch();
+    const recipes = useReduxStore().recipes;
+
 
     //send the meals to the server
     const handleButtonClick = () => {
@@ -55,31 +58,46 @@ function DaysOfWeekGrid(props) {
         }
     }
 
+    const handleRemoveDBButton = (id) => {
+        dispatch({ type: 'DELETE_USER_MEAL', payload: id });
+
+    }
+
     return (
         <>
-        {/* these are the individual cards for the day of the week */}
+            {/* these are the individual cards for the day of the week */}
             <Grid item xs={3}>
                 <Paper>
                     <Card>
-                        <Box p={2}> 
+                        <Box p={2}>
                             <Typography variant="h4" gutterBottom>Monday</Typography>
-                            {/* conditional rendering to see if there is a monday meal */}
-                            {props.mondayMeal.title == '' ?
-                            // if not...
-                                <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
+                            {recipes.mondayMeal.id != -1 ?
                                 <>
-                                {/* if so... */}
-                                    <Typography variant="h6">{props.mondayMeal.title}</Typography>
-                                    <img src={props.mondayMeal.image} alt={props.mondayMeal.title} />
+                                    <Typography variant="h6">{recipes.mondayMeal.name}</Typography>
+                                    <img src={recipes.mondayMeal.image_path} alt={recipes.mondayMeal.name} />
                                     <ButtonGroup>
                                         {/* below is our MUI dialog component to show a meals ingredients and instructions */}
-                                    <MUIDialogBox
-                                        meal={props.mondayMeal}
-                                        ingredientsString={props.mondayMeal.ingredientsString}
-                                    />
-                                    <Button color="warning" variant="contained" onClick={() => handleRemoveButton(0)}>Remove</Button>
+                                        <MUIDialogBox
+                                            meal={recipes.mondayMeal}
+                                            ingredientsString={recipes.mondayMeal.ingredients_string}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.mondayMeal.id)}>Remove</Button>
                                     </ButtonGroup>
-                                </>
+                                </> :
+                                <>{props.mondayMeal.title == '' ?
+                                    <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
+                                    <>
+                                        <h3>{props.mondayMeal.title}</h3>
+                                        <img src={props.mondayMeal.image} alt={props.mondayMeal.title} />
+                                        <ButtonGroup>
+                                            <MUIDialogBox
+                                                meal={props.mondayMeal}
+                                                ingredientsString={props.mondayMeal.ingredientsString}
+                                            />
+                                            <Button color="warning" variant="contained" onClick={() => handleRemoveButton(0)}>Remove</Button>
+                                        </ButtonGroup>
+                                    </>
+                                }</>
                             }
                         </Box>
                     </Card>
@@ -92,7 +110,20 @@ function DaysOfWeekGrid(props) {
                     <Card>
                         <Box p={2}>
                             <Typography variant="h4" gutterBottom>Tuesday</Typography>
-                            {props.tuesdayMeal.title == '' ?
+                            {recipes.tuesdayMeal.id != -1 ?
+                                <>
+                                    <Typography variant="h6">{recipes.tuesdayMeal.name}</Typography>
+                                    <img src={recipes.tuesdayMeal.image_path} alt={recipes.tuesdayMeal.name} />
+                                    <ButtonGroup>
+                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                        <MUIDialogBox
+                                            meal={recipes.tuesdayMeal}
+                                            ingredientsString={recipes.tuesdayMeal.ingredients_string}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.tuesdayMeal.id)}>Remove</Button>
+                                    </ButtonGroup>
+                                </> :
+                                <>{props.tuesdayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.tuesdayMeal.title}</h3>
@@ -103,8 +134,9 @@ function DaysOfWeekGrid(props) {
                                             ingredientsString={props.tuesdayMeal.ingredientsString}
                                         />
                                         <Button color="warning" variant="contained" onClick={() => handleRemoveButton(1)}>Remove</Button>
-                                    </ButtonGroup>
-                                </>
+                                        </ButtonGroup>
+                                    </>
+                                }</>
                             }
                         </Box>
                     </Card>
@@ -117,7 +149,20 @@ function DaysOfWeekGrid(props) {
                     <Card>
                         <Box p={2}>
                             <Typography variant="h4" gutterBottom>Wednesday</Typography>
-                            {props.wednesdayMeal.title == '' ?
+                            {recipes.wednesdayMeal.id != -1 ?
+                                <>
+                                    <Typography variant="h6">{recipes.wednesdayMeal.name}</Typography>
+                                    <img src={recipes.wednesdayMeal.image_path} alt={recipes.wednesdayMeal.name} />
+                                    <ButtonGroup>
+                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                        <MUIDialogBox
+                                            meal={recipes.wednesdayMeal}
+                                            ingredientsString={recipes.wednesdayMeal.ingredients_string}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.wednesdayMeal.id)}>Remove</Button>
+                                    </ButtonGroup>
+                                </> :
+                                <>{props.wednesdayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.wednesdayMeal.title}</h3>
@@ -128,8 +173,9 @@ function DaysOfWeekGrid(props) {
                                             ingredientsString={props.wednesdayMeal.ingredientsString}
                                         />
                                         <Button color="warning" variant="contained" onClick={() => handleRemoveButton(2)}>Remove</Button>
-                                    </ButtonGroup>
-                                </>
+                                          </ButtonGroup>
+                                    </>
+                                }</>
                             }
                         </Box>
                     </Card>
@@ -142,7 +188,20 @@ function DaysOfWeekGrid(props) {
                     <Card>
                         <Box p={2}>
                             <Typography variant="h4" gutterBottom>Thursday</Typography>
-                            {props.thursdayMeal.title == '' ?
+                            {recipes.thursdayMeal.id != -1 ?
+                                <>
+                                    <Typography variant="h6">{recipes.thursdayMeal.name}</Typography>
+                                    <img src={recipes.thursdayMeal.image_path} alt={recipes.thursdayMeal.name} />
+                                    <ButtonGroup>
+                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                        <MUIDialogBox
+                                            meal={recipes.thursdayMeal}
+                                            ingredientsString={recipes.thursdayMeal.ingredients_string}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.thursdayMeal.id)}>Remove</Button>
+                                    </ButtonGroup>
+                                </> :
+                                <>{props.thursdayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.thursdayMeal.title}</h3>
@@ -153,8 +212,9 @@ function DaysOfWeekGrid(props) {
                                             ingredientsString={props.thursdayMeal.ingredientsString}
                                         />
                                         <Button color="warning" variant="contained" onClick={() => handleRemoveButton(3)}>Remove</Button>
-                                    </ButtonGroup>
-                                </>
+                                               </ButtonGroup>
+                                    </>
+                                }</>
                             }
                         </Box>
                     </Card>
@@ -167,7 +227,20 @@ function DaysOfWeekGrid(props) {
                     <Card>
                         <Box p={2}>
                             <Typography variant="h4" gutterBottom>Friday</Typography>
-                            {props.fridayMeal.title == '' ?
+                            {recipes.fridayMeal.id != -1 ?
+                                <>
+                                    <Typography variant="h6">{recipes.fridayMeal.name}</Typography>
+                                    <img src={recipes.fridayMeal.image_path} alt={recipes.fridayMeal.name} />
+                                    <ButtonGroup>
+                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                        <MUIDialogBox
+                                            meal={recipes.fridayMeal}
+                                            ingredientsString={recipes.fridayMeal.ingredients_string}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.fridayMeal.id)}>Remove</Button>
+                                    </ButtonGroup>
+                                </> :
+                                <>{props.fridayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.fridayMeal.title}</h3>
@@ -180,8 +253,9 @@ function DaysOfWeekGrid(props) {
                                         <Button color="warning" variant="contained" onClick={() => handleRemoveButton(4)}>Remove</Button>
                                     </ButtonGroup>
                                 </>
+                            }</>
                             }
-                        </Box>
+                    </Box>
                     </Card>
                 </Paper>
             </Grid >
@@ -192,7 +266,20 @@ function DaysOfWeekGrid(props) {
                     <Card>
                         <Box p={2}>
                             <Typography variant="h4" gutterBottom>Saturday</Typography>
-                            {props.saturdayMeal.title == '' ?
+                            {recipes.saturdayMeal.id != -1 ?
+                                <>
+                                    <Typography variant="h6">{recipes.saturdayMeal.name}</Typography>
+                                    <img src={recipes.saturdayMeal.image_path} alt={recipes.saturdayMeal.name} />
+                                    <ButtonGroup>
+                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                        <MUIDialogBox
+                                            meal={recipes.saturdayMeal}
+                                            ingredientsString={recipes.saturdayMeal.ingredients_string}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.saturdayMeal.id)}>Remove</Button>
+                                    </ButtonGroup>
+                                </> :
+                                <>{props.saturdayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.saturdayMeal.title}</h3>
@@ -205,8 +292,9 @@ function DaysOfWeekGrid(props) {
                                         <Button color="warning" variant="contained" onClick={() => handleRemoveButton(5)}>Remove</Button>
                                     </ButtonGroup>
                                 </>
+                            }</>
                             }
-                        </Box>
+                    </Box>
                     </Card>
                 </Paper>
             </Grid >
@@ -217,7 +305,20 @@ function DaysOfWeekGrid(props) {
                     <Card>
                         <Box p={2}>
                             <Typography variant="h4" gutterBottom>Sunday</Typography>
-                            {props.sundayMeal.title == '' ?
+                            {recipes.sundayMeal.id != -1 ?
+                                <>
+                                    <Typography variant="h6">{recipes.sundayMeal.name}</Typography>
+                                    <img src={recipes.sundayMeal.image_path} alt={recipes.sundayMeal.name} />
+                                    <ButtonGroup>
+                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                        <MUIDialogBox
+                                            meal={recipes.sundayMeal}
+                                            ingredientsString={recipes.sundayMeal.ingredients_string}
+                                        />
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.sundayMeal.id)}>Remove</Button>
+                                    </ButtonGroup>
+                                </> :
+                                <>{props.sundayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.sundayMeal.title}</h3>
@@ -230,8 +331,9 @@ function DaysOfWeekGrid(props) {
                                         <Button color="warning" variant="contained" onClick={() => handleRemoveButton(6)}>Remove</Button>
                                     </ButtonGroup>
                                 </>
+                            }</>
                             }
-                        </Box>
+                    </Box>
                     </Card>
                 </Paper>
             </Grid >

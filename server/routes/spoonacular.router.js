@@ -4,12 +4,25 @@ const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 require('dotenv').config();
+const setupCache = require('axios-cache-adapter').setupCache;
+// Create `axios-cache-adapter` instance
+const cache = setupCache({
+    maxAge: 15 * 60 * 1000,
+    exclude: {
+        query: false,
+    }
+})
+
+// Create `axios` instance passing the newly created `cache.adapter`
+const api = axios.create({
+    adapter: cache.adapter
+})
 
 const router = express.Router();
 
 //get route for a RANDOM spoonacular search. return only 1
 router.get('/random', rejectUnauthenticated, (req, res) => {
-    axios.get(`https://api.spoonacular.com/recipes/random?number=1&apiKey=${process.env.SPOONACULAR_API_KEY}`)
+    api.get(`https://api.spoonacular.com/recipes/random?number=1&apiKey=${process.env.SPOONACULAR_API_KEY}`)
         .then(response => {
             console.log(response.data);
             res.send(response.data);
@@ -21,7 +34,7 @@ router.get('/random', rejectUnauthenticated, (req, res) => {
 //get route to for a specified spoonacular search
 router.get('/search', rejectUnauthenticated, (req, res) => {
     //base parameters: main course, random, limit 4, bring ingredients list, bring recipe info
-    axios.get(`https://api.spoonacular.com/recipes/complexSearch?type=main%20course&sort=random&number=4&fillIngredients=true&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`)
+    api.get(`https://api.spoonacular.com/recipes/complexSearch?type=main%20course&sort=random&number=4&fillIngredients=true&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`)
         .then(response => {
             console.log(response.data);
             res.send(response.data);
@@ -39,7 +52,7 @@ router.post('/totalingredients', rejectUnauthenticated, (req, res) => {
     for (let i = 0; i < ingredients.length; i++) {
         apiObject.items.push(ingredients[i].fullString);
     }
-    axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${process.env.SPOONACULAR_API_KEY}`, apiObject)
+    api.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${process.env.SPOONACULAR_API_KEY}`, apiObject)
         .then(response => {
             console.log('response', response.data);
             res.send(response.data);

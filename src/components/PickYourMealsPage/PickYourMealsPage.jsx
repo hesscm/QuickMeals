@@ -10,6 +10,7 @@ import { Grid, Button, Typography } from '@mui/material';
 function PickYourMealsPage() {
     const dispatch = useDispatch();
     const recipes = useReduxStore().recipes.searchRecipes;
+    const trackRecipes = useReduxStore().recipes;
 
     //local states for holding each individual recipe
     const [mondayMeal, setMondayMeal] = useState({ title: '', image: '' });
@@ -22,7 +23,7 @@ function PickYourMealsPage() {
 
     //this may be commented out but it's just for saving API quotas while testing. feel free to uncomment
     useEffect(() => {
-        // dispatch({ type: 'GET_API_RECIPES' })
+        dispatch({ type: 'GET_USER_MEALS_SIMPLE' })
     }, []);
 
     //function to take in a recipe's ingredients and change it to HTML friendly format
@@ -30,7 +31,7 @@ function PickYourMealsPage() {
         let ingredients = [];
         ingredients = recipes[element].extendedIngredients; //recipe provided
         //we're going to output both an array and a string
-        let ingredientsString = ''; 
+        let ingredientsString = '';
         let ingredientsArray = [];
 
         //if we even have ingredients...
@@ -50,15 +51,19 @@ function PickYourMealsPage() {
     //take the input from the API and convert the recipe instructions into a HTML ready listed string
     const parseInstructions = (element) => {
         let instructions = [];
-        instructions = recipes[element].analyzedInstructions[0].steps;
         let instructionsString = '';
+        if (recipes[element].analyzedInstructions.length === 0) {
+            instructionsString = 'No instructions provided.'
+        } else {
+            instructions = recipes[element].analyzedInstructions[0].steps;
 
-        if (instructions.length !== 0) {
-            for (let i = 0; i < instructions.length; i++) {
-                if (i !== instructions.length - 1) {
-                    instructionsString += (i + 1) + '. ' + instructions[i].step + '<br />';
-                } else {
-                    instructionsString += instructions[i].step;
+            if (instructions.length !== 0) {
+                for (let i = 0; i < instructions.length; i++) {
+                    if (i !== instructions.length - 1) {
+                        instructionsString += (i + 1) + '. ' + instructions[i].step + '<br />';
+                    } else {
+                        instructionsString += instructions[i].step;
+                    }
                 }
             }
         }
@@ -68,7 +73,7 @@ function PickYourMealsPage() {
     //big function but all we are doing is taking the chosen recipe from the user and setting that to a day of the week
     //hopefully this will change when I add Drag and Drop
     const handleAddMeal = (input, dayOfWeek) => {
-        console.log('handleAddMeal function',dayOfWeek, input);
+        console.log('handleAddMeal function', dayOfWeek, input);
         switch (dayOfWeek) {
             case 'Monday':
             case 'monday':
@@ -187,6 +192,7 @@ function PickYourMealsPage() {
                 justifyContent="space-around"
             >
                 {/* top section */}
+
                 <DaysOfWeekGrid
                     mondayMeal={mondayMeal}
                     setMondayMeal={setMondayMeal}
@@ -215,16 +221,16 @@ function PickYourMealsPage() {
                 <Button size="large" color="primary" variant="contained" onClick={handleRefreshMeals}>Refresh Meals</Button>
             </Grid>
             {/* bottom section */}
-            <Grid 
-            container
-            spacing={2}
+            <Grid
+                container
+                spacing={2}
             >
-            <PopulatedMealsGrid
-                recipes={recipes}
-                handleAddMeal={handleAddMeal}
-                parseIngredients={parseIngredients}
-                parseInstructions={parseInstructions}
-            />
+                <PopulatedMealsGrid
+                    recipes={recipes}
+                    handleAddMeal={handleAddMeal}
+                    parseIngredients={parseIngredients}
+                    parseInstructions={parseInstructions}
+                />
             </Grid>
         </>
     )

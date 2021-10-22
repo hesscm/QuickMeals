@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 //below are some default/test variables
-import { recipe, searchRecipesVar, defaultUserMeal } from '../../DefaultVariables';
+import { recipe, searchRecipesVar, bugCheckSearch, defaultUserMeal } from '../../DefaultVariables';
 
 //set the random recipe in its own reducer
 const randomRecipe = (state = recipe, action) => {
@@ -13,7 +13,7 @@ const randomRecipe = (state = recipe, action) => {
 };//end randomRecipe reducer
 
 //set array of 4 recipes in its own reducer
-const searchRecipes = (state = searchRecipesVar, action) => {
+const searchRecipes = (state = bugCheckSearch, action) => {
     switch (action.type) {
         case 'SET_API_RECIPES':
             return action.payload;

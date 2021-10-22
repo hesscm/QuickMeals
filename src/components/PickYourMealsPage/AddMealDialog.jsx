@@ -10,12 +10,15 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import useReduxStore from '../../hooks/useReduxStore';
 
- function AddMealDialog(props) {
+
+function AddMealDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [day, setDay] = React.useState('');
+    const recipes = useReduxStore().recipes;
 
-     //local states for holding each individual recipe
+    //local states for holding each individual recipe
     const handleChange = (event) => {
         setDay(event.target.value || '');
     };
@@ -29,19 +32,74 @@ import Select from '@mui/material/Select';
             setOpen(false);
         }
     };
-     const handleSubmit = (event, reason) => {
-         if (reason !== 'backdropClick') {
-             setOpen(false);
-         }
-         console.log('in handleSubmit');
-         console.log(props.thisMeal, day);
-         props.handleAddMeal(props.thisMeal, day)
-     };
+    const handleSubmit = (event, reason) => {
+        if (reason !== 'backdropClick') {
+            setOpen(false);
+        }
+        console.log('in handleSubmit');
+        console.log(props.thisMeal, day);
+        switch (day) {
+            case 'Monday':
+                if (recipes.mondayMeal.day === 'Monday') {
+                    alert('Please remove the current recipe first.');
+                } else {
+                    props.handleAddMeal(props.thisMeal, day)
+                }
+                break;
+            case 'Tuesday':
+                if (recipes.tuesdayMeal.day === 'Tuesday') {
+                    alert('Please remove the current recipe first.');
+                } else {
+                    props.handleAddMeal(props.thisMeal, day)
+                }
+                break;
+            case 'Wednesday':
+                if (recipes.wednesdayMeal.day === 'Wednesday') {
+                    alert('Please remove the current recipe first.');
+                } else {
+                    props.handleAddMeal(props.thisMeal, day)
+                }
+                break;
+            case 'Thursday':
+                if (recipes.thursdayMeal.day === 'Thursday') {
+                    alert('Please remove the current recipe first.');
+                } else {
+                    props.handleAddMeal(props.thisMeal, day)
+                }
+                break;
+            case 'Friday':
+                if (recipes.fridayMeal.day === 'Friday') {
+                    alert('Please remove the current recipe first.');
+                } else {
+                    props.handleAddMeal(props.thisMeal, day)
+                }
+                break;
+            case 'Saturday':
+                if (recipes.saturdayMeal.day === 'Saturday') {
+                    alert('Please remove the current recipe first.');
+                } else {
+                    props.handleAddMeal(props.thisMeal, day)
+                }
+                break;
+            case 'Sunday':
+                if (recipes.sundayMeal.day === 'Sunday') {
+                    alert('Please remove the current recipe first.');
+                } else {
+                    props.handleAddMeal(props.thisMeal, day)
+                }
+                break;
+            default:
+                break;
+        }
+
+
+        
+    };
 
     return (
         <div>
             <Button variant="contained" color="success" onClick={handleClickOpen}>Add</Button>
-            
+
             <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
                 <DialogTitle>Choose a Day</DialogTitle>
                 <DialogContent>
