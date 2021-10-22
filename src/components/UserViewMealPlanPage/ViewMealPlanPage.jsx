@@ -246,7 +246,7 @@ function ViewMealPlanPage() {
                                                         meal={recipes.sundayMeal}
                                                         ingredientsString={recipes.sundayMeal.ingredients_string}
                                                     />
-                                                    {!recipes.mondayMeal.is_saved ?
+                                                {!recipes.sundayMeal.is_saved ?
                                                         <Button size="small" color="secondary" variant="contained" onClick={() => handleSaveButton(recipes.sundayMeal.id, 'true')}>Favorite</Button>
                                                         :
                                                         <Button size="small" color="success" variant="contained" onClick={() => handleSaveButton(recipes.sundayMeal.id, 'false')}>Unfavorite</Button>

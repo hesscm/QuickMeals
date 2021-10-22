@@ -186,6 +186,8 @@ function PickYourMealsPage() {
     return (
         <>
             <Typography variant="h2" gutterBottom>Pick Your Meals</Typography>
+            <Typography variant="h4" gutterBottom>Meal Plan</Typography>
+
             <Grid
                 container
                 spacing={2}
@@ -215,9 +217,8 @@ function PickYourMealsPage() {
             {/* middle section */}
             <Grid
                 container
-                justifyContent="space-between"
+                justifyContent="flex-end"
             >
-                <p>filter-pagination</p>
                 <Button size="large" color="primary" variant="contained" onClick={handleRefreshMeals}>Refresh Meals</Button>
             </Grid>
             {/* bottom section */}

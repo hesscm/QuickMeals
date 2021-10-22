@@ -5,37 +5,22 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useHistory } from 'react-router-dom';
 
-export default function AlertUserOfLogin(props) {
-    const [open, setOpen] = React.useState(true);
-    const history = useHistory();
+export default function AlertForSubmit(props) {
+    const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
-    const handleCloseRegister = () => {
-        setOpen(false);
-        props.setShowLogin(false);
-        history.push('/registration')
-    };
     const handleClose = () => {
         setOpen(false);
-        props.setShowLogin(false);
-    };
-
-    const handleCloseLogin = () => {
-        setOpen(false);
-        props.setShowLogin(false);
-        history.push('/login')
-
     };
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open alert dialog
+            <Button size="large" color="primary" variant="contained" onClick={handleClickOpen}>
+                Let's Eat!
             </Button>
             <Dialog
                 open={open}
@@ -44,18 +29,18 @@ export default function AlertUserOfLogin(props) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Must Log In To Continue"}
+                    {"Are you sure you want to submit this meal plan?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        You can definitely check out some recipes without logging in,
-                        but if you want to save this recipe you will need to log in to your account.
+                        Let Google help apps determine location. This means sending anonymous
+                        location data to Google, even when no apps are running.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseLogin}>Login</Button>
-                    <Button onClick={handleCloseRegister} autoFocus>
-                        Register
+                    <Button onClick={handleClose}>No</Button>
+                    <Button onClick={props.handleButtonClick} autoFocus>
+                        Yes
                     </Button>
                 </DialogActions>
             </Dialog>

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Button, ButtonGroup, Paper, Grid, Card, Typography, Box } from '@mui/material';
 import MUIDialogBox from './ViewDetailsDialog';
 import useReduxStore from '../../hooks/useReduxStore';
+import AlertForSubmit from './AlertForSubmit';
 
 function DaysOfWeekGrid(props) {
     const history = useHistory();
@@ -13,8 +14,6 @@ function DaysOfWeekGrid(props) {
     //send the meals to the server
     const handleButtonClick = () => {
         //doesn't do anything yet. shh....
-        confirm('Are you sure you want to submit this?');
-
         console.log('clicked');
         const action = [
             props.mondayMeal,
@@ -142,7 +141,6 @@ function DaysOfWeekGrid(props) {
                     </Card>
                 </Paper>
             </Grid>
-
 
             <Grid item xs={3}>
                 <Paper>
@@ -340,7 +338,7 @@ function DaysOfWeekGrid(props) {
 
             {/* button to send chosen meals to the server */}
             <Grid item xs={12}>
-                <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Let's Eat!</Button>
+                <AlertForSubmit handleButtonClick={handleButtonClick}/>
             </Grid>
         </>
 
