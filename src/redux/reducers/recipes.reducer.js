@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { recipe, searchRecipesVar, bugCheckSearch, defaultUserMeal } from '../../DefaultVariables';
 
 //set the random recipe in its own reducer
-const randomRecipe = (state = recipe, action) => {
+const randomRecipe = (state = [], action) => {
     switch (action.type) {
         case 'SET_RANDOM_RECIPE':
             return action.payload;

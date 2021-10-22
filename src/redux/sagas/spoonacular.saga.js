@@ -6,7 +6,8 @@ import axios from 'axios';
 function* getRandomRecipe() {
     try {
         const response = yield axios.get(`/api/spoonacular/random`);
-        yield put({ type: 'SET_RANDOM_RECIPE', payload: response.data.recipes[0] });
+        console.log('random', response.data.results[0]);
+        yield put({ type: 'SET_RANDOM_RECIPE', payload: response.data.results[0] });
     } catch (error) {
         console.log(error);
     }
@@ -181,7 +182,7 @@ function* saveRecipeGeneratorMeal(action) {
 }//end saveRecipeGeneratorMeal
 
 function* spoonacularSaga() {
-    // yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
+    yield takeEvery('GET_RANDOM_RECIPE', getRandomRecipe);
     yield takeEvery('GET_API_RECIPES', getAPIRecipes)
     yield takeEvery('POST_MEALS', postMeals);
     yield takeEvery('GET_USER_MEALS', getUserMeals)

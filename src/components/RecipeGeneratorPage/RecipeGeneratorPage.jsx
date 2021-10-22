@@ -5,22 +5,24 @@ import FrontOfCard from './FrontOfCard';
 import './RecipeGeneratorPage.css';
 import { Paper, Button, ButtonGroup, Typography, Card, Grid, Box } from '@mui/material';
 import useReduxStore from '../../hooks/useReduxStore';
+import LoginForm from '../LoginForm/LoginForm';
+import AlertUserOfLogin from './AlertUserOfLogin';
 
 
 
 function RecipeGeneratorPage() {
     const dispatch = useDispatch();
     const recipes = useReduxStore().recipes.randomRecipe;
+    const user = useReduxStore().user;
     const [saved, setSaved] = useState(false);
     const [mondayMeal, setMondayMeal] = useState('');
-
-
+    const [showLogin, setShowLogin] = useState(false);
 
     //boolean to check if we are looking at the front or back of the recipe card
     const [sideOfCard, setSideOfCard] = useState(true);
 
     useEffect(() => {
-        dispatch({ type: 'GET_RANDOM_RECIPE' })
+        // dispatch({ type: 'GET_RANDOM_RECIPE' })
     }, []);
 
     const handleButtonClick = () => {
@@ -63,75 +65,90 @@ function RecipeGeneratorPage() {
     //take the input from the API and convert the recipe instructions into a HTML ready listed string
     const parseInstructions = () => {
         let instructions = [];
-        instructions = recipes.analyzedInstructions[0].steps;
         let instructionsString = '';
-
-        if (instructions.length !== 0) {
-            for (let i = 0; i < instructions.length; i++) {
-                if (i !== instructions.length - 1) {
-                    instructionsString += (i + 1) + '. ' + instructions[i].step + '<br />';
-                } else {
-                    instructionsString += instructions[i].step;
+        if (recipes.analyzedInstructions.length === 0) {
+            instructionsString = 'No instructions provided.'
+        } else {
+            instructions = recipes.analyzedInstructions[0].steps;
+            if (instructions.length !== 0) {
+                for (let i = 0; i < instructions.length; i++) {
+                    if (i !== instructions.length - 1) {
+                        instructionsString += (i + 1) + '. ' + instructions[i].step + '<br />';
+                    } else {
+                        instructionsString += instructions[i].step;
+                    }
                 }
             }
+            return instructionsString;
         }
-        return instructionsString;
     }
 
     //update this meal as a saved meal or an UNSAVED meal
     const handleSaveButton = () => {
-        setSaved(true);
-        const action = {
-            title: recipes.title,
-            image: recipes.image,
-            description: recipes.summary,
-            instructions: parseInstructions(),
-            ingredients: parseIngredients()[1],
-            ingredientsString: parseIngredients()[0],
-            number_servings: recipes.servings,
-            id: recipes.id,
-            day: 'RecipeGenerator'
-        };
-        console.log(recipes.title);
-        console.log(mondayMeal);
-        dispatch({ type: 'SAVE_RECIPE_GENERATOR_MEAL', payload: action })
+        if (!user.id) {
+            setShowLogin(true);
+        } else {
+            setSaved(true);
+            const action = {
+                title: recipes.title,
+                image: recipes.image,
+                description: recipes.summary,
+                instructions: parseInstructions(),
+                ingredients: parseIngredients()[1],
+                ingredientsString: parseIngredients()[0],
+                number_servings: recipes.servings,
+                id: recipes.id,
+                day: 'RecipeGenerator'
+            };
+            console.log(recipes.title);
+            console.log(mondayMeal);
+            dispatch({ type: 'SAVE_RECIPE_GENERATOR_MEAL', payload: action })
+        }
     }
 
     return (
         <div>
             {/* MUI grid */}
+            {showLogin && <AlertUserOfLogin setShowLogin={setShowLogin} />}
+
             <Grid container justifyContent="center">
                 <Grid item xs={12} >
                     <Typography variant="h2" component="h2" gutterBottom>The Recipe Generator</Typography>
                     <Typography variant="h5" component="h2" gutterBottom>Click the card to see more details.</Typography>
-
                 </Grid>
                 <Paper elevation={12}>
                     <Card>
                         <Box p={4}>
-                            <Grid item >
-                                {/* conditional rendering. front or back of the card */}
-                                {sideOfCard ?
-                                    <FrontOfCard flipCard={flipCard} /> :
-                                    <BackOfCard flipCard={flipCard} />
-                                }
-                            </Grid>
-                            <br /><br />
-                            <Grid item xs={12}>
-                                <ButtonGroup>
+                            {!recipes.title ? <>
+                                <Typography variant="h4" gutterBottom>Let's Grab a Recipe</Typography>
                                 <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
-                                {/* is this meal saved? change buttons depending on the boolean */}
-                                {!saved ?
-                                        <Button size="large" color="secondary" variant="contained" onClick={() => handleSaveButton()}>Save</Button>
-                                    :
-                                        <Button size="large" disabled color="secondary" variant="contained">Saved!</Button>
-                                }
-                                </ButtonGroup>
-                            </Grid>
+                            </> : <>
+                                <Grid item >
+
+                                    {/* conditional rendering. front or back of the card */}
+                                    {sideOfCard ?
+                                        <FrontOfCard flipCard={flipCard} /> :
+                                        <BackOfCard flipCard={flipCard} />
+                                    }
+                                </Grid>
+                                <br /><br />
+                                <Grid item xs={12}>
+                                    <ButtonGroup>
+                                        <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
+                                        {/* is this meal saved? change buttons depending on the boolean */}
+                                        {!saved ?
+                                            <Button size="large" color="secondary" variant="contained" onClick={() => handleSaveButton()}>Save</Button>
+                                            :
+                                            <Button size="large" disabled color="secondary" variant="contained">Saved!</Button>
+                                        }
+                                    </ButtonGroup>
+                                </Grid>
+                            </>}
                         </Box>
                     </Card>
                 </Paper>
             </Grid>
+
         </div>
     )
 }

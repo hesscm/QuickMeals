@@ -21,9 +21,8 @@ const api = axios.create({
 const router = express.Router();
 
 //get route for a RANDOM spoonacular search. return only 1
-router.get('/random', rejectUnauthenticated, (req, res) => {
-    api.get(`https://api.spoonacular.com/recipes/random?number=1&apiKey=${process.env.SPOONACULAR_API_KEY}`)
-        .then(response => {
+router.get('/random', (req, res) => {
+    axios.get(`https://api.spoonacular.com/recipes/complexSearch?type=main%20course&sort=random&number=1&fillIngredients=true&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`)        .then(response => {
             console.log(response.data);
             res.send(response.data);
         }).catch(error => {
@@ -34,7 +33,7 @@ router.get('/random', rejectUnauthenticated, (req, res) => {
 //get route to for a specified spoonacular search
 router.get('/search', rejectUnauthenticated, (req, res) => {
     //base parameters: main course, random, limit 4, bring ingredients list, bring recipe info
-    api.get(`https://api.spoonacular.com/recipes/complexSearch?type=main%20course&sort=random&number=4&fillIngredients=true&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`)
+    axios.get(`https://api.spoonacular.com/recipes/complexSearch?type=main%20course&sort=random&number=4&fillIngredients=true&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`)
         .then(response => {
             console.log(response.data);
             res.send(response.data);
@@ -52,7 +51,7 @@ router.post('/totalingredients', rejectUnauthenticated, (req, res) => {
     for (let i = 0; i < ingredients.length; i++) {
         apiObject.items.push(ingredients[i].fullString);
     }
-    api.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${process.env.SPOONACULAR_API_KEY}`, apiObject)
+    axios.post(`https://api.spoonacular.com/mealplanner/shopping-list/compute?apiKey=${process.env.SPOONACULAR_API_KEY}`, apiObject)
         .then(response => {
             console.log('response', response.data);
             res.send(response.data);
