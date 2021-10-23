@@ -22,7 +22,8 @@ const router = express.Router();
 
 //get route for a RANDOM spoonacular search. return only 1
 router.get('/random', (req, res) => {
-    axios.get(`https://api.spoonacular.com/recipes/complexSearch?type=main%20course&sort=random&number=1&fillIngredients=true&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`)        .then(response => {
+    axios.get(`https://api.spoonacular.com/recipes/complexSearch?type=main%20course&sort=random&number=1&fillIngredients=true&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`)        
+    .then(response => {
             console.log(response.data);
             res.send(response.data);
         }).catch(error => {

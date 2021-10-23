@@ -12,7 +12,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import useReduxStore from '../../hooks/useReduxStore';
 
-
 function AddMealDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [day, setDay] = React.useState('');
