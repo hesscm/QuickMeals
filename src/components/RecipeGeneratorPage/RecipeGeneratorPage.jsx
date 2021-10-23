@@ -3,9 +3,8 @@ import { useDispatch } from 'react-redux';
 import BackOfCard from './BackOfCard';
 import FrontOfCard from './FrontOfCard';
 import './RecipeGeneratorPage.css';
-import { Paper, Button, ButtonGroup, Typography, Card, Grid, Box } from '@mui/material';
+import { Button, ButtonGroup, Typography, Card, CardHeader, CardActionArea, Grid, Box, Divider } from '@mui/material';
 import useReduxStore from '../../hooks/useReduxStore';
-import LoginForm from '../LoginForm/LoginForm';
 import AlertUserOfLogin from './AlertUserOfLogin';
 
 
@@ -116,37 +115,45 @@ function RecipeGeneratorPage() {
                     <Typography variant="h2" component="h2" gutterBottom>The Recipe Generator</Typography>
                     <Typography variant="h5" component="h2" gutterBottom>Click the card to see more details.</Typography>
                 </Grid>
-                <Paper elevation={12}>
-                    <Card>
-                        <Box p={4}>
-                            {!recipes.title ? <>
-                                <Typography variant="h4" gutterBottom>Let's Grab a Recipe</Typography>
-                                <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
-                            </> : <>
-                                <Grid item >
+                <Grid item xs={5}>
+                    <Card elevation={12}>
+                        <CardActionArea onClick={flipCard}>
+                            <Box p={4} >
+                                {!recipes.title ? <>
+                                    <Typography variant="h4" gutterBottom>Let's Grab a Recipe</Typography>
+                                </> : <>
+                                    <CardHeader
+                                        title={recipes.title}
+                                        titleTypographyProps={{ variant: 'h4' }}
+                                    />
+                                        <Divider variant="middle" />
 
                                     {/* conditional rendering. front or back of the card */}
                                     {sideOfCard ?
-                                        <FrontOfCard flipCard={flipCard} /> :
-                                        <BackOfCard flipCard={flipCard} />
+                                        <FrontOfCard /> :
+                                        <BackOfCard />
                                     }
-                                </Grid>
-                                <br /><br />
-                                <Grid item xs={12}>
-                                    <ButtonGroup>
-                                        <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
-                                        {/* is this meal saved? change buttons depending on the boolean */}
-                                        {!saved ?
-                                            <Button size="large" color="secondary" variant="contained" onClick={() => handleSaveButton()}>Save</Button>
-                                            :
-                                            <Button size="large" disabled color="secondary" variant="contained">Saved!</Button>
-                                        }
-                                    </ButtonGroup>
-                                </Grid>
-                            </>}
-                        </Box>
+                                    <br /><br />
+
+
+                                </>}
+                            </Box>
+                        </CardActionArea>
                     </Card>
-                </Paper>
+                    <br />
+                    {!recipes.title ?
+                        <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
+                        :
+                    <ButtonGroup>
+                            <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
+                        {!saved ?
+                            <Button size="large" color="secondary" variant="contained" onClick={() => handleSaveButton()}>Save</Button>
+                            :
+                            <Button size="large" disabled color="secondary" variant="contained">Saved!</Button>
+                        }
+                    </ButtonGroup>}
+
+                </Grid>
             </Grid>
 
         </div>

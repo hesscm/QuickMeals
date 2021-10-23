@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import { useHistory } from 'react-router-dom';
-import { Button, ButtonGroup, Grid, Paper, Typography, Card, Box } from '@mui/material';
+import { Button, ButtonGroup, Grid, Paper, Typography, Card, CardHeader, Divider, Box } from '@mui/material';
 import MUIDialogBox from '../PickYourMealsPage/ViewDetailsDialog';
 
 function ViewMealPlanPage() {
@@ -53,16 +53,20 @@ function ViewMealPlanPage() {
                     >
                         {/* card for each day of the week */}
                         <Grid item xs={3}>
-                            <Paper>
                                 <Card>
                                     <Box p={2}> 
-                                        <Typography variant="h4" gutterBottom>Monday</Typography>
+                                        <Typography variant="h4" >Monday</Typography>
                                         {recipes.mondayMeal.name == '' ? //if meal is empty, show that there is nothing there
                                             <><br /><Typography variant="body1" gutterBottom>Seem to be missing a meal. Go back and add one!</Typography></> :
                                             <>
-                                                {/* else, display the meal */}
-                                                <Typography variant="h6">{recipes.mondayMeal.name}</Typography>
+                                                {/* else, display the meal */}                                                
+                                        <CardHeader
+                                            subheader={recipes.mondayMeal.name}
+                                            subheaderTypographyProps={{ variant: 'h6' }}
+                                        />
+                                        <Divider variant="middle" />
                                                 <img src={recipes.mondayMeal.image_path} alt={recipes.mondayMeal.name} />
+                                        <Divider variant="middle" />
                                                 <br />
                                                 <ButtonGroup size="small" variant="outlined" aria-label="outlined button group">
                                                     {/* button to display the details of this meal */}
@@ -83,19 +87,23 @@ function ViewMealPlanPage() {
                                         }
                                     </Box>
                                 </Card>
-                            </Paper>
                         </Grid>
                         <Grid item xs={3}>
-                            <Paper>
+                            
                                 <Card>
                                     <Box p={2}>
-                                        <Typography variant="h4" gutterBottom>Tuesday</Typography>
+                                        <Typography variant="h4" >Tuesday</Typography>
                                         {recipes.tuesdayMeal.name == '' ?
                                             <><br /><Typography variant="body1" gutterBottom>Seem to be missing a meal. Go back and add one!</Typography></> :
                                             <>
-                                                <Typography variant="h6">{recipes.tuesdayMeal.name}</Typography>
-                                                <img src={recipes.tuesdayMeal.image_path} alt={recipes.tuesdayMeal.name} />
-                                                <br />
+                                            <CardHeader
+                                                subheader={recipes.tuesdayMeal.name}
+                                                subheaderTypographyProps={{ variant: 'h6' }}
+                                            />
+                                            <Divider variant="middle" />
+                                            <img src={recipes.tuesdayMeal.image_path} alt={recipes.tuesdayMeal.name} />
+                                            <Divider variant="middle" />
+                                            <br />
                                                 <ButtonGroup size="small" variant="outlined" aria-label="outlined button group">
                                                     <MUIDialogBox
                                                         meal={recipes.tuesdayMeal}
@@ -112,19 +120,24 @@ function ViewMealPlanPage() {
                                         }
                                     </Box>
                                 </Card>
-                            </Paper>
+                            
                         </Grid>
                         <Grid item xs={3}>
-                            <Paper>
+                            
                                 <Card>
                                     <Box p={2}>
-                                        <Typography variant="h4" gutterBottom>Wednesday</Typography>
+                                        <Typography variant="h4" >Wednesday</Typography>
                                         {recipes.wednesdayMeal.name == '' ?
                                             <><br /><Typography variant="body1" gutterBottom>Seem to be missing a meal. Go back and add one!</Typography></> :
                                             <>
-                                                <Typography variant="h6">{recipes.wednesdayMeal.name}</Typography>
-                                                <img src={recipes.wednesdayMeal.image_path} alt={recipes.wednesdayMeal.name} />
-                                                <br />
+                                            <CardHeader
+                                                subheader={recipes.wednesdayMeal.name}
+                                                subheaderTypographyProps={{ variant: 'h6' }}
+                                            />
+                                            <Divider variant="middle" />
+                                            <img src={recipes.wednesdayMeal.image_path} alt={recipes.wednesdayMeal.name} />
+                                            <Divider variant="middle" />
+                                            <br />
                                                 <ButtonGroup size="small" variant="outlined" aria-label="outlined button group">
                                                     <MUIDialogBox
                                                         meal={recipes.wednesdayMeal}
@@ -141,19 +154,24 @@ function ViewMealPlanPage() {
                                         }
                                     </Box>
                                 </Card>
-                            </Paper>
+                            
                         </Grid>
                         <Grid item xs={3}>
-                            <Paper>
+                            
                                 <Card>
                                     <Box p={2}>
-                                        <Typography variant="h4" gutterBottom>Thursday</Typography>
+                                        <Typography variant="h4" >Thursday</Typography>
                                         {recipes.thursdayMeal.name == '' ?
                                             <><br /><Typography variant="body1" gutterBottom>Seem to be missing a meal. Go back and add one!</Typography></> :
                                             <>
-                                                <Typography variant="h6">{recipes.thursdayMeal.name}</Typography>
-                                                <img src={recipes.thursdayMeal.image_path} alt={recipes.thursdayMeal.name} />
-                                                <br />
+                                            <CardHeader
+                                                subheader={recipes.thursdayMeal.name}
+                                                subheaderTypographyProps={{ variant: 'h6' }}
+                                            />
+                                            <Divider variant="middle" />
+                                            <img src={recipes.thursdayMeal.image_path} alt={recipes.thursdayMeal.name} />
+                                            <Divider variant="middle" />
+                                            <br />
                                                 <ButtonGroup size="small" variant="outlined" aria-label="outlined button group">
                                                     <MUIDialogBox
                                                         meal={recipes.thursdayMeal}
@@ -170,19 +188,24 @@ function ViewMealPlanPage() {
                                         }
                                     </Box>
                                 </Card>
-                            </Paper>
+                            
                         </Grid>
                         <Grid item xs={4}>
-                            <Paper>
+                            
                                 <Card>
                                     <Box p={2}>
-                                        <Typography variant="h4" gutterBottom>Friday</Typography>
+                                        <Typography variant="h4" >Friday</Typography>
                                         {recipes.fridayMeal.name == '' ?
                                             <><br /><Typography variant="body1" gutterBottom>Seem to be missing a meal. Go back and add one!</Typography></> :
                                             <>
-                                                <Typography variant="h6">{recipes.fridayMeal.name}</Typography>
-                                                <img src={recipes.fridayMeal.image_path} alt={recipes.fridayMeal.name} />
-                                                <br />
+                                            <CardHeader
+                                                subheader={recipes.fridayMeal.name}
+                                                subheaderTypographyProps={{ variant: 'h6' }}
+                                            />
+                                            <Divider variant="middle" />
+                                            <img src={recipes.fridayMeal.image_path} alt={recipes.fridayMeal.name} />
+                                            <Divider variant="middle" />
+                                            <br />
                                                 <ButtonGroup size="small" variant="outlined" aria-label="outlined button group">
                                                     <MUIDialogBox
                                                         meal={recipes.fridayMeal}
@@ -199,19 +222,24 @@ function ViewMealPlanPage() {
                                         }
                                     </Box>
                                 </Card>
-                            </Paper>
+                            
                         </Grid>
                         <Grid item xs={4}>
-                            <Paper>
+                            
                                 <Card>
                                     <Box p={2}>
-                                        <Typography variant="h4" gutterBottom>Saturday</Typography>
+                                        <Typography variant="h4" >Saturday</Typography>
                                         {recipes.saturdayMeal.name == '' ?
                                             <><br /><Typography variant="body1" gutterBottom>Seem to be missing a meal. Go back and add one!</Typography></> :
                                             <>
-                                                <Typography variant="h6">{recipes.saturdayMeal.name}</Typography>
-                                                <img src={recipes.saturdayMeal.image_path} alt={recipes.saturdayMeal.name} />
-                                                <br />
+                                            <CardHeader
+                                                subheader={recipes.saturdayMeal.name}
+                                                subheaderTypographyProps={{ variant: 'h6' }}
+                                            />
+                                            <Divider variant="middle" />
+                                            <img src={recipes.saturdayMeal.image_path} alt={recipes.saturdayMeal.name} />
+                                            <Divider variant="middle" />
+                                            <br />
                                                 <ButtonGroup size="small" variant="outlined" aria-label="outlined button group">
                                                     <MUIDialogBox
                                                         meal={recipes.saturdayMeal}
@@ -228,19 +256,24 @@ function ViewMealPlanPage() {
                                         }
                                     </Box>
                                 </Card>
-                            </Paper>
+                            
                         </Grid>
                         <Grid item xs={4}>
-                            <Paper>
+                            
                                 <Card>
                                     <Box p={2}>
-                                        <Typography variant="h4" gutterBottom>Sunday</Typography>
+                                        <Typography variant="h4" >Sunday</Typography>
                                         {recipes.sundayMeal.name == '' ?
                                             <><br /><Typography variant="body1" gutterBottom>Seem to be missing a meal. Go back and add one!</Typography></> :
                                             <>
-                                                <Typography variant="h6">{recipes.sundayMeal.name}</Typography>
-                                                <img src={recipes.sundayMeal.image_path} alt={recipes.sundayMeal.name} />
-                                                <br />
+                                            <CardHeader
+                                                subheader={recipes.sundayMeal.name}
+                                                subheaderTypographyProps={{ variant: 'h6' }}
+                                            />
+                                            <Divider variant="middle" />
+                                            <img src={recipes.sundayMeal.image_path} alt={recipes.sundayMeal.name} />
+                                            <Divider variant="middle" />
+                                            <br />
                                                 <ButtonGroup size="small" variant="outlined" aria-label="outlined button group">
                                                     <MUIDialogBox
                                                         meal={recipes.sundayMeal}
@@ -257,7 +290,7 @@ function ViewMealPlanPage() {
                                         }
                                     </Box>
                                 </Card>
-                            </Paper>
+                            
                         </Grid>
                         <br /><br />
                         <Grid item xs={12}>

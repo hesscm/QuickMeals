@@ -4,13 +4,14 @@ import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import DaysOfWeekGrid from './DaysOfWeekGrid';
 import PopulatedMealsGrid from './PopulatedMealsGrid';
-import { Grid, Button, Typography } from '@mui/material';
+import { Grid, Button, Typography, LinearProgress, Box } from '@mui/material';
 
 
 function PickYourMealsPage() {
     const dispatch = useDispatch();
     const recipes = useReduxStore().recipes.searchRecipes;
     const trackRecipes = useReduxStore().recipes;
+    const [loadCards, setLoadCards] = useState(true);
 
     //local states for holding each individual recipe
     const [mondayMeal, setMondayMeal] = useState({ title: '', image: '' });
@@ -222,16 +223,25 @@ function PickYourMealsPage() {
                 <Button size="large" color="primary" variant="contained" onClick={handleRefreshMeals}>Refresh Meals</Button>
             </Grid>
             {/* bottom section */}
+
+
             <Grid
                 container
                 spacing={2}
+                justifyContent="center"
             >
-                <PopulatedMealsGrid
-                    recipes={recipes}
-                    handleAddMeal={handleAddMeal}
-                    parseIngredients={parseIngredients}
-                    parseInstructions={parseInstructions}
-                />
+                <Grid item xs={12}>
+                    <Typography variant="h5">Pick what you like!</Typography>
+                </Grid>
+
+                    <PopulatedMealsGrid
+                        recipes={recipes}
+                        handleAddMeal={handleAddMeal}
+                        parseIngredients={parseIngredients}
+                        parseInstructions={parseInstructions}
+                    />
+                
+     
             </Grid>
         </>
     )

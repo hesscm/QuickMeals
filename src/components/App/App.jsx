@@ -25,6 +25,7 @@ import ShoppingListPage from '../UserShoppingListPage/ShoppingListPage';
 import ViewMealPlanPage from '../UserViewMealPlanPage/ViewMealPlanPage';
 import SavedMealsPage from '../UserSavedMealsPage/SavedMealsPage';
 import DashboardPage from '../UserDashboardPage/DashboardPage';
+import MUIAppBar from '../Nav/MUIAppBar';
 
 import './App.css';
 
@@ -40,7 +41,9 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        <MUIAppBar />
+        <br />
+        {/* <Nav /> */}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/recipegenerator" />

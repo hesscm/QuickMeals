@@ -1,13 +1,13 @@
 import useReduxStore from '../../hooks/useReduxStore';
 import './RecipeGeneratorPage.css';
-import { Typography } from '@mui/material';
+import { Typography, Divider } from '@mui/material';
 
 /*Regarding DOMPurify/dangerouslySetInnerHTML...
  API returns some HTML.
  We will display the HTML as intended but also use DOMPurify for some added security against XSS(cross site scripting)
 */
 
-function BackOfCard({ flipCard }) {
+function BackOfCard() {
     const DOMPurify = require('dompurify')(window);
     const recipes = useReduxStore().recipes;
 
@@ -47,14 +47,17 @@ function BackOfCard({ flipCard }) {
 
     return (
         // display the ingredients and instructions
-        <div onClick={flipCard}>
-            <Typography variant="h4">{recipes.randomRecipe.title}</Typography>
+        <div>
             <br />
             <Typography variant="h5">Ingredients</Typography>
             <Typography component="span" variant="body2"><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(ingredientsString) }} /></Typography>
             <br />
+            <Divider variant="middle" />
+            <br />
             <Typography variant="h5">Cooking Instructions</Typography>
             <Typography align="left" component="span" variant="body2"><div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(instructionsString) }} /></Typography>
+            <br />
+            <Divider variant="middle" />
         </div>
     )
 }

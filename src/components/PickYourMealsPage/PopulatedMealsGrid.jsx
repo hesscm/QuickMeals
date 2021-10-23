@@ -1,4 +1,5 @@
-import { Paper, Grid, Typography, Box, Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import { Paper, Grid, Typography, Box, Button, ButtonGroup, 
+    Dialog, DialogActions, DialogContent, DialogContentText, Card, CardActionArea, CardHeader, Divider } from "@mui/material";
 import { useState, useRef } from "react";
 const DOMPurify = require('dompurify')(window);
 import AddMealDialog from "./AddMealDialog";
@@ -45,15 +46,17 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
         return (
             <>
             {/* 4 meals are populated from the API. We use MUI organize them. More comments to come */}
-                <Grid item xs={12}>
-                    <Typography variant="h5">Pick what you like!</Typography>
-                </Grid>
-
                 <Grid item xs={3} >
-                    <Paper>
+                    <Card>
                         <Box p={2}>
-                            <Typography variant="h6" gutterBottom>{recipes[0].title}</Typography>
+                            <CardHeader
+                                title={recipes[0].title}
+                                titleTypographyProps={{ variant: 'h6' }}
+                            />
+                            <Divider variant="middle" />
                             <img src={recipes[0].image} alt={recipes[0].title} />
+                            <Divider variant="middle" />
+                            <br />
                             <ButtonGroup>
                             <AddMealDialog thisMeal={0} handleAddMeal={handleAddMeal}/>
                             <Button variant="contained" onClick={handleClickOpen(0)}>Details</Button>
@@ -85,13 +88,19 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
                                 </DialogActions>
                             </Dialog>
                         </Box>
-                    </Paper>
+                    </Card>
                 </Grid>
                 <Grid item xs={3} >
-                    <Paper>
+                    <Card>
                         <Box p={2}>
-                            <Typography variant="h6" gutterBottom>{recipes[1].title}</Typography>
-                            <img onClick={() => handleAddMeal(1)} src={recipes[1].image} alt={recipes[1].title} />
+                            <CardHeader
+                                title={recipes[1].title}
+                                titleTypographyProps={{ variant: 'h6' }}
+                            />
+                            <Divider variant="middle" />
+                            <img src={recipes[1].image} alt={recipes[1].title} />
+                            <Divider variant="middle" />
+                            <br />
                             <ButtonGroup>
                                 <AddMealDialog thisMeal={1} handleAddMeal={handleAddMeal} />
                                 <Button variant="contained" onClick={handleClickOpen(1)}>Details</Button>
@@ -122,13 +131,19 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
                                 </DialogActions>
                             </Dialog>
                         </Box>
-                    </Paper>
+                    </Card>
                 </Grid>
                 <Grid item xs={3} >
-                    <Paper>
+                    <Card>
                         <Box p={2}>
-                            <Typography variant="h6" gutterBottom>{recipes[2].title}</Typography>
-                            <img onClick={() => handleAddMeal(2)} src={recipes[2].image} alt={recipes[2].title} />
+                            <CardHeader
+                                title={recipes[2].title}
+                                titleTypographyProps={{ variant: 'h6' }}
+                            />
+                            <Divider variant="middle" />
+                            <img src={recipes[2].image} alt={recipes[2].title} />
+                            <Divider variant="middle" />
+                            <br />
                             <ButtonGroup>
                                 <AddMealDialog thisMeal={2} handleAddMeal={handleAddMeal} />
                                 <Button variant="contained" onClick={handleClickOpen(2)}>Details</Button>
@@ -159,13 +174,19 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
                                 </DialogActions>
                             </Dialog>
                         </Box>
-                    </Paper>
+                    </Card>
                 </Grid>
                 <Grid item xs={3} >
-                    <Paper>
+                    <Card>
                         <Box p={2}>
-                            <Typography variant="h6" gutterBottom>{recipes[3].title}</Typography>
-                            <img onClick={() => handleAddMeal(3)} src={recipes[3].image} alt={recipes[3].title} />
+                            <CardHeader
+                                title={recipes[3].title}
+                                titleTypographyProps={{ variant: 'h6' }}
+                            />
+                            <Divider variant="middle" />
+                            <img src={recipes[3].image} alt={recipes[3].title} />
+                            <Divider variant="middle" />
+                            <br />
                             <ButtonGroup>
                                 <AddMealDialog thisMeal={3} handleAddMeal={handleAddMeal} />
                                 <Button variant="contained" onClick={handleClickOpen(3)}>Details</Button>
@@ -196,7 +217,7 @@ function PopulatedMealsGrid({ recipes, handleAddMeal, parseIngredients, parseIns
                                 </DialogActions>
                             </Dialog>
                         </Box>
-                    </Paper>
+                    </Card>
                 </Grid>
 
             </>

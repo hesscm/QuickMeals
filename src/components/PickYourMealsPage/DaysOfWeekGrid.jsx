@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Button, ButtonGroup, Paper, Grid, Card, Typography, Box } from '@mui/material';
+import { Button, ButtonGroup, Paper, Grid, Card, CardHeader, Divider, Typography, Box } from '@mui/material';
 import MUIDialogBox from './ViewDetailsDialog';
 import useReduxStore from '../../hooks/useReduxStore';
 import AlertForSubmit from './AlertForSubmit';
@@ -66,14 +66,19 @@ function DaysOfWeekGrid(props) {
         <>
             {/* these are the individual cards for the day of the week */}
             <Grid item xs={3}>
-                <Paper>
                     <Card>
                         <Box p={2}>
-                            <Typography variant="h4" gutterBottom>Monday</Typography>
+                            <Typography variant="h4">Monday</Typography>
                             {recipes.mondayMeal.id != -1 ?
                                 <>
-                                    <Typography variant="h6">{recipes.mondayMeal.name}</Typography>
+                                    <CardHeader
+                                        subheader={recipes.mondayMeal.name}
+                                        subheaderTypographyProps={{ variant: 'h6' }}
+                                    />
+                                    <Divider variant="middle" />
                                     <img src={recipes.mondayMeal.image_path} alt={recipes.mondayMeal.name} />
+                                    <Divider variant="middle" />
+                                    <br />
                                     <ButtonGroup>
                                         {/* below is our MUI dialog component to show a meals ingredients and instructions */}
                                         <MUIDialogBox
@@ -100,19 +105,24 @@ function DaysOfWeekGrid(props) {
                             }
                         </Box>
                     </Card>
-                </Paper>
             </Grid>
 
 
             <Grid item xs={3}>
-                <Paper>
+                
                     <Card>
                         <Box p={2}>
-                            <Typography variant="h4" gutterBottom>Tuesday</Typography>
+                            <Typography variant="h4" >Tuesday</Typography>
                             {recipes.tuesdayMeal.id != -1 ?
                                 <>
-                                    <Typography variant="h6">{recipes.tuesdayMeal.name}</Typography>
+                                    <CardHeader
+                                        subheader={recipes.tuesdayMeal.name}
+                                        subheaderTypographyProps={{ variant: 'h6' }}
+                                    />
+                                    <Divider variant="middle" />
                                     <img src={recipes.tuesdayMeal.image_path} alt={recipes.tuesdayMeal.name} />
+                                    <Divider variant="middle" />
+                                    <br />
                                     <ButtonGroup>
                                         {/* below is our MUI dialog component to show a meals ingredients and instructions */}
                                         <MUIDialogBox
@@ -139,18 +149,24 @@ function DaysOfWeekGrid(props) {
                             }
                         </Box>
                     </Card>
-                </Paper>
+                
             </Grid>
 
             <Grid item xs={3}>
-                <Paper>
+                
                     <Card>
                         <Box p={2}>
-                            <Typography variant="h4" gutterBottom>Wednesday</Typography>
+                            <Typography variant="h4" >Wednesday</Typography>
                             {recipes.wednesdayMeal.id != -1 ?
                                 <>
-                                    <Typography variant="h6">{recipes.wednesdayMeal.name}</Typography>
+                                    <CardHeader
+                                        subheader={recipes.wednesdayMeal.name}
+                                        subheaderTypographyProps={{ variant: 'h6' }}
+                                    />
+                                    <Divider variant="middle" />
                                     <img src={recipes.wednesdayMeal.image_path} alt={recipes.wednesdayMeal.name} />
+                                    <Divider variant="middle" />
+                                    <br />
                                     <ButtonGroup>
                                         {/* below is our MUI dialog component to show a meals ingredients and instructions */}
                                         <MUIDialogBox
@@ -177,19 +193,25 @@ function DaysOfWeekGrid(props) {
                             }
                         </Box>
                     </Card>
-                </Paper>
+                
             </Grid>
 
 
             <Grid item xs={3}>
-                <Paper>
+                
                     <Card>
                         <Box p={2}>
-                            <Typography variant="h4" gutterBottom>Thursday</Typography>
+                            <Typography variant="h4" >Thursday</Typography>
                             {recipes.thursdayMeal.id != -1 ?
                                 <>
-                                    <Typography variant="h6">{recipes.thursdayMeal.name}</Typography>
+                                    <CardHeader
+                                        subheader={recipes.thursdayMeal.name}
+                                        subheaderTypographyProps={{ variant: 'h6' }}
+                                    />
+                                    <Divider variant="middle" />
                                     <img src={recipes.thursdayMeal.image_path} alt={recipes.thursdayMeal.name} />
+                                    <Divider variant="middle" />
+                                    <br />
                                     <ButtonGroup>
                                         {/* below is our MUI dialog component to show a meals ingredients and instructions */}
                                         <MUIDialogBox
@@ -216,19 +238,25 @@ function DaysOfWeekGrid(props) {
                             }
                         </Box>
                     </Card>
-                </Paper>
+                
             </Grid >
 
 
             <Grid item xs={4}>
-                <Paper>
+                
                     <Card>
                         <Box p={2}>
-                            <Typography variant="h4" gutterBottom>Friday</Typography>
+                            <Typography variant="h4" >Friday</Typography>
                             {recipes.fridayMeal.id != -1 ?
                                 <>
-                                    <Typography variant="h6">{recipes.fridayMeal.name}</Typography>
+                                    <CardHeader
+                                        subheader={recipes.fridayMeal.name}
+                                        subheaderTypographyProps={{ variant: 'h6' }}
+                                    />
+                                    <Divider variant="middle" />
                                     <img src={recipes.fridayMeal.image_path} alt={recipes.fridayMeal.name} />
+                                    <Divider variant="middle" />
+                                    <br />
                                     <ButtonGroup>
                                         {/* below is our MUI dialog component to show a meals ingredients and instructions */}
                                         <MUIDialogBox
@@ -255,19 +283,25 @@ function DaysOfWeekGrid(props) {
                             }
                     </Box>
                     </Card>
-                </Paper>
+                
             </Grid >
 
 
             <Grid item xs={4}>
-                <Paper>
+                
                     <Card>
                         <Box p={2}>
-                            <Typography variant="h4" gutterBottom>Saturday</Typography>
+                            <Typography variant="h4" >Saturday</Typography>
                             {recipes.saturdayMeal.id != -1 ?
                                 <>
-                                    <Typography variant="h6">{recipes.saturdayMeal.name}</Typography>
+                                    <CardHeader
+                                        subheader={recipes.saturdayMeal.name}
+                                        subheaderTypographyProps={{ variant: 'h6' }}
+                                    />
+                                    <Divider variant="middle" />
                                     <img src={recipes.saturdayMeal.image_path} alt={recipes.saturdayMeal.name} />
+                                    <Divider variant="middle" />
+                                    <br />
                                     <ButtonGroup>
                                         {/* below is our MUI dialog component to show a meals ingredients and instructions */}
                                         <MUIDialogBox
@@ -294,19 +328,25 @@ function DaysOfWeekGrid(props) {
                             }
                     </Box>
                     </Card>
-                </Paper>
+                
             </Grid >
 
 
             <Grid item xs={4}>
-                <Paper>
+                
                     <Card>
                         <Box p={2}>
-                            <Typography variant="h4" gutterBottom>Sunday</Typography>
+                            <Typography variant="h4" >Sunday</Typography>
                             {recipes.sundayMeal.id != -1 ?
                                 <>
-                                    <Typography variant="h6">{recipes.sundayMeal.name}</Typography>
+                                    <CardHeader
+                                        subheader={recipes.sundayMeal.name}
+                                        subheaderTypographyProps={{ variant: 'h6' }}
+                                    />
+                                    <Divider variant="middle" />
                                     <img src={recipes.sundayMeal.image_path} alt={recipes.sundayMeal.name} />
+                                    <Divider variant="middle" />
+                                    <br />
                                     <ButtonGroup>
                                         {/* below is our MUI dialog component to show a meals ingredients and instructions */}
                                         <MUIDialogBox
@@ -333,7 +373,7 @@ function DaysOfWeekGrid(props) {
                             }
                     </Box>
                     </Card>
-                </Paper>
+                
             </Grid >
 
             {/* button to send chosen meals to the server */}
