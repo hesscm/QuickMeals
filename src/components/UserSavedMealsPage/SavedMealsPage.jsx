@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
-import UserSavedMealsItem from './UserSavedMealsItem';
 import { Typography } from '@mui/material';
+import MUITable from './MUITable'
 import './UserSavedMealsPage.css'
 
 function SavedMealsPage() {
@@ -24,27 +24,7 @@ function SavedMealsPage() {
                             <div className='savedMealsTable'>
                                 <Typography variant="h2">Your Saved Meals</Typography>
                                 <Typography variant="h6">Click the buttons to check the details.</Typography>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Ingredients</th>
-                                            <th>Instructions</th>
-                                            <th>Date Saved</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        
-                                        {/* loop/map through all returned meals */}
-                                        {meals.map((meal, i) => {
-                                            return <UserSavedMealsItem
-                                                key={meal.id}
-                                                meal={meal}
-                                            />
-                                        })}
-
-                                    </tbody>
-                                </table>
+                                <MUITable />
                             </div>
                         </>
                 }

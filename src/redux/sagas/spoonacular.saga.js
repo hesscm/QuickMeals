@@ -84,7 +84,7 @@ function* getUserMeals() {
         //set user meals to a reducer for each day of the week
         yield put({ type: 'SET_USER_MEALS', payload: response.data });
         //send the API filtered/adjusted total ingredients to a reducer
-        yield put({ type: 'SET_TOTAL_INGREDIENTS', payload: combinedIngredients })
+        yield put({ type: 'SET_TOTAL_INGREDIENTS', payload: {ingredients: combinedIngredients} })
     } catch (error) {
         console.log(error);
     }
