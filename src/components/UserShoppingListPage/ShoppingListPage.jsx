@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import DayOfWeekList from './DayOfWeekList';
 import './ShoppingListPage.css'
-import WeeklyShoppingList from './WeeklyShoppingList';
 import { Typography } from '@mui/material';
 import MUITableShoppingList from './MUITableShoppingList';
 
@@ -15,7 +13,7 @@ function ShoppingListPage() {
     }, []);
 
     return (
-        <>
+        <div className="ShoppingListPage">
             <Typography variant="h2" gutterBottom>Your Shopping List</Typography>
             <MUITableShoppingList />
             {/* list for a specific day of the week */}
@@ -23,7 +21,7 @@ function ShoppingListPage() {
             {/* list for the whole week */}
             {/* <WeeklyShoppingList /> */}
     
-        </>
+        </div>
     )
 }
 

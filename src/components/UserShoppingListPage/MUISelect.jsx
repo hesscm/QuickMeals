@@ -9,19 +9,20 @@ export default function MUISelect(props) {
     const [age, setAge] = React.useState('');
 
     const handleChange = (event) => {
-        setAge(event.target.value);
+        setAge(event);
+        props.handleDayOfWeek(event)
     };
 
     return (
-        <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+        <Box sx={{padding: "1em", maxWidth: 120 }} alignItems="center">
+            <FormControl  fullWidth>
                 <InputLabel id="demo-simple-select-label">List</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={age}
                     label="Age"
-                    onChange={(event) => props.handleDayOfWeek(event.target.value)}
+                    onChange={(event) => handleChange(event.target.value)}
                 >
                     <MenuItem value={'Monday'}>Monday</MenuItem>
                     <MenuItem value={'Tuesday'}>Tuesday</MenuItem>

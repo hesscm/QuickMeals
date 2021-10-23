@@ -1,15 +1,8 @@
-.dayOfWeekSection {
-    width:fit-content;
-    border: solid black;
-    float: left;
-    margin-right: 10px;
-    /* overflow:auto; */
-}
-
-.savedMealsPage {
-    width:fit-content;
-    margin-right: 10px;
+.ShoppingListPage {
+    width:max-content;
+    /* margin-right: 10px; */
     margin: auto;
     overflow:auto;
+    /* padding: 70%; */
 } 
 

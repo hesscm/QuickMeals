@@ -49,17 +49,13 @@ export default function MUITableShoppingList() {
 
     return (
         <>
-
             <TableContainer component={Paper}>
-                <Typography alignItems="flex-start" htmlFor="day" variant="body1" component="label">Choose Your List: </Typography>
                 <MUISelect handleDayOfWeek={handleDayOfWeek}/>
                 <hr />
-
-                
                 {list.id ?
                     <>
                         <Typography variant="h5" gutterBottom>{list.day}</Typography>
-                        <Typography variant="h6" gutterBottom>{list.name}</Typography>
+                        <Typography sx={{padding: '10px'}} variant="h6" gutterBottom>{list.name}</Typography>
                     </>
                     : 
                     <>
@@ -67,7 +63,6 @@ export default function MUITableShoppingList() {
                         <Typography variant="h6" gutterBottom>Total Shopping List</Typography>
                     </>
                 }
-            
             <hr />
 
             <Table sx={{ minWidth: 300 }} aria-label="simple table">
