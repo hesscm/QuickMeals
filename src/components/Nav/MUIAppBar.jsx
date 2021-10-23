@@ -8,7 +8,7 @@ import MUILeftDrawer from './MUILeftDrawer';
 export default function MUIAppBar() {
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar  position="static">
+            <AppBar position="relative" >
                 <Toolbar>
                     <MUILeftDrawer />
                     <Typography variant="h6" component="div" >
