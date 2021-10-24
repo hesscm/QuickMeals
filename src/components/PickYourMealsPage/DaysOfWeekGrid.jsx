@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, ButtonGroup, Paper, Grid, Card, CardHeader, Divider, Typography, Box } from '@mui/material';
-import MUIDialogBox from './ViewDetailsDialog';
+import MUIDialogBox from './MUIDialogBox';
 import useReduxStore from '../../hooks/useReduxStore';
 import AlertForSubmit from './AlertForSubmit';
 

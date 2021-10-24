@@ -52,7 +52,7 @@ function MUIDialogBox(props) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Ok</Button>
+                    <Button color="warning" variant="outlined" onClick={handleClose}>Ok</Button>
                 </DialogActions>
             </Dialog>
         </>
