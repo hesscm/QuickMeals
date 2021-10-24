@@ -18,7 +18,7 @@ function AboutPage() {
           If you find a recipe that you love, you can also save it to your favorites.
         </Typography>
         <br />
-        <Typography variant="body1" gutterBottom>Technologies Used: React, Redux, Spoonacular API, Postgres, SQL</Typography>
+        <Typography variant="body1" gutterBottom>Technologies Used: React, Material-UI, Redux, Spoonacular API, Postgres, SQL</Typography>
         <Typography variant="body1">
           <a target="_blank" href="https://icons8.com/icon/BUmCBJ1sx1CD/meal">Meal</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
         </Typography>
