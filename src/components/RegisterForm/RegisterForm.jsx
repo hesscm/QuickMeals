@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Typography, Button } from '@mui/material';
+
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -21,15 +23,14 @@ function RegisterForm() {
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <Typography variant="h5" gutterBottom>Register User</Typography>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
       )}
       <div>
-        <label htmlFor="username">
-          Username:
+        <Typography variant="h6" htmlFor="username" component="label" gutterBottom>Username:
           <input
             type="text"
             name="username"
@@ -37,11 +38,10 @@ function RegisterForm() {
             required
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
+        </Typography>
       </div>
       <div>
-        <label htmlFor="password">
-          Password:
+        <Typography variant="h6" htmlFor="username" component="label" gutterBottom>Password:
           <input
             type="password"
             name="password"
@@ -49,10 +49,10 @@ function RegisterForm() {
             required
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
+        </Typography>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+        <Button type="submit" variant="contained" color="secondary" name="submit">Register</Button>
       </div>
     </form>
   );

@@ -30,6 +30,7 @@ import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
 import { lightGreen, orange, pink, deepOrange, lightBlue, teal } from '@mui/material/colors';
 
 import './App.css';
+import zIndex from '@mui/material/styles/zIndex';
 
 const newLightGreen = lightGreen['500'];
 const customTheme = createTheme({
@@ -71,9 +72,10 @@ const customTheme = createTheme({
     body1: { color: '#3A5245' },
     body1: { color: '#3A5245' }
 
-  }
-
-
+  },
+  appBar: {
+    zIndex: zIndex.drawer + 1,
+  },
 });
 
 function App() {

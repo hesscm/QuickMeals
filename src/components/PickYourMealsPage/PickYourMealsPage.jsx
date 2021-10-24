@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import DaysOfWeekGrid from './DaysOfWeekGrid';
 import PopulatedMealsGrid from './PopulatedMealsGrid';
-import { Grid, Button, Typography, LinearProgress, Box } from '@mui/material';
+import { Grid, Button, Typography, Divider } from '@mui/material';
 
 
 function PickYourMealsPage() {
@@ -187,7 +187,10 @@ function PickYourMealsPage() {
     return (
         <>
             <Typography variant="h2" gutterBottom>Pick Your Meals</Typography>
+            <Divider />
+            <br />
             <Typography variant="h4" gutterBottom>Meal Plan</Typography>
+            <br />
 
             <Grid
                 container
@@ -214,17 +217,24 @@ function PickYourMealsPage() {
                     parseIngredients={parseIngredients}
                     parseInstructions={parseInstructions}
                 />
+                
             </Grid>
             {/* middle section */}
+            <br />
+            <Divider />
+            <br />
             <Grid
                 container
                 justifyContent="flex-end"
             >
                 <Button size="large" color="primary" variant="contained" onClick={handleRefreshMeals}>Refresh Meals</Button>
             </Grid>
+            
             {/* bottom section */}
 
-
+            <br />
+            <Divider />
+            <br />
             <Grid
                 container
                 spacing={2}

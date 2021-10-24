@@ -43,6 +43,8 @@ function ViewMealPlanPage() {
     return (
         <>
             <Typography variant="h2" gutterBottom>View Meal Plan</Typography>
+            <Divider />
+            <br />
             {/* some conditional rendering to help prevent exploding rendering syndrome */}
             {recipes.length != 0 ?
                     <Grid

@@ -66,73 +66,73 @@ function DaysOfWeekGrid(props) {
         <>
             {/* these are the individual cards for the day of the week */}
             <Grid item xs={3}>
-                    <Card>
-                        <Box p={2}>
-                            <Typography variant="h4">Monday</Typography>
-                            {recipes.mondayMeal.id != -1 ?
-                                <>
-                                    <CardHeader
-                                        subheader={recipes.mondayMeal.name}
-                                        subheaderTypographyProps={{ variant: 'h6' }}
+                <Card>
+                    <Box p={2}>
+                        <Typography variant="h4">Monday</Typography>
+                        {recipes.mondayMeal.id != -1 ?
+                            <>
+                                <CardHeader
+                                    subheader={recipes.mondayMeal.name}
+                                    subheaderTypographyProps={{ variant: 'h6' }}
+                                />
+                                <Divider variant="middle" />
+                                <img src={recipes.mondayMeal.image_path} alt={recipes.mondayMeal.name} />
+                                <Divider variant="middle" />
+                                <br />
+                                <ButtonGroup>
+                                    {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                    <MUIDialogBox
+                                        meal={recipes.mondayMeal}
+                                        ingredientsString={recipes.mondayMeal.ingredients_string}
                                     />
-                                    <Divider variant="middle" />
-                                    <img src={recipes.mondayMeal.image_path} alt={recipes.mondayMeal.name} />
-                                    <Divider variant="middle" />
-                                    <br />
+                                    <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.mondayMeal.id)}>Remove</Button>
+                                </ButtonGroup>
+                            </> :
+                            <>{props.mondayMeal.title == '' ?
+                                <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
+                                <>
+                                    <h3>{props.mondayMeal.title}</h3>
+                                    <img src={props.mondayMeal.image} alt={props.mondayMeal.title} />
                                     <ButtonGroup>
-                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
                                         <MUIDialogBox
-                                            meal={recipes.mondayMeal}
-                                            ingredientsString={recipes.mondayMeal.ingredients_string}
+                                            meal={props.mondayMeal}
+                                            ingredientsString={props.mondayMeal.ingredientsString}
                                         />
-                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.mondayMeal.id)}>Remove</Button>
+                                        <Button color="warning" variant="contained" onClick={() => handleRemoveButton(0)}>Remove</Button>
                                     </ButtonGroup>
-                                </> :
-                                <>{props.mondayMeal.title == '' ?
-                                    <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
-                                    <>
-                                        <h3>{props.mondayMeal.title}</h3>
-                                        <img src={props.mondayMeal.image} alt={props.mondayMeal.title} />
-                                        <ButtonGroup>
-                                            <MUIDialogBox
-                                                meal={props.mondayMeal}
-                                                ingredientsString={props.mondayMeal.ingredientsString}
-                                            />
-                                            <Button color="warning" variant="contained" onClick={() => handleRemoveButton(0)}>Remove</Button>
-                                        </ButtonGroup>
-                                    </>
-                                }</>
-                            }
-                        </Box>
-                    </Card>
+                                </>
+                            }</>
+                        }
+                    </Box>
+                </Card>
             </Grid>
 
 
             <Grid item xs={3}>
-                
-                    <Card>
-                        <Box p={2}>
-                            <Typography variant="h4" >Tuesday</Typography>
-                            {recipes.tuesdayMeal.id != -1 ?
-                                <>
-                                    <CardHeader
-                                        subheader={recipes.tuesdayMeal.name}
-                                        subheaderTypographyProps={{ variant: 'h6' }}
+
+                <Card>
+                    <Box p={2}>
+                        <Typography variant="h4" >Tuesday</Typography>
+                        {recipes.tuesdayMeal.id != -1 ?
+                            <>
+                                <CardHeader
+                                    subheader={recipes.tuesdayMeal.name}
+                                    subheaderTypographyProps={{ variant: 'h6' }}
+                                />
+                                <Divider variant="middle" />
+                                <img src={recipes.tuesdayMeal.image_path} alt={recipes.tuesdayMeal.name} />
+                                <Divider variant="middle" />
+                                <br />
+                                <ButtonGroup>
+                                    {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                    <MUIDialogBox
+                                        meal={recipes.tuesdayMeal}
+                                        ingredientsString={recipes.tuesdayMeal.ingredients_string}
                                     />
-                                    <Divider variant="middle" />
-                                    <img src={recipes.tuesdayMeal.image_path} alt={recipes.tuesdayMeal.name} />
-                                    <Divider variant="middle" />
-                                    <br />
-                                    <ButtonGroup>
-                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
-                                        <MUIDialogBox
-                                            meal={recipes.tuesdayMeal}
-                                            ingredientsString={recipes.tuesdayMeal.ingredients_string}
-                                        />
-                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.tuesdayMeal.id)}>Remove</Button>
-                                    </ButtonGroup>
-                                </> :
-                                <>{props.tuesdayMeal.title == '' ?
+                                    <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.tuesdayMeal.id)}>Remove</Button>
+                                </ButtonGroup>
+                            </> :
+                            <>{props.tuesdayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.tuesdayMeal.title}</h3>
@@ -143,40 +143,40 @@ function DaysOfWeekGrid(props) {
                                             ingredientsString={props.tuesdayMeal.ingredientsString}
                                         />
                                         <Button color="warning" variant="contained" onClick={() => handleRemoveButton(1)}>Remove</Button>
-                                        </ButtonGroup>
-                                    </>
-                                }</>
-                            }
-                        </Box>
-                    </Card>
-                
+                                    </ButtonGroup>
+                                </>
+                            }</>
+                        }
+                    </Box>
+                </Card>
+
             </Grid>
 
             <Grid item xs={3}>
-                
-                    <Card>
-                        <Box p={2}>
-                            <Typography variant="h4" >Wednesday</Typography>
-                            {recipes.wednesdayMeal.id != -1 ?
-                                <>
-                                    <CardHeader
-                                        subheader={recipes.wednesdayMeal.name}
-                                        subheaderTypographyProps={{ variant: 'h6' }}
+
+                <Card>
+                    <Box p={2}>
+                        <Typography variant="h4" >Wednesday</Typography>
+                        {recipes.wednesdayMeal.id != -1 ?
+                            <>
+                                <CardHeader
+                                    subheader={recipes.wednesdayMeal.name}
+                                    subheaderTypographyProps={{ variant: 'h6' }}
+                                />
+                                <Divider variant="middle" />
+                                <img src={recipes.wednesdayMeal.image_path} alt={recipes.wednesdayMeal.name} />
+                                <Divider variant="middle" />
+                                <br />
+                                <ButtonGroup>
+                                    {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                    <MUIDialogBox
+                                        meal={recipes.wednesdayMeal}
+                                        ingredientsString={recipes.wednesdayMeal.ingredients_string}
                                     />
-                                    <Divider variant="middle" />
-                                    <img src={recipes.wednesdayMeal.image_path} alt={recipes.wednesdayMeal.name} />
-                                    <Divider variant="middle" />
-                                    <br />
-                                    <ButtonGroup>
-                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
-                                        <MUIDialogBox
-                                            meal={recipes.wednesdayMeal}
-                                            ingredientsString={recipes.wednesdayMeal.ingredients_string}
-                                        />
-                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.wednesdayMeal.id)}>Remove</Button>
-                                    </ButtonGroup>
-                                </> :
-                                <>{props.wednesdayMeal.title == '' ?
+                                    <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.wednesdayMeal.id)}>Remove</Button>
+                                </ButtonGroup>
+                            </> :
+                            <>{props.wednesdayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.wednesdayMeal.title}</h3>
@@ -187,41 +187,41 @@ function DaysOfWeekGrid(props) {
                                             ingredientsString={props.wednesdayMeal.ingredientsString}
                                         />
                                         <Button color="warning" variant="contained" onClick={() => handleRemoveButton(2)}>Remove</Button>
-                                          </ButtonGroup>
-                                    </>
-                                }</>
-                            }
-                        </Box>
-                    </Card>
-                
+                                    </ButtonGroup>
+                                </>
+                            }</>
+                        }
+                    </Box>
+                </Card>
+
             </Grid>
 
 
             <Grid item xs={3}>
-                
-                    <Card>
-                        <Box p={2}>
-                            <Typography variant="h4" >Thursday</Typography>
-                            {recipes.thursdayMeal.id != -1 ?
-                                <>
-                                    <CardHeader
-                                        subheader={recipes.thursdayMeal.name}
-                                        subheaderTypographyProps={{ variant: 'h6' }}
+
+                <Card>
+                    <Box p={2}>
+                        <Typography variant="h4" >Thursday</Typography>
+                        {recipes.thursdayMeal.id != -1 ?
+                            <>
+                                <CardHeader
+                                    subheader={recipes.thursdayMeal.name}
+                                    subheaderTypographyProps={{ variant: 'h6' }}
+                                />
+                                <Divider variant="middle" />
+                                <img src={recipes.thursdayMeal.image_path} alt={recipes.thursdayMeal.name} />
+                                <Divider variant="middle" />
+                                <br />
+                                <ButtonGroup>
+                                    {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                    <MUIDialogBox
+                                        meal={recipes.thursdayMeal}
+                                        ingredientsString={recipes.thursdayMeal.ingredients_string}
                                     />
-                                    <Divider variant="middle" />
-                                    <img src={recipes.thursdayMeal.image_path} alt={recipes.thursdayMeal.name} />
-                                    <Divider variant="middle" />
-                                    <br />
-                                    <ButtonGroup>
-                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
-                                        <MUIDialogBox
-                                            meal={recipes.thursdayMeal}
-                                            ingredientsString={recipes.thursdayMeal.ingredients_string}
-                                        />
-                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.thursdayMeal.id)}>Remove</Button>
-                                    </ButtonGroup>
-                                </> :
-                                <>{props.thursdayMeal.title == '' ?
+                                    <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.thursdayMeal.id)}>Remove</Button>
+                                </ButtonGroup>
+                            </> :
+                            <>{props.thursdayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.thursdayMeal.title}</h3>
@@ -232,41 +232,41 @@ function DaysOfWeekGrid(props) {
                                             ingredientsString={props.thursdayMeal.ingredientsString}
                                         />
                                         <Button color="warning" variant="contained" onClick={() => handleRemoveButton(3)}>Remove</Button>
-                                               </ButtonGroup>
-                                    </>
-                                }</>
-                            }
-                        </Box>
-                    </Card>
-                
+                                    </ButtonGroup>
+                                </>
+                            }</>
+                        }
+                    </Box>
+                </Card>
+
             </Grid >
 
 
             <Grid item xs={4}>
-                
-                    <Card>
-                        <Box p={2}>
-                            <Typography variant="h4" >Friday</Typography>
-                            {recipes.fridayMeal.id != -1 ?
-                                <>
-                                    <CardHeader
-                                        subheader={recipes.fridayMeal.name}
-                                        subheaderTypographyProps={{ variant: 'h6' }}
+
+                <Card>
+                    <Box p={2}>
+                        <Typography variant="h4" >Friday</Typography>
+                        {recipes.fridayMeal.id != -1 ?
+                            <>
+                                <CardHeader
+                                    subheader={recipes.fridayMeal.name}
+                                    subheaderTypographyProps={{ variant: 'h6' }}
+                                />
+                                <Divider variant="middle" />
+                                <img src={recipes.fridayMeal.image_path} alt={recipes.fridayMeal.name} />
+                                <Divider variant="middle" />
+                                <br />
+                                <ButtonGroup>
+                                    {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                    <MUIDialogBox
+                                        meal={recipes.fridayMeal}
+                                        ingredientsString={recipes.fridayMeal.ingredients_string}
                                     />
-                                    <Divider variant="middle" />
-                                    <img src={recipes.fridayMeal.image_path} alt={recipes.fridayMeal.name} />
-                                    <Divider variant="middle" />
-                                    <br />
-                                    <ButtonGroup>
-                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
-                                        <MUIDialogBox
-                                            meal={recipes.fridayMeal}
-                                            ingredientsString={recipes.fridayMeal.ingredients_string}
-                                        />
-                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.fridayMeal.id)}>Remove</Button>
-                                    </ButtonGroup>
-                                </> :
-                                <>{props.fridayMeal.title == '' ?
+                                    <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.fridayMeal.id)}>Remove</Button>
+                                </ButtonGroup>
+                            </> :
+                            <>{props.fridayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.fridayMeal.title}</h3>
@@ -280,38 +280,38 @@ function DaysOfWeekGrid(props) {
                                     </ButtonGroup>
                                 </>
                             }</>
-                            }
+                        }
                     </Box>
-                    </Card>
-                
+                </Card>
+
             </Grid >
 
 
             <Grid item xs={4}>
-                
-                    <Card>
-                        <Box p={2}>
-                            <Typography variant="h4" >Saturday</Typography>
-                            {recipes.saturdayMeal.id != -1 ?
-                                <>
-                                    <CardHeader
-                                        subheader={recipes.saturdayMeal.name}
-                                        subheaderTypographyProps={{ variant: 'h6' }}
+
+                <Card>
+                    <Box p={2}>
+                        <Typography variant="h4" >Saturday</Typography>
+                        {recipes.saturdayMeal.id != -1 ?
+                            <>
+                                <CardHeader
+                                    subheader={recipes.saturdayMeal.name}
+                                    subheaderTypographyProps={{ variant: 'h6' }}
+                                />
+                                <Divider variant="middle" />
+                                <img src={recipes.saturdayMeal.image_path} alt={recipes.saturdayMeal.name} />
+                                <Divider variant="middle" />
+                                <br />
+                                <ButtonGroup>
+                                    {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                    <MUIDialogBox
+                                        meal={recipes.saturdayMeal}
+                                        ingredientsString={recipes.saturdayMeal.ingredients_string}
                                     />
-                                    <Divider variant="middle" />
-                                    <img src={recipes.saturdayMeal.image_path} alt={recipes.saturdayMeal.name} />
-                                    <Divider variant="middle" />
-                                    <br />
-                                    <ButtonGroup>
-                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
-                                        <MUIDialogBox
-                                            meal={recipes.saturdayMeal}
-                                            ingredientsString={recipes.saturdayMeal.ingredients_string}
-                                        />
-                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.saturdayMeal.id)}>Remove</Button>
-                                    </ButtonGroup>
-                                </> :
-                                <>{props.saturdayMeal.title == '' ?
+                                    <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.saturdayMeal.id)}>Remove</Button>
+                                </ButtonGroup>
+                            </> :
+                            <>{props.saturdayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.saturdayMeal.title}</h3>
@@ -325,38 +325,38 @@ function DaysOfWeekGrid(props) {
                                     </ButtonGroup>
                                 </>
                             }</>
-                            }
+                        }
                     </Box>
-                    </Card>
-                
+                </Card>
+
             </Grid >
 
 
             <Grid item xs={4}>
-                
-                    <Card>
-                        <Box p={2}>
-                            <Typography variant="h4" >Sunday</Typography>
-                            {recipes.sundayMeal.id != -1 ?
-                                <>
-                                    <CardHeader
-                                        subheader={recipes.sundayMeal.name}
-                                        subheaderTypographyProps={{ variant: 'h6' }}
+
+                <Card>
+                    <Box p={2}>
+                        <Typography variant="h4" >Sunday</Typography>
+                        {recipes.sundayMeal.id != -1 ?
+                            <>
+                                <CardHeader
+                                    subheader={recipes.sundayMeal.name}
+                                    subheaderTypographyProps={{ variant: 'h6' }}
+                                />
+                                <Divider variant="middle" />
+                                <img src={recipes.sundayMeal.image_path} alt={recipes.sundayMeal.name} />
+                                <Divider variant="middle" />
+                                <br />
+                                <ButtonGroup>
+                                    {/* below is our MUI dialog component to show a meals ingredients and instructions */}
+                                    <MUIDialogBox
+                                        meal={recipes.sundayMeal}
+                                        ingredientsString={recipes.sundayMeal.ingredients_string}
                                     />
-                                    <Divider variant="middle" />
-                                    <img src={recipes.sundayMeal.image_path} alt={recipes.sundayMeal.name} />
-                                    <Divider variant="middle" />
-                                    <br />
-                                    <ButtonGroup>
-                                        {/* below is our MUI dialog component to show a meals ingredients and instructions */}
-                                        <MUIDialogBox
-                                            meal={recipes.sundayMeal}
-                                            ingredientsString={recipes.sundayMeal.ingredients_string}
-                                        />
-                                        <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.sundayMeal.id)}>Remove</Button>
-                                    </ButtonGroup>
-                                </> :
-                                <>{props.sundayMeal.title == '' ?
+                                    <Button color="warning" variant="contained" onClick={() => handleRemoveDBButton(recipes.sundayMeal.id)}>Remove</Button>
+                                </ButtonGroup>
+                            </> :
+                            <>{props.sundayMeal.title == '' ?
                                 <><br /><Typography variant="body1" gutterBottom>Click a recipe and choose a day!</Typography></> :
                                 <>
                                     <h3>{props.sundayMeal.title}</h3>
@@ -370,15 +370,15 @@ function DaysOfWeekGrid(props) {
                                     </ButtonGroup>
                                 </>
                             }</>
-                            }
+                        }
                     </Box>
-                    </Card>
-                
+                </Card>
+
             </Grid >
 
             {/* button to send chosen meals to the server */}
             <Grid item xs={12}>
-                <AlertForSubmit handleButtonClick={handleButtonClick}/>
+                <AlertForSubmit handleButtonClick={handleButtonClick} />
             </Grid>
         </>
 

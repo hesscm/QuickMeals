@@ -113,7 +113,10 @@ function RecipeGeneratorPage() {
             <Grid container justifyContent="center">
                 <Grid item xs={12} >
                     <Typography variant="h2" component="h2" gutterBottom>The Recipe Generator</Typography>
+                    <Divider />
+                    <br />
                     <Typography variant="h5" component="h2" gutterBottom>Click the card to see more details.</Typography>
+                    <br />
                 </Grid>
                 <Grid item xs={5}>
                     <Card elevation={12}>
