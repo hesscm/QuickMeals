@@ -124,8 +124,8 @@ function AddMealDialog(props) {
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleSubmit}>Ok</Button>
+                    <Button variant="outlined" onClick={handleClose}>Cancel</Button>
+                    <Button color="warning" variant="outlined" onClick={handleSubmit}>Ok</Button>
                 </DialogActions>
             </Dialog>
         </div>

@@ -113,7 +113,10 @@ function RecipeGeneratorPage() {
             <Grid container justifyContent="center">
                 <Grid item xs={12} >
                     <Typography variant="h2" component="h2" gutterBottom>The Recipe Generator</Typography>
+                    <Divider />
+                    <br />
                     <Typography variant="h5" component="h2" gutterBottom>Click the card to see more details.</Typography>
+                    <br />
                 </Grid>
                 <Grid item xs={5}>
                     <Card elevation={12}>
@@ -142,14 +145,14 @@ function RecipeGeneratorPage() {
                     </Card>
                     <br />
                     {!recipes.title ?
-                        <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
+                        <Button size="large" color="secondary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
                         :
                     <ButtonGroup>
-                            <Button size="large" color="primary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
+                            <Button size="large" color="secondary" variant="contained" onClick={handleButtonClick}>Get A Random Recipe</Button>
                         {!saved ?
-                            <Button size="large" color="secondary" variant="contained" onClick={() => handleSaveButton()}>Save</Button>
+                            <Button size="large" color="primary" variant="contained" onClick={() => handleSaveButton()}>Save</Button>
                             :
-                            <Button size="large" disabled color="secondary" variant="contained">Saved!</Button>
+                            <Button size="large" disabled color="success" variant="contained">Saved!</Button>
                         }
                     </ButtonGroup>}
 

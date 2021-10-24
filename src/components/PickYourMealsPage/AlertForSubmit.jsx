@@ -38,7 +38,7 @@ export default function AlertForSubmit(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>No</Button>
-                    <Button onClick={props.handleButtonClick} autoFocus>
+                    <Button color="warning" onClick={props.handleButtonClick} autoFocus>
                         Yes
                     </Button>
                 </DialogActions>

@@ -38,6 +38,9 @@ export default function MUILeftDrawer() {
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
         >
+            <br />
+            <br />
+            <br />
             <List>
                 <ListItem button onClick={() => handleClick('/home')} key='Recipe Generator'>
                     <ListItemText primary='Recipe Generator' />
@@ -73,10 +76,13 @@ export default function MUILeftDrawer() {
 
     const LoggedOutList = (anchor) => (
         <Box
-            sx={{ width: 250 }}
+            sx={{ width: 250}}
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
         >
+            <br />
+            <br />
+            <br />
             <List>
                 <ListItem button onClick={() => handleClick('/home')} key='Recipe Generator'>
                     <ListItemText primary='Recipe Generator' />
@@ -112,6 +118,9 @@ export default function MUILeftDrawer() {
                     <MenuIcon />
                 </IconButton>
                 <Drawer
+                    sx={{ width: 250, height: 'calc(100% - 64px)', top: 64 }}
+                    
+
                     anchor="left"
                     open={state["left"]}
                     onClose={toggleDrawer("left", false)}

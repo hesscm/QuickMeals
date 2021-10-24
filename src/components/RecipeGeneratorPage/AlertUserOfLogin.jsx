@@ -51,7 +51,7 @@ export default function AlertUserOfLogin(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseLogin}>Login</Button>
-                    <Button onClick={handleCloseRegister} autoFocus>
+                    <Button color="warning" onClick={handleCloseRegister} autoFocus>
                         Register
                     </Button>
                 </DialogActions>

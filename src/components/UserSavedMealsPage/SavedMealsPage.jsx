@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
-import { Typography } from '@mui/material';
+import { Typography, Divider } from '@mui/material';
 import MUITable from './MUITable'
 import './UserSavedMealsPage.css'
 
@@ -19,11 +19,14 @@ function SavedMealsPage() {
             <div className="savedMealsPage">
                 {
                     meals.length == 0 ?
-                        <Typography variant="h4">No meal selected for this day!</Typography> :
+                        <Typography variant="h4">No meals saved!</Typography> :
                         <>
                             <div className='savedMealsTable'>
-                                <Typography variant="h2">Your Saved Meals</Typography>
+                                <Typography variant="h2" gutterBottom>Your Saved Meals</Typography>
+                                <Divider />
+                                <br />
                                 <Typography variant="h6">Click the buttons to check the details.</Typography>
+                                <br />
                                 <MUITable />
                             </div>
                         </>
