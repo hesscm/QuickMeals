@@ -1,7 +1,5 @@
 # QuickMeals
 
-## CURRENTLY IN DEVELOPMENT 10/18/21
-
 ## Description
 
 _Duration: 2 Week Sprint_
