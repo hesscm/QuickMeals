@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import DaysOfWeekGrid from './DaysOfWeekGrid';
 import PopulatedMealsGrid from './PopulatedMealsGrid';
-import { Grid, Button, Typography, Divider } from '@mui/material';
+import { Grid, Button, Typography, Divider, Box } from '@mui/material';
 
 
 function PickYourMealsPage() {
@@ -191,50 +191,56 @@ function PickYourMealsPage() {
             <br />
             <Typography variant="h4" gutterBottom>Meal Plan</Typography>
             <br />
+            <Box sx={{ m: 1 }}>
+                <Grid
+                    container
+                    spacing={2}
+                    justifyContent="space-around"
+                >
+                    {/* top section */}
 
-            <Grid
-                container
-                spacing={2}
-                justifyContent="space-around"
-            >
-                {/* top section */}
+                    <DaysOfWeekGrid
+                        mondayMeal={mondayMeal}
+                        setMondayMeal={setMondayMeal}
+                        tuesdayMeal={tuesdayMeal}
+                        setTuesdayMeal={setTuesdayMeal}
+                        wednesdayMeal={wednesdayMeal}
+                        setWednesdayMeal={setWednesdayMeal}
+                        thursdayMeal={thursdayMeal}
+                        setThursdayMeal={setThursdayMeal}
+                        fridayMeal={fridayMeal}
+                        setFridayMeal={setFridayMeal}
+                        saturdayMeal={saturdayMeal}
+                        setSaturdayMeal={setSaturdayMeal}
+                        sundayMeal={sundayMeal}
+                        setSundayMeal={setSundayMeal}
+                        parseIngredients={parseIngredients}
+                        parseInstructions={parseInstructions}
+                    />
 
-                <DaysOfWeekGrid
-                    mondayMeal={mondayMeal}
-                    setMondayMeal={setMondayMeal}
-                    tuesdayMeal={tuesdayMeal}
-                    setTuesdayMeal={setTuesdayMeal}
-                    wednesdayMeal={wednesdayMeal}
-                    setWednesdayMeal={setWednesdayMeal}
-                    thursdayMeal={thursdayMeal}
-                    setThursdayMeal={setThursdayMeal}
-                    fridayMeal={fridayMeal}
-                    setFridayMeal={setFridayMeal}
-                    saturdayMeal={saturdayMeal}
-                    setSaturdayMeal={setSaturdayMeal}
-                    sundayMeal={sundayMeal}
-                    setSundayMeal={setSundayMeal}
-                    parseIngredients={parseIngredients}
-                    parseInstructions={parseInstructions}
-                />
-                
-            </Grid>
+
+                </Grid>
+            </Box>
             {/* middle section */}
             <br />
             <Divider />
             <br />
+            <Box sx={{ m: 1 }}>
             <Grid
                 container
                 justifyContent="flex-end"
             >
                 <Button size="large" color="primary" variant="contained" onClick={handleRefreshMeals}>Refresh Meals</Button>
             </Grid>
-            
+            </Box>
+
             {/* bottom section */}
 
             <br />
             <Divider />
             <br />
+            <Box sx={{ m: 1 }}>
+
             <Grid
                 container
                 spacing={2}
@@ -244,15 +250,17 @@ function PickYourMealsPage() {
                     <Typography variant="h5">Pick what you like!</Typography>
                 </Grid>
 
-                    <PopulatedMealsGrid
-                        recipes={recipes}
-                        handleAddMeal={handleAddMeal}
-                        parseIngredients={parseIngredients}
-                        parseInstructions={parseInstructions}
-                    />
-                
-     
+                <PopulatedMealsGrid
+                    recipes={recipes}
+                    handleAddMeal={handleAddMeal}
+                    parseIngredients={parseIngredients}
+                    parseInstructions={parseInstructions}
+                />
+
+
             </Grid>
+            </Box>
+
         </>
     )
 }
