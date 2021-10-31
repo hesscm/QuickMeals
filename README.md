@@ -19,9 +19,12 @@ This has the details of all of my initial planning. This includes wireframes for
 
 ## Screen Shot
 
-#How you can pick your Meal Plan
+How you can pick your Meal Plan
+
 ![pickmeals](images/pickmeals.png)
-#How you can view your Meal Plan
+
+How you can view your Meal Plan
+
 ![pickmeals](images/viewmeals.png)
 
 
@@ -58,8 +61,7 @@ This has the details of all of my initial planning. This includes wireframes for
 
 ## Built With
 
-HTML, CSS, JavaScript, Node.js, Postgres, SQL, React, Redux, Redux-Saga, Material-UI, Passport, Axios, Heroku,
-React-Beautiful-DND, Moment.js, Spoonacular API.
+HTML, CSS, JavaScript, Node.js, Postgres, SQL, React, Redux, Redux-Saga, Material-UI, Passport, Axios, Heroku, Moment.js, Spoonacular API.
 
 ## Acknowledgement
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. (Shout out to my instructor, Chris Black!)
