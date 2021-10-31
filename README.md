@@ -6,7 +6,11 @@ _Duration: 2 Week Sprint_
 
 Can’t decide what’s for dinner? QuickMeals is a random recipe picker/meal planner App with help from the spoonacular API. If you just want to quickly find a recipe without thinking, you can randomly search for recipes on the Recipe Generator page. If not, you can plan meals for one day or the entire week. You can then take that meal plan and generate a shopping list. If you find a recipe that you love, you can also save it to your favorites.
 
-### Visit: Heroku Deployment Coming Soon
+## Now Deployed On Heroku!
+
+Important: I am using the free version of Heroku. The app goes to sleep if it has not been opened for a while. Please give it the initial load a chance.
+
+[Check out my app!](https://hess-quickmeals.herokuapp.com/)
 
 ## Scope Document
 See: [Scope Document](https://docs.google.com/document/d/1-JiniI-LnAbEoI7cYLXNBrbgpZj1vpY2_2h-W1HLSms/edit#heading=h.vhvkcjgwsn55)
@@ -15,12 +19,17 @@ This has the details of all of my initial planning. This includes wireframes for
 
 ## Screen Shot
 
-Coming Soon
+#How you can pick your Meal Plan
+![pickmeals](images/pickmeals.png)
+#How you can view your Meal Plan
+![pickmeals](images/viewmeals.png)
+
 
 ### Prerequisites
 
 - Any IDE such as VS Code or a web browser, Node.js, postgresql and associated database software.
 - This app uses the Spoonacular API and requires an internet connection to enjoy full functionality.
+- Also, if running locally, you will need to [register an account](https://spoonacular.com/food-api) and create your own spoonacular API key.
 
 ## Installation
 1. Fork the repository
@@ -30,6 +39,7 @@ Coming Soon
 4. Open with your preferred IDE.
 5. You will need node.js installed. In the repo folder, type "npm install" to install all of the included dependencies.
 6. You will also need postgres installed. Install a SQL database titled 'QuickMeals' with the data in the data.sql file.
+7. Finally, you need to create a file name called '.env'. Create a new variable called 'SPOONACULAR_API_KEY=yourAPIkey' and insert your API key where it says 'yourAPIkey'.
 7. Type "npm run server" to get the server running.
 8. Open a new terminal and type "npm run client" to get the react client going.
 9. Run the app in the browser at "localhost:3000".
