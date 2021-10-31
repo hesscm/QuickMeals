@@ -8,7 +8,7 @@ Can’t decide what’s for dinner? QuickMeals is a random recipe picker/meal pl
 
 ## Now Deployed On Heroku!
 
-Important: I am using the free version of Heroku. The app goes to sleep if it has not been opened for a while. Please give it the initial load a chance.
+### Important: I am using the free version of Heroku. The app goes to sleep if it has not been opened for a while. The initial load will take about 15 seconds.
 
 [Check out my app!](https://hess-quickmeals.herokuapp.com/)
 
