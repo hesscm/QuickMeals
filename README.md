@@ -19,11 +19,11 @@ This has the details of all of my initial planning. This includes wireframes for
 
 ## Screen Shot
 
-How you can pick your Meal Plan
+### How you can pick your Meal Plan
 
 ![pickmeals](images/pickmeals.png)
 
-How you can view your Meal Plan
+### How you can view your Meal Plan
 
 ![pickmeals](images/viewmeals.png)
 
