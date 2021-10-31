@@ -9,7 +9,6 @@
     "@mui/icons-material": "^5.0.4",
     "@mui/material": "^5.0.4",
     "@mui/system": "^5.0.4",
-    "@mui/x-data-grid": "^4.0.1",
     "axios": "^0.21.1",
     "axios-cache-adapter": "^2.7.3",
     "bcryptjs": "^2.4.3",
