@@ -16,6 +16,7 @@
     "dompurify": "^2.3.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jest": "^27.3.1",
     "moment": "^2.29.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
@@ -36,6 +37,7 @@
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "jest": "NODE_ENV=test jest test/*.*.test.js --coverage --forceExit --detectOpenHandles",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
